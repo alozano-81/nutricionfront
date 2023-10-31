@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, map, tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from './../../environments/environment';
 //import { Router } from '@angular/router';
 
 @Injectable({
@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 export class ServiciosService {
 
   comercios: any[] = [];
+  login:any[] = [];
 
   constructor(
     private formularioNuevo: FormBuilder,
@@ -24,8 +25,8 @@ export class ServiciosService {
    //form login
    cargarFormLogin(): FormGroup{
     return this.formularioNuevo.group({
-      user: [],
-      pass:[]
+      user: ['',Validators.compose([Validators.required])],
+      pass:['',Validators.compose([Validators.required])]
     });
   }
 
@@ -40,6 +41,21 @@ export class ServiciosService {
   }
 
   //servicios
+
+  validarCredenciales(usuario:string,password:string){
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('usuario',usuario);
+    queryParams = queryParams.append('password',password);
+    let url = `${environment.urlValidarLogin}`;
+    return this.http.post(url,'',{params : queryParams}).pipe(
+    tap((result:any)=> (this.login = result)),
+    map((result:any)=> result)
+    );
+
+  }
+
+
+
   /**
    *
    * @returns Obtener listado de comercios
