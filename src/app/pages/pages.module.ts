@@ -38,13 +38,15 @@ import { GenerarTurnosComponent } from './generar-turnos/generar-turnos.componen
 import { GestionLoginComponent } from './gestion-login/gestion-login.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
+import { GestionPrincipalComponent } from './gestion-principal/gestion-principal.component';
 @NgModule({
   declarations: [
     TemplateComponent,
     PagesComponent,
     GestionLoginComponent,
     GenerarTurnosComponent,
-    SpinerComponent
+    SpinerComponent,
+    GestionPrincipalComponent
   ],
   imports: [
     CommonModule,

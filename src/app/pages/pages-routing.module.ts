@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 ///import { RouterModule, Routes } from '@angular/router';
 import { RouterModule, Routes } from '@angular/router';
-import { GenerarTurnosComponent } from './generar-turnos/generar-turnos.component';
 import { GestionLoginComponent } from './gestion-login/gestion-login.component';
+import { GestionPrincipalComponent } from './gestion-principal/gestion-principal.component';
 import { PagesComponent } from './pages.component';
 
 const routes: Routes = [
@@ -20,8 +20,8 @@ const routes: Routes = [
       },
 
       {
-        path: 'generar-turnos',
-        component: GenerarTurnosComponent,
+        path: 'gestion-principal',
+        component: GestionPrincipalComponent,
         data: { showRootComponents: true}
       }
       //{ path: '', redirectTo: '/inicio', pathMatch: 'full' },

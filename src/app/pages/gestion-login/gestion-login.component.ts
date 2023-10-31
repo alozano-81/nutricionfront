@@ -45,13 +45,10 @@ export class GestionLoginComponent implements OnInit{
   }
 
   enviarDatos(){
-    console.log(this.formLogin);
-    console.log( this.formLogin.get('user').value);
-    console.log( this.formLogin.get('pass').value);
     this.serviceLogin.validarCredenciales(this.formLogin.get('user').value,  this.formLogin.get('pass').value).subscribe(
       (result:any)=>{
         console.log('entra correcto', result);
-        this.router.navigate(['/', 'generar-turnos']);
+        this.router.navigate(['/', 'gestion-principal']);
         localStorage.setItem('user', this.formLogin.get('user').value);
       },
       (error)=>{
