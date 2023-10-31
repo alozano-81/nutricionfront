@@ -48,13 +48,20 @@ export class GestionLoginComponent implements OnInit{
     console.log(this.formLogin);
     console.log( this.formLogin.get('user').value);
     console.log( this.formLogin.get('pass').value);
-    if(this.formLogin.get('user').value == environment.user && this.formLogin.get('pass').value == environment.pass){
-      this.router.navigate(['/', 'generar-turnos']);
-      localStorage.setItem('user', this.formLogin.get('user').value);
-    }else{
-      this.toastr.info('ver');
-      Swal.fire({icon: 'error', title: 'Error', text: 'Usuario o id de la sesión invalido'});
-    }
+    this.serviceLogin.validarCredenciales(this.formLogin.get('user').value,  this.formLogin.get('pass').value).subscribe(
+      (result:any)=>{
+        console.log('entra correcto', result);
+        this.router.navigate(['/', 'generar-turnos']);
+        localStorage.setItem('user', this.formLogin.get('user').value);
+      },
+      (error)=>{
+        console.log('entra incorrecto', error);
+        this.toastr.info('ver');
+        Swal.fire({icon: 'error', title: 'Error', text: 'Usuario o id de la sesión invalido'});
+      }
+    );
+
+
   }
 
 }
