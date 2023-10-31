@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, map, tap } from 'rxjs';
 import { environment } from './../../environments/environment';
@@ -25,8 +25,8 @@ export class ServiciosService {
    //form login
    cargarFormLogin(): FormGroup{
     return this.formularioNuevo.group({
-      user: [],
-      pass:[]
+      user: ['',Validators.compose([Validators.required])],
+      pass:['',Validators.compose([Validators.required])]
     });
   }
 
