@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, map, tap } from 'rxjs';
-import { Paises } from '../models/Parametrizacion-model';
+import { Paises, RegistrarPacientes } from '../models/Parametrizacion-model';
 import { environment } from './../../environments/environment';
 //import { Router } from '@angular/router';
 
@@ -15,6 +15,7 @@ export class ServiciosService {
   comercios: any[] = [];
   login:any[] = [];
   listaPaises:Paises[] = [];
+  registroPacientes:RegistrarPacientes[] =[];
 
   constructor(
     private formularioNuevo: FormBuilder,
@@ -51,7 +52,7 @@ export class ServiciosService {
         pais:[],
         fechaNacimiento:[],
         email:[],
-        documento:[],
+        documento:['',Validators.compose([Validators.required])],
         ocupacion:[],
         telefono:[]
       });
@@ -59,6 +60,14 @@ export class ServiciosService {
 
   //******************************servicios
 
+  /**
+   *Validar credenciales de inicio de sesion
+   *
+   * @param {string} usuario
+   * @param {string} password
+   * @return {*}
+   * @memberof ServiciosService
+   */
   validarCredenciales(usuario:string,password:string){
     let queryParams = new HttpParams();
     queryParams = queryParams.append('usuario',usuario);
@@ -98,4 +107,21 @@ export class ServiciosService {
         map((result:any) => result)
       );
     }
+
+  /**
+   * registrar pacientes nuevos
+   *
+   * @param {*} form
+   * @return {*}
+   * @memberof ServiciosService
+   */
+  registrarPacientes(form: any) {
+    //let user ={usuario: usu};
+    let items = Object.assign(form);
+    let url = `${environment.urlRegistrarPacientes}`;
+    return this.http.post(url, items).pipe(
+      tap((result: any) => (this.registroPacientes = result)),
+      map((result: any) => result)
+    );
+  }
 }

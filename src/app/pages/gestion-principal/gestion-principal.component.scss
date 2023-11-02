@@ -83,15 +83,8 @@ mat-card::ng-deep.mat-form-field {
   padding: 10px;
 }
 
-md-backdrop.md-select-backdrop {
-  z-index:103;
-  }
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+  z-index: 99999 !important;
+}
 
-  .md-select-menu-container {
-  z-index:104;
-  }
-
-  .cdk-overlay-container {
-    z-index:1127;
-    }
 

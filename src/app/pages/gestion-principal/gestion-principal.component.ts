@@ -63,15 +63,24 @@ export class GestionPrincipalComponent implements OnInit {
 
 
 
-  registrar() {}
+  registrar() {
+    this.services.registrarPacientes(this.formRegistro.value).subscribe(
+      (result:any)=>{
+        console.log("correcot",result);
+      },
+      (error) => {
+        console.log("incorrecot",error);
+      }
+    );
+  }
 
   /**
    * Abre modal en caso de que nit no exista, queda a requerimiento del cliente
    * @param modal
    */
   openModalRegistro(modal: any) {
-    this.modal.open(modal, { size: 'xl', scrollable: true });
-    //this.modal.open(modal, { fullscreen: true });
+    //this.modal.open(modal, { size: 'xl', scrollable: true });
+    this.modal.open(modal, { fullscreen: true });
   }
 
   /**
