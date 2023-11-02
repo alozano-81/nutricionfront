@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, map, tap } from 'rxjs';
+import { Paises } from '../models/Parametrizacion-model';
 import { environment } from './../../environments/environment';
 //import { Router } from '@angular/router';
 
@@ -13,6 +14,7 @@ export class ServiciosService {
 
   comercios: any[] = [];
   login:any[] = [];
+  listaPaises:Paises[] = [];
 
   constructor(
     private formularioNuevo: FormBuilder,
@@ -40,7 +42,22 @@ export class ServiciosService {
     });
   }
 
-  //servicios
+    //form registro pacientes
+    cargarFormRegistroPacientes(): FormGroup{
+      return this.formularioNuevo.group({
+        nombres: ['',Validators.compose([Validators.required])],
+        apellidos:['',Validators.compose([Validators.required])],
+        sexo:[],
+        pais:[],
+        fechaNacimiento:[],
+        email:[],
+        documento:[],
+        ocupacion:[],
+        telefono:[]
+      });
+    }
+
+  //******************************servicios
 
   validarCredenciales(usuario:string,password:string){
     let queryParams = new HttpParams();
@@ -68,4 +85,17 @@ export class ServiciosService {
       map((result:any) => result)
     );
   }
+
+    /**
+   *
+   * @returns Obtener listado de paises
+   */
+
+    getPaises():Observable<any[]>{
+      let url = `${environment.urlListaPaises}`;
+      return this.http.get(url).pipe(
+        tap((result:any) => (this.listaPaises = result)),
+        map((result:any) => result)
+      );
+    }
 }

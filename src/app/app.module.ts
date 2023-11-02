@@ -8,6 +8,7 @@ import { AppRoutingModule, appRoutingProviders } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PagesRoutingModule } from './pages/pages-routing.module';
 import { PagesModule } from './pages/pages.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { PagesModule } from './pages/pages.module';
 
 @NgModule({
@@ -20,7 +21,8 @@ import { PagesModule } from './pages/pages.module';
     PagesRoutingModule,
     BrowserAnimationsModule,
     MatExpansionModule,
-    PagesModule
+    PagesModule,
+    NgbModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -7,6 +7,7 @@ export const environment = {
   urlApi: 'http://localhost:8085/api/tecnica/entrar',
   urlApiListarComercios: 'http://localhost:8085/api/tecnica/listarcomercios',
   urlValidarLogin: 'http://localhost:8083/api/login/validar-credenciales',
+  urlListaPaises: 'http://localhost:8083/api/paciente/get-all-paises',
 
 
 
