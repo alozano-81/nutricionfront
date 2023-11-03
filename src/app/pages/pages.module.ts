@@ -36,9 +36,9 @@ import { SpinerComponent } from './components/spiner/spiner.component';
 import { TemplateComponent } from './components/template/template.component';
 import { GenerarTurnosComponent } from './generar-turnos/generar-turnos.component';
 import { GestionLoginComponent } from './gestion-login/gestion-login.component';
+import { GestionPrincipalComponent } from './gestion-principal/gestion-principal.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
-import { GestionPrincipalComponent } from './gestion-principal/gestion-principal.component';
 @NgModule({
   declarations: [
     TemplateComponent,

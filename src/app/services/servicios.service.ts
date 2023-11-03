@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Observable, map, tap } from 'rxjs';
 import { Paises, RegistrarPacientes } from '../models/Parametrizacion-model';
 import { environment } from './../../environments/environment';
-//import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'

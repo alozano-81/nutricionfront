@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ServiciosService } from 'src/app/services/servicios.service';
+import Swal from 'sweetalert2';
 import { Paises } from './../../models/Parametrizacion-model';
 
 @Component({
@@ -42,6 +43,7 @@ export class GestionPrincipalComponent implements OnInit {
     this.formRegistro = this.services.cargarFormRegistroPacientes();
     //this.cargarSelectPaises();
     this.getPaises();
+    this.toastr.success('Hello world!', 'Toastr fun!');
   }
 
   getPaises(){
@@ -69,7 +71,12 @@ export class GestionPrincipalComponent implements OnInit {
         console.log("correcot",result);
       },
       (error) => {
-        console.log("incorrecot",error);
+        console.log("incorrecot",error.status);
+        if(error.status == 302){
+          Swal.fire({icon: 'error', title: 'Error', text: 'En validación token'});
+          this.toastr.success('Hello world!', 'Toastr fun!');
+          this.toastr.success('No es posible registrar el paciente este numero de documento',error.error.obj.documento);
+        }
       }
     );
   }
@@ -79,8 +86,8 @@ export class GestionPrincipalComponent implements OnInit {
    * @param modal
    */
   openModalRegistro(modal: any) {
-    //this.modal.open(modal, { size: 'xl', scrollable: true });
-    this.modal.open(modal, { fullscreen: true });
+    this.modal.open(modal, { size: 'xl', scrollable: true });
+    //this.modal.open(modal, { fullscreen: true });
   }
 
   /**
