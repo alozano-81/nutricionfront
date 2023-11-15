@@ -75,7 +75,7 @@ export class GestionPrincipalComponent implements OnInit {
         if(error.status == 302){
           Swal.fire({icon: 'error', title: 'Error', text: 'En validación token'});
           this.toastr.success('Hello world!', 'Toastr fun!');
-          this.toastr.success('No es posible registrar el paciente este numero de documento',error.error.obj.documento);
+          this.toastr.success('No es posible registrar el paciente este n&acuteumero de documento',error.error.obj.documento);
         }
       }
     );
