@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ export class ServiciosService {
 
   comercios: any[] = [];
   login:any[] = [];
+  respuestas:any [] =[];
   listaPaises:Paises[] = [];
   registroPacientes:RegistrarPacientes[] =[];
 
@@ -58,6 +59,17 @@ export class ServiciosService {
     }
 
   //******************************servicios
+
+  validarSesion(token:any){
+    let headers = new HttpHeaders({'Content-Type': 'application/json'}).append('token', token);
+    let url = `${environment.urlApivalidacionSesion}`;
+    console.log('pasa', url);
+    return this.http.get(url,{headers: headers}).pipe(
+    tap((result:any)=> (this.login = result)),
+    map((result:any)=> result)
+    );
+
+  }
 
   /**
    *Validar credenciales de inicio de sesion

@@ -50,6 +50,7 @@ export class GestionLoginComponent implements OnInit{
         console.log('entra correcto', result);
         this.router.navigate(['/', 'gestion-principal']);
         localStorage.setItem('user', this.formLogin.get('user').value);
+        localStorage.setItem('token', result.token);
       },
       (error)=>{
         console.log('entra incorrecto', error);

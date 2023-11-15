@@ -11,12 +11,12 @@ import { Paises } from './../../models/Parametrizacion-model';
   selector: 'app-gestion-principal',
   templateUrl: './gestion-principal.component.html',
   styleUrls: ['./gestion-principal.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class GestionPrincipalComponent implements OnInit {
   public formRegistro: any;
-  paises:Paises[] =[];
-  selected:any;
+  paises: Paises[] = [];
+  selected: any;
   public sex: string = '';
   public listaSex: string[] = ['Masculino', 'Femenino'];
 
@@ -40,42 +40,59 @@ export class GestionPrincipalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.formRegistro = this.services.cargarFormRegistroPacientes();
-    //this.cargarSelectPaises();
-    this.getPaises();
-    this.toastr.success('Hello world!', 'Toastr fun!');
+    this.services.validarSesion(localStorage.getItem('token')).subscribe(
+      (result: any) => {
+        console.log('verr: ', result);
+        this.formRegistro = this.services.cargarFormRegistroPacientes();
+        //this.cargarSelectPaises();
+        this.getPaises();
+        this.toastr.success(result.status);
+      },
+      (error) => {
+        console.log('verError: ', error);
+        if(error.status == 400){
+          this.toastr.info('Sesion expiro', error.error.msn);
+          this.router.navigate(['/', 'login']);
+        }
+      }
+    );
   }
 
-  getPaises(){
+  getPaises() {
     this.services.getPaises().subscribe(
-      (result)=>{
+      (result) => {
         console.log('ok');
         console.log(result);
         this.paises = result;
         console.log(this.paises);
       },
-      (error)=>{
+      (error) => {
         console.log('nok');
         console.log(error);
       }
     );
   }
 
-  cargarSelectPaises(seleccionaPais:any){}
-
-
+  cargarSelectPaises(seleccionaPais: any) {}
 
   registrar() {
     this.services.registrarPacientes(this.formRegistro.value).subscribe(
-      (result:any)=>{
-        console.log("correcot",result);
+      (result: any) => {
+        console.log('correcot', result);
       },
       (error) => {
-        console.log("incorrecot",error.status);
-        if(error.status == 302){
-          Swal.fire({icon: 'error', title: 'Error', text: 'En validación token'});
+        console.log('incorrecot', error.status);
+        if (error.status == 302) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'En validación token',
+          });
           this.toastr.success('Hello world!', 'Toastr fun!');
-          this.toastr.success('No es posible registrar el paciente este n&acuteumero de documento',error.error.obj.documento);
+          this.toastr.success(
+            'No es posible registrar el paciente este n&acuteumero de documento',
+            error.error.obj.documento
+          );
         }
       }
     );

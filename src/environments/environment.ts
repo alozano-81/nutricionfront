@@ -5,9 +5,10 @@
 export const environment = {
   production: false,
   urlApi: 'http://localhost:8085/api/tecnica/entrar',
+  urlApivalidacionSesion: 'http://localhost:8083/api/auth/usersesion/validar-sesion',
   urlApiListarComercios: 'http://localhost:8085/api/tecnica/listarcomercios',
   urlValidarLogin: 'http://localhost:8083/api/login/validar-credenciales',
-  urlListaPaises: 'http://localhost:8083/api/paciente/get-all-paises',
+  urlListaPaises: 'http://localhost:8083/api/auth/paciente/get-all-paises',
   urlRegistrarPacientes: 'http://localhost:8083/api/paciente/registrar',
 
 
