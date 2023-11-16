@@ -19,6 +19,7 @@ export class GestionPrincipalComponent implements OnInit {
   selected: any;
   public sex: string = '';
   public listaSex: string[] = ['Masculino', 'Femenino'];
+  rolUsuario:any;
 
   constructor(
     public services: ServiciosService,
@@ -40,24 +41,35 @@ export class GestionPrincipalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.services.validarSesion(localStorage.getItem('token')).subscribe(
-      (result: any) => {
-        console.log('verr: ', result);
-        this.formRegistro = this.services.cargarFormRegistroPacientes();
-        //this.cargarSelectPaises();
-        this.getPaises();
-        this.toastr.success(result.status);
-      },
-      (error) => {
-        console.log('verError: ', error);
-        if(error.status == 400){
-          this.toastr.info('Sesion expiro', error.error.msn);
-          this.router.navigate(['/', 'login']);
+    this.rolUsuario = localStorage.getItem('rolUser');
+    if (localStorage.getItem('creado') == 'ok') {
+      this.formRegistro = this.services.cargarFormRegistroPacientes();
+      localStorage.removeItem('creado');
+      this.getPaises();
+    } else {
+      this.services.validarSesion(localStorage.getItem('token')).subscribe(
+        (result: any) => {
+          console.log('verr: ', result);
+          this.formRegistro = this.services.cargarFormRegistroPacientes();
+          //this.cargarSelectPaises();
+          this.getPaises();
+          this.toastr.success(result.status);
+        },
+        (error) => {
+          console.log('verError: ', error);
+          if (error.error.status == 'CONFLICT') {
+            this.toastr.info('Sesion expiro', error.error.msn);
+            localStorage.clear();
+            this.router.navigate(['/', 'login']);
+          }
         }
-      }
-    );
+      );
+    }
   }
 
+  /**
+   * carga la lista de paises
+   */
   getPaises() {
     this.services.getPaises().subscribe(
       (result) => {

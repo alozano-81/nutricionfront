@@ -1,7 +1,7 @@
 <div class="container">
 <p>gestion-principal works!</p>
 <div class="container">
-<button
+<button *ngIf="rolUsuario  == 'ROLE_USER'"
   type="button"
   data-toggle="modal"
   class="btn btn-success btn-round btn-fab btn-sm"

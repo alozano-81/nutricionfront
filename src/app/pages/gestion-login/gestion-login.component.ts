@@ -41,6 +41,7 @@ export class GestionLoginComponent implements OnInit{
     }
 
   ngOnInit():void {
+    localStorage.clear();
     this.formLogin = this.serviceLogin.cargarFormLogin();
   }
 
@@ -48,14 +49,17 @@ export class GestionLoginComponent implements OnInit{
     this.serviceLogin.validarCredenciales(this.formLogin.get('user').value,  this.formLogin.get('pass').value).subscribe(
       (result:any)=>{
         console.log('entra correcto', result);
+        localStorage.setItem('rolUser',result.obj[0].nombre);
         this.router.navigate(['/', 'gestion-principal']);
         localStorage.setItem('user', this.formLogin.get('user').value);
         localStorage.setItem('token', result.token);
+        localStorage.setItem('creado','ok');
       },
       (error)=>{
         console.log('entra incorrecto', error);
-        this.toastr.info('ver');
-        Swal.fire({icon: 'error', title: 'Error', text: 'Usuario o id de la sesión invalido'});
+        this.formLogin.reset();
+        localStorage.clear();
+        Swal.fire({icon: 'error', title: error.error.status, text: error.error.msn});
       }
     );
 
