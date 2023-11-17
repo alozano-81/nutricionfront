@@ -1,17 +1,22 @@
 export const environment = {
   production: true,
-  urlApiProveedorServicio: '/proveedores/ProveedoresServicio/proveedores/v2/',
-  urlToken: '/Token/ProveedoresServicio/token',
-  urlTokenV2: 'http://localhost:8088/ProveedoresServicio/token/validar-token',
-  urlApiGeneralOrganizacion: '/GeneralOrganizacion',
-  urlAutenticacion:'/autenticacion-sigru/general/autenticacion/loginSigru',
+  urlApi: 'http://localhost:8085/api/tecnica/entrar',
+  urlApivalidacionSesion: 'http://localhost:8083/api/auth/usersesion/validar-sesion',
+  urlApiListarComercios: 'http://localhost:8085/api/tecnica/listarcomercios',
+  urlValidarLogin: 'http://localhost:8083/api/login/validar-credenciales',
+  urlListaPaises: 'http://localhost:8083/api/auth/paciente/get-all-paises',
+  urlRegistrarPacientes: 'http://localhost:8083/api/paciente/registrar',
 
-  // urlApiProveedorServicio2: '/proveedores/ProveedoresServicio/proveedores/v2/',
-    // urlToken:'/Token/ProveedoresServicio/token/generar',
-    //urlApiGeneralOrganizacion: 'GeneralOrganizacion/GeneralOrganizacion',
-    urlDownloadFiles:'/descargar-archivos-proveedor/visualizador/archivo/descargar/',
 
-    // proveedores:Servicios
-    path: '/ProveedoresServicio',
+
+  //etiquetas formularios
+  usuario: 'Usuario',
+  lbl_pass: 'Ingrese su contraseña',
+  //msn
+
+
+  //credenciales
+  user: 'admin',
+  pass: 'admin'
 
 };
