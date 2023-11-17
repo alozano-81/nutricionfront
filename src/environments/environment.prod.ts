@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
-  urlApi: 'http://localhost:8085/api/tecnica/entrar',
-  urlApivalidacionSesion: 'http://localhost:8083/api/auth/usersesion/validar-sesion',
-  urlApiListarComercios: 'http://localhost:8085/api/tecnica/listarcomercios',
-  urlValidarLogin: 'http://localhost:8083/api/login/validar-credenciales',
-  urlListaPaises: 'http://localhost:8083/api/auth/paciente/get-all-paises',
-  urlRegistrarPacientes: 'http://localhost:8083/api/paciente/registrar',
+  urlApi: 'https://nutricionfront-production.up.railway.app//api/tecnica/entrar',
+  urlApivalidacionSesion: 'https://nutricionfront-production.up.railway.app/3/api/auth/usersesion/validar-sesion',
+  urlApiListarComercios: 'https://nutricionfront-production.up.railway.app//api/tecnica/listarcomercios',
+  urlValidarLogin: 'https://nutricionfront-production.up.railway.app/3/api/login/validar-credenciales',
+  urlListaPaises: 'https://nutricionfront-production.up.railway.app/3/api/auth/paciente/get-all-paises',
+  urlRegistrarPacientes: 'https://nutricionfront-production.up.railway.app/3/api/paciente/registrar',
 
 
 
