@@ -3,6 +3,6 @@
     "target":"https://nutricionfront-production.up.railway.app",
     "secure":false,
     "changeOrigin":true,
-    "pathRewrite": {"^/autenticacion-sigru" : ""}
+    "pathRewrite": {"^/autenticacion-login" : ""}
   }
 }
