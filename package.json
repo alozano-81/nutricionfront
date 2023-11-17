@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "dev": "ng serve",
     "start1": "ng serve",
     "start2": "ng serve --proxy-config proxy.conf.json",
     "desarrollo": "ng serve --proxy-config proxy.conf-desarrollo.json",
