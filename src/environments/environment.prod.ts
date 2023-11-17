@@ -3,7 +3,7 @@ export const environment = {
   urlApi: 'https://nutricionfront-production.up.railway.app//api/tecnica/entrar',
   urlApivalidacionSesion: 'https://nutricionfront-production.up.railway.app/3/api/auth/usersesion/validar-sesion',
   urlApiListarComercios: 'https://nutricionfront-production.up.railway.app//api/tecnica/listarcomercios',
-  urlValidarLogin: 'https://nutricionfront-production.up.railway.app/3/api/login/validar-credenciales',
+  urlValidarLogin: 'autenticacion-login/3/api/login/validar-credenciales',
   urlListaPaises: 'https://nutricionfront-production.up.railway.app/3/api/auth/paciente/get-all-paises',
   urlRegistrarPacientes: 'https://nutricionfront-production.up.railway.app/3/api/paciente/registrar',
 
