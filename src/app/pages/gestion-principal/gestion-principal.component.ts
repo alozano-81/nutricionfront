@@ -57,6 +57,7 @@ export class GestionPrincipalComponent implements OnInit {
         },
         (error) => {
           console.log('verError: ', error);
+          this.cerrarModal('ModalGestionUsuarios');
           if (error.error.status == 'CONFLICT') {
             this.toastr.info('Sesion expiro', error.error.msn);
             localStorage.clear();
@@ -64,6 +65,14 @@ export class GestionPrincipalComponent implements OnInit {
           }
         }
       );
+    }
+  }
+
+  eventoCerrarModalCreacionUsuario(evento:any){
+    console.log('llega evento');
+    console.log(evento);
+    if(evento){
+      this.cerrarModal('ModalGestionUsuarios');
     }
   }
 

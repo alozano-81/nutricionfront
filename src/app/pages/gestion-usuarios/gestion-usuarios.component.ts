@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -16,6 +16,11 @@ export class GestionUsuariosComponent implements OnInit{
   rolUsuario:any;
   public rol: string = '';
   public listaRol: string[] = ['ROLE_USER', 'ROLE_ADMIN'];
+
+  //@Input() cerrarModalCrearUsuario:any;
+   /**Enviar datos al componente externo */
+   @Output()
+   cerrarModalCrearUsuario: EventEmitter<boolean> =  new EventEmitter<boolean>();
 
   constructor(
     public services: ServiciosService,
@@ -37,7 +42,9 @@ export class GestionUsuariosComponent implements OnInit{
         },
         (error) => {
           console.log('verError: ', error);
+          this.cerrarModalCrearUsuario.emit(true);
           if (error.error.status == 'CONFLICT') {
+
             this.toastr.info('Sesion expiro', error.error.msn);
             localStorage.clear();
             this.router.navigate(['/', 'login']);

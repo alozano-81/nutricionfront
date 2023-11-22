@@ -250,6 +250,7 @@
       <div class="modal-body">
         <app-gestion-usuarios
           *ngIf="this.rolUsuario == 'ROLE_ADMIN'"
+          (cerrarModalCrearUsuario) = "eventoCerrarModalCreacionUsuario($event)"
         ></app-gestion-usuarios>
       </div>
       <div class="modal-footer">
