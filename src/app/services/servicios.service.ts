@@ -20,6 +20,7 @@ export class ServiciosService {
   constructor(
     private formularioNuevo: FormBuilder,
     private formularioTurnos: FormBuilder,
+    private formularioCreacionUsuarios: FormBuilder,
     private http: HttpClient,
     private router: Router
   ) { }
@@ -30,6 +31,16 @@ export class ServiciosService {
     return this.formularioNuevo.group({
       user: ['',Validators.compose([Validators.required])],
       pass:['',Validators.compose([Validators.required])]
+    });
+  }
+
+  //form creacion de usuarios
+  cargarFormCreacionUsuarios(): FormGroup{
+    return this.formularioCreacionUsuarios.group({
+      username:['',Validators.compose([Validators.required])],
+      password:['',Validators.compose([Validators.required])],
+      email:['',Validators.compose([Validators.required])],
+      roless:['',Validators.compose([Validators.required])]
     });
   }
 
@@ -133,6 +144,18 @@ export class ServiciosService {
     return this.http.post(url, items).pipe(
       tap((result: any) => (this.registroPacientes = result)),
       map((result: any) => result)
+    );
+  }
+
+  crearUsuario(token:any, usuario:any){
+    let items = Object.assign(usuario);
+    let headers = new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', token);
+    let url = `${environment.urlCrearUsuarios}`;
+    console.log('crear', url);
+    console.log('form', items);
+    return this.http.post(url,items,{headers: headers}).pipe(
+    tap((result:any)=> (this.respuestas = result)),
+    map((result:any)=> result)
     );
   }
 }

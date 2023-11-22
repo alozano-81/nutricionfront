@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="modal-body">
+    <form [formGroup]="formCreacion" class="form" (submit)="crear()" novalidate>
+      <div class="row">
+        <div class="col">
+          <mat-form-field hintLabel="Max 10 caracteres">
+            <mat-label>User</mat-label>
+            <input
+              matInput
+              #nombres
+              required="true"
+              formControlName="username"
+            />
+          </mat-form-field>
+
+          <div *ngIf="formCreacion.controls['username'].errors">
+            <mat-error
+              *ngIf="formCreacion.controls['username'].errors?.required"
+            >
+              <p style="color: F44336">Debe ingresar datos.</p>
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="col">
+          <mat-form-field hintLabel="Max 10 caracteres">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              #nombres
+              required="true"
+              formControlName="password"
+            />
+          </mat-form-field>
+
+          <div *ngIf="formCreacion.controls['password'].errors">
+            <mat-error
+              *ngIf="formCreacion.controls['password'].errors?.required"
+            >
+              <p style="color: F44336">Debe ingresar datos.</p>
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="col">
+          <mat-form-field hintLabel="Max 10 caracteres">
+            <mat-label>Email</mat-label>
+            <input matInput #nombres required="true" formControlName="email" />
+          </mat-form-field>
+
+          <div *ngIf="formCreacion.controls['email'].errors">
+            <mat-error *ngIf="formCreacion.controls['email'].errors?.required">
+              <p style="color: F44336">Debe ingresar datos.</p>
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Rol</mat-label>
+            <mat-select formControlName="roless" placeholder="Rol">
+              <mat-option
+                style="z-index: 99999"
+                *ngFor="let ite of listaRol"
+                [value]="ite"
+                >{{ ite }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formCreacion.controls['roless'].errors?.required">
+              <span> Se debe seleccionar una pa&acuoteis </span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <button
+        [disabled]="formCreacion.invalid"
+        class="btn btn-primary btn-sm"
+        type="submit"
+      >
+        Crear
+      </button>
+    </form>
+  </div>
+</div>

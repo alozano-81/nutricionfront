@@ -1,0 +1,90 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover;
+}
+
+.example-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.bg-primary-flota {
+  --bs-bg-opacity: 1;
+  background-color: rgb(34, 64, 122);
+}
+
+mat-card::ng-deep.mat-card-header {
+  width: 100%;
+  background: rgb(34, 64, 122);
+  color: white;
+  height: 40px;
+  text-transform: uppercase;
+}
+
+mat-card::ng-deep.mat-card-avatar {
+  padding: 10px;
+}
+
+mat-card::ng-deep.mat-card-header-text {
+  padding: 10px;
+}
+
+mat-card::ng-deep.mat-card-subtitle {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+mat-card::ng-deep.mat-button-toggle-group {
+  box-shadow: none;
+}
+
+mat-card::ng-deep.mat-button-toggle {
+  background: rgb(184, 171, 132);
+  margin: 5px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+mat-card::ng-deep.mat-button-toggle:hover {
+  color: rgb(57, 68, 231) !important;
+}
+
+mat-card::ng-deep.mat-button-toggle-checked {
+  background-color: rgb(34, 64, 122) !important;
+  color: white !important;
+}
+
+mat-card::ng-deep.mat-form-field {
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.mat-button-toggle{
+  background-color: #306cee;
+  color: #141313;
+}
+
+.mat-button-toggle:hover {
+  background-color: transparent;
+  color: #1100ff !important;
+}
+
+.mat-button-toggle-checked {
+  background-color: #ec2c4c;
+  color: #1100ff !important;
+}
+
+.mat_card_header{
+  background-color: rgb(34, 64, 122) !important;
+  color: white !important;
+  padding: 10px;
+}
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+  z-index: 99999 !important;
+}
+
+
