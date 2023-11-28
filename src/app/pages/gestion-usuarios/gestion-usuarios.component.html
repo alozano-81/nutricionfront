@@ -62,12 +62,12 @@
               <mat-option
                 style="z-index: 99999"
                 *ngFor="let ite of listaRol"
-                [value]="ite"
-                >{{ ite }}
+                [value]="ite.codigo"
+                >{{ ite.nombre }}
               </mat-option>
             </mat-select>
             <mat-error *ngIf="formCreacion.controls['roless'].errors?.required">
-              <span> Se debe seleccionar una pa&acuoteis </span>
+              <span> Se debe seleccionar un Rol </span>
             </mat-error>
           </mat-form-field>
         </div>

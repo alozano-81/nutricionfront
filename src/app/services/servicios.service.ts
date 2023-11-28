@@ -15,6 +15,7 @@ export class ServiciosService {
   login:any[] = [];
   respuestas:any [] =[];
   listaPaises:Paises[] = [];
+  listaRoles:any[] =[];
   registroPacientes:RegistrarPacientes[] =[];
 
   constructor(
@@ -70,6 +71,13 @@ export class ServiciosService {
     }
 
   //******************************servicios
+  getListaRoles(){
+    let url = `${environment.urlListaRoles}`;
+    return this.http.get(url).pipe(
+      tap((result:any)=> (this.listaRoles = result)),
+      map((result:any)=> result)
+      );
+  }
 
   validarSesion(token:any){
     let headers = new HttpHeaders({'Content-Type': 'application/json'}).append('token', token);

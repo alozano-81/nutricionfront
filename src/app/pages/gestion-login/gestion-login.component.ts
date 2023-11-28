@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ServiciosService } from 'src/app/services/servicios.service';
 import { environment } from 'src/environments/environment';
@@ -32,7 +33,7 @@ export class GestionLoginComponent implements OnInit{
     private modal : NgbModal,
     private changeDetector: ChangeDetectorRef,
     config: NgbModalConfig*/
-
+    private spinner : NgxSpinnerService,
     public router : Router,
     public toastr : ToastrService
     )
@@ -46,8 +47,10 @@ export class GestionLoginComponent implements OnInit{
   }
 
   enviarDatos(){
+    this.spinner.show();
     this.serviceLogin.validarCredenciales(this.formLogin.get('user').value,  this.formLogin.get('pass').value).subscribe(
       (result:any)=>{
+        this.spinner.hide();
         console.log('entra correcto', result);
         localStorage.setItem('rolUser',result.obj[0].nombre);
         this.router.navigate(['/', 'gestion-principal']);
@@ -56,6 +59,7 @@ export class GestionLoginComponent implements OnInit{
         localStorage.setItem('creado','ok');
       },
       (error)=>{
+        this.spinner.hide();
         console.log('entra incorrecto', error);
         this.formLogin.reset();
         localStorage.clear();

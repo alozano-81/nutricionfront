@@ -7,6 +7,7 @@ export const environment = {
   urlApi: 'http://localhost:8085/api/tecnica/entrar',
   urlApivalidacionSesion: 'http://localhost:8083/api/auth/usersesion/validar-sesion',
   urlCrearUsuarios: 'http://localhost:8083/api/auth/usersesion/creacion',
+  urlListaRoles: 'http://localhost:8083/api/auth/usersesion/get-all-roles',
 
 
   urlApiListarComercios: 'http://localhost:8085/api/tecnica/listarcomercios',

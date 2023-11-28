@@ -15,7 +15,8 @@ export class GestionUsuariosComponent implements OnInit{
   public formCreacion:any;
   rolUsuario:any;
   public rol: string = '';
-  public listaRol: string[] = ['ROLE_USER', 'ROLE_ADMIN'];
+  //public listaRol: string[] = ['ROLE_USER', 'ROLE_ADMIN'];
+  public listaRol: any[] = [];
 
   //@Input() cerrarModalCrearUsuario:any;
    /**Enviar datos al componente externo */
@@ -30,6 +31,7 @@ export class GestionUsuariosComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
+    this.getRoles();
     this.formCreacion = this.services.cargarFormCreacionUsuarios();
     this.rolUsuario = localStorage.getItem('rolUser');
     if (localStorage.getItem('creado') == 'ok') {
@@ -52,6 +54,17 @@ export class GestionUsuariosComponent implements OnInit{
         }
       );
     }
+  }
+
+  //
+  getRoles(){
+    this.services.getListaRoles().subscribe(
+      (result:any)=>{
+        console.log(result);
+        this.listaRol = result.obj
+      },
+      (error)=>{}
+    );
   }
 
   //
