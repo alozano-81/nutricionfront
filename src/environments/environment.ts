@@ -13,7 +13,7 @@ export const environment = {
   urlApiListarComercios: 'http://localhost:8085/api/tecnica/listarcomercios',
   urlValidarLogin: 'http://localhost:8083/api/login/validar-credenciales',
   urlListaPaises: 'http://localhost:8083/api/auth/paciente/get-all-paises',
-  urlRegistrarPacientes: 'http://localhost:8083/api/paciente/registrar',
+  urlRegistrarPacientes: 'http://localhost:8083/api/auth/paciente/registrar',
 
 
 

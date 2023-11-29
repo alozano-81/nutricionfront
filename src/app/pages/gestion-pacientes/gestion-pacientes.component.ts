@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Paises } from 'src/app/models/Parametrizacion-model';
 import { ServiciosService } from 'src/app/services/servicios.service';
@@ -26,20 +27,19 @@ export class GestionPacientesComponent implements OnInit {
     public services: ServiciosService,
     private modal: NgbModal,
     public router: Router,
-    public toastr: ToastrService
+    public toastr: ToastrService,
+    private spinner : NgxSpinnerService,
   ) {}
 
   ngOnInit(): void {
-
+    this.formRegistro = this.services.cargarFormRegistroPacientes();
     if (localStorage.getItem('creado') == 'ok') {
-      this.formRegistro = this.services.cargarFormRegistroPacientes();
       localStorage.removeItem('creado');
       this.getPaises();
     } else {
       this.services.validarSesion(localStorage.getItem('token')).subscribe(
         (result: any) => {
           console.log('verr: ', result);
-          this.formRegistro = this.services.cargarFormRegistroPacientes();
           this.getPaises();
           this.toastr.success(result.status);
         },
@@ -75,22 +75,39 @@ export class GestionPacientesComponent implements OnInit {
   }
 
   registrar() {
-    this.services.registrarPacientes(this.formRegistro.value).subscribe(
+    this.spinner.show();
+    this.services.registrarPacientes(this.formRegistro.value, localStorage.getItem('token')).subscribe(
       (result: any) => {
         console.log('correcot', result);
+        if(result.status == 'ACCEPTED'){
+          this.spinner.hide();
+          this.toastr.success(result.mensaje == null ? 'Paciente creado correctamente' : result.mensaje);
+          this.formRegistro.reset();
+          this.modal.dismissAll();
+        }
       },
-      (error) => {
+      (error) => {console.log('err', error);
+        this.spinner.hide();
         if (error.status == 302) {
           Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'En validación token',
+            text: error.error.mensaje['message'],
           });
-          this.toastr.success('Hello world!', 'Toastr fun!');
-          this.toastr.success(
-            'No es posible registrar el paciente este n&acuteumero de documento',
+          this.toastr.info(
+            'No es posible registrar el paciente con este número de documento',
             error.error.obj.documento
           );
+        }
+
+        if(error.status == 403){
+          this.spinner.hide();
+          localStorage.clear();
+          this.toastr.info('',
+            environment.sesionexpiro
+          );
+          this.modal.dismissAll();
+          this.router.navigate(['/', 'login']);
         }
       }
     );

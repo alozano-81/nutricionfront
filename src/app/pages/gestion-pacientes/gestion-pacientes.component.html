@@ -32,7 +32,7 @@
               <mat-label>Apellidos</mat-label>
               <input
                 matInput
-                #nombres
+                #apellidos
                 required="true"
                 formControlName="apellidos"
               />
@@ -143,9 +143,16 @@
               <mat-error
                 *ngIf="formRegistro.controls['documento'].errors?.required"
               >
-                Se debe ingresar un teléfono de contacto
+                Se debe ingresar un datos
               </mat-error>
             </mat-form-field>
+            <div *ngIf="formRegistro.controls['documento'].errors">
+              <mat-error
+                *ngIf="formRegistro.controls['documento'].errors?.required"
+              >
+                <p style="color: F44336">Debe ingresar datos.</p>
+              </mat-error>
+            </div>
           </div>
           <div class="col">
             <mat-label>Ocupaci&oacute;n</mat-label>

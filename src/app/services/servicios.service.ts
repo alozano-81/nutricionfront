@@ -145,11 +145,12 @@ export class ServiciosService {
    * @return {*}
    * @memberof ServiciosService
    */
-  registrarPacientes(form: any) {
+  registrarPacientes(form: any, token:any) {
     //let user ={usuario: usu};
+    let headers = new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', token);
     let items = Object.assign(form);
     let url = `${environment.urlRegistrarPacientes}`;
-    return this.http.post(url, items).pipe(
+    return this.http.post(url, items, {headers: headers}).pipe(
       tap((result: any) => (this.registroPacientes = result)),
       map((result: any) => result)
     );
