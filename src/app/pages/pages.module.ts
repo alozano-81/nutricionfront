@@ -40,6 +40,7 @@ import { GestionPrincipalComponent } from './gestion-principal/gestion-principal
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
 import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.component';
+import { GestionPacientesComponent } from './gestion-pacientes/gestion-pacientes.component';
 @NgModule({
   declarations: [
     TemplateComponent,
@@ -48,7 +49,8 @@ import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.co
     GenerarTurnosComponent,
     SpinerComponent,
     GestionPrincipalComponent,
-    GestionUsuariosComponent
+    GestionUsuariosComponent,
+    GestionPacientesComponent
   ],
   imports: [
     CommonModule,

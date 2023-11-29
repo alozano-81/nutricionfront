@@ -63,7 +63,7 @@ export class ServiciosService {
         sexo:[],
         pais:[],
         fechaNacimiento:[],
-        email:[],
+        email:['',Validators.compose([Validators.required, Validators.email])],
         documento:['',Validators.compose([Validators.required])],
         ocupacion:[],
         telefono:[]

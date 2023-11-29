@@ -5,8 +5,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ServiciosService } from 'src/app/services/servicios.service';
 import { environment } from 'src/environments/environment';
-import Swal from 'sweetalert2';
-import { Paises } from './../../models/Parametrizacion-model';
 
 @Component({
   selector: 'app-gestion-principal',
@@ -16,10 +14,7 @@ import { Paises } from './../../models/Parametrizacion-model';
 })
 export class GestionPrincipalComponent implements OnInit {
   public formRegistro: any;
-  paises: Paises[] = [];
-  selected: any;
-  public sex: string = '';
-  public listaSex: string[] = ['Masculino', 'Femenino'];
+
   atras:string = environment.atras;
   rolUsuario:any;
 
@@ -45,16 +40,10 @@ export class GestionPrincipalComponent implements OnInit {
   ngOnInit(): void {
     this.rolUsuario = localStorage.getItem('rolUser');
     if (localStorage.getItem('creado') == 'ok') {
-      this.formRegistro = this.services.cargarFormRegistroPacientes();
       localStorage.removeItem('creado');
-      this.getPaises();
     } else {
       this.services.validarSesion(localStorage.getItem('token')).subscribe(
         (result: any) => {
-          console.log('verr: ', result);
-          this.formRegistro = this.services.cargarFormRegistroPacientes();
-          //this.cargarSelectPaises();
-          this.getPaises();
           this.toastr.success(result.status);
         },
         (error) => {
@@ -75,50 +64,8 @@ export class GestionPrincipalComponent implements OnInit {
     console.log(evento);
     if(evento){
       this.cerrarModal('ModalGestionUsuarios');
+      this.modal.dismissAll();
     }
-  }
-
-  /**
-   * carga la lista de paises
-   */
-  getPaises() {
-    this.services.getPaises().subscribe(
-      (result) => {
-        console.log('ok');
-        console.log(result);
-        this.paises = result;
-        console.log(this.paises);
-      },
-      (error) => {
-        console.log('nok');
-        console.log(error);
-      }
-    );
-  }
-
-  cargarSelectPaises(seleccionaPais: any) {}
-
-  registrar() {
-    this.services.registrarPacientes(this.formRegistro.value).subscribe(
-      (result: any) => {
-        console.log('correcot', result);
-      },
-      (error) => {
-        console.log('incorrecot', error.status);
-        if (error.status == 302) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'En validación token',
-          });
-          this.toastr.success('Hello world!', 'Toastr fun!');
-          this.toastr.success(
-            'No es posible registrar el paciente este n&acuteumero de documento',
-            error.error.obj.documento
-          );
-        }
-      }
-    );
   }
 
   /**
@@ -127,23 +74,7 @@ export class GestionPrincipalComponent implements OnInit {
    */
   openModalRegistro(modal: any) {
     //this.modal.open(modal, { fullscreen: true });
-    if (localStorage.getItem('creado') == 'ok') {
-      localStorage.removeItem('creado');
-    } else {
-      this.services.validarSesion(localStorage.getItem('token')).subscribe(
-        (result: any) => {
-          this.modal.open(modal, { size: 'xl', scrollable: true, backdrop: 'static', keyboard:false });
-        },
-        (error) => {
-          this.cerrarModal('ModalGestionUsuarios');
-          if (error.error.status == 'CONFLICT') {
-            this.toastr.info(error.error.msn,environment.sesionexpiro);
-            localStorage.clear();
-            this.router.navigate(['/', 'login']);
-          }
-        }
-      );
-    }
+    this.modal.open(modal, { size: 'xl', scrollable: true, backdrop: 'static', keyboard:false });
   }
 
   /**

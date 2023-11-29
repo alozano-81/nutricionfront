@@ -29,7 +29,7 @@ export const environment = {
   pass: 'admin',
 
   //msn
-  sesionexpiro:'Sesi&oacute;n expir&oacute;',
+  sesionexpiro:'Sesión expiró',
 
   //iconos
   atras: 'keyboard_backspace',
