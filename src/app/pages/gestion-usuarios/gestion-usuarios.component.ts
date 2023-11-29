@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ServiciosService } from 'src/app/services/servicios.service';
 import Swal from 'sweetalert2';
@@ -27,7 +28,8 @@ export class GestionUsuariosComponent implements OnInit{
     public services: ServiciosService,
     private modal: NgbModal,
     public router: Router,
-    public toastr: ToastrService
+    public toastr: ToastrService,
+    public spinner: NgxSpinnerService
   ){}
 
   ngOnInit(): void {
@@ -70,6 +72,7 @@ export class GestionUsuariosComponent implements OnInit{
   //
   usuario:UserDTO = new UserDTO();
   crear(){
+    this.spinner.show();
     this.usuario.username = this.formCreacion.get('username').value;
     this.usuario.password = this.formCreacion.get('password').value;
     this.usuario.email = this.formCreacion.get('email').value;
@@ -77,10 +80,15 @@ export class GestionUsuariosComponent implements OnInit{
     this.services.crearUsuario(localStorage.getItem('token'),this.usuario).subscribe(
       (result:any)=>{
         console.log('cre===> ', result);
-        this.toastr.info('usuario creado correctamente')
+        this.spinner.hide();
+        this.toastr.info('usuario creado correctamente');
+        this.formCreacion.reset();
+        this.usuario = new UserDTO();
+        this.cerrarModalCrearUsuario.emit(true);
       },
       (error)=>{
         console.log('cerror===> ', error);
+        this.spinner.hide();
         Swal.fire({icon: 'error', title: error.error.status, text: error.error.msn});
       }
     );

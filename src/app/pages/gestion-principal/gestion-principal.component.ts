@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ServiciosService } from 'src/app/services/servicios.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { Paises } from './../../models/Parametrizacion-model';
 
@@ -19,6 +20,7 @@ export class GestionPrincipalComponent implements OnInit {
   selected: any;
   public sex: string = '';
   public listaSex: string[] = ['Masculino', 'Femenino'];
+  atras:string = environment.atras;
   rolUsuario:any;
 
   constructor(
@@ -59,7 +61,7 @@ export class GestionPrincipalComponent implements OnInit {
           console.log('verError: ', error);
           this.cerrarModal('ModalGestionUsuarios');
           if (error.error.status == 'CONFLICT') {
-            this.toastr.info('Sesion expiro', error.error.msn);
+            this.toastr.info(error.error.msn,environment.sesionexpiro);
             localStorage.clear();
             this.router.navigate(['/', 'login']);
           }
@@ -124,8 +126,24 @@ export class GestionPrincipalComponent implements OnInit {
    * @param modal
    */
   openModalRegistro(modal: any) {
-    this.modal.open(modal, { size: 'xl', scrollable: true });
     //this.modal.open(modal, { fullscreen: true });
+    if (localStorage.getItem('creado') == 'ok') {
+      localStorage.removeItem('creado');
+    } else {
+      this.services.validarSesion(localStorage.getItem('token')).subscribe(
+        (result: any) => {
+          this.modal.open(modal, { size: 'xl', scrollable: true, backdrop: 'static', keyboard:false });
+        },
+        (error) => {
+          this.cerrarModal('ModalGestionUsuarios');
+          if (error.error.status == 'CONFLICT') {
+            this.toastr.info(error.error.msn,environment.sesionexpiro);
+            localStorage.clear();
+            this.router.navigate(['/', 'login']);
+          }
+        }
+      );
+    }
   }
 
   /**
@@ -134,5 +152,10 @@ export class GestionPrincipalComponent implements OnInit {
    */
   cerrarModal(modal: any) {
     this.modal.dismissAll(modal);
+  }
+
+  regresar(){
+    localStorage.clear();
+    this.router.navigate(['/', 'login']);
   }
 }

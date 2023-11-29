@@ -26,5 +26,11 @@ export const environment = {
 
   //credenciales
   user: 'admin',
-  pass: 'admin'
+  pass: 'admin',
+
+  //msn
+  sesionexpiro:'Sesi&oacute;n expir&oacute;',
+
+  //iconos
+  atras: 'keyboard_backspace',
 }
