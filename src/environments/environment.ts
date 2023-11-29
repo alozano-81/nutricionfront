@@ -16,6 +16,17 @@ export const environment = {
   urlRegistrarPacientes: 'http://localhost:8083/api/auth/paciente/registrar',
 
 
+  /*urlApi: 'http://localhost:8085/api/tecnica/entrar',
+  urlApivalidacionSesion: '/autenticacion-login/api/auth/usersesion/validar-sesion',
+  urlCrearUsuarios: '/autenticacion-login/api/auth/usersesion/creacion',
+  urlListaRoles: '/autenticacion-login/api/auth/usersesion/get-all-roles',
+
+
+  urlApiListarComercios: '/autenticacion-login/api/tecnica/listarcomercios',
+  urlValidarLogin: '/autenticacion-login/api/login/validar-credenciales',
+  urlListaPaises: '/autenticacion-login/api/auth/paciente/get-all-paises',
+  urlRegistrarPacientes: '/autenticacion-login/api/auth/paciente/registrar',*/
+
 
 
   //etiquetas formularios

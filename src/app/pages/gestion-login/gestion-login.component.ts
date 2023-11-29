@@ -21,6 +21,7 @@ export class GestionLoginComponent implements OnInit{
   lbl_login:string="Iniciar sesión";
   public lbl_usuario : string = environment.usuario;
   public lbl_contrasena : string = environment.lbl_pass;
+  idForm:string = 'idForm';
 
   constructor(
     public serviceLogin : ServiciosService,

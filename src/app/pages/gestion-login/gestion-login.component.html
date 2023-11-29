@@ -11,6 +11,7 @@
         <div class="col contenedor">
           <form
             [formGroup]="formLogin"
+            id="{{ idForm }}"
             class="form"
             (submit)="enviarDatos()"
             novalidate
@@ -22,16 +23,15 @@
           <mat-form-field>
             <mat-label>{{lbl_contrasena}}</mat-label>
             <input matInput formControlName="pass" [type]="hide ? 'password' : 'text'">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <button [attr.form]="!idForm" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
           </mat-form-field>
 
-
-            <button mat-button [disabled]="formLogin.invalid">Enviar</button>
-            <button mat-button>Cancelar</button>
-
           </form>
+          <button type="submit"
+          [attr.form]="idForm" mat-button [disabled]="formLogin.invalid">Enviar</button>
+          <button mat-button>Cancelar</button>
 
         </div>
 
