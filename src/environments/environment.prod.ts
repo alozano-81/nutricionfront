@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-
+  urlLocal: 'http://localhost:8083/',
+  urlLocalProd: 'https://nutricion-production.up.railway.app/',
   urlApi: 'http://localhost:8085/api/tecnica/entrar',
   /*urlApivalidacionSesion: '/autenticacion-login/api/auth/usersesion/validar-sesion',
   urlCrearUsuarios: '/autenticacion-login/api/auth/usersesion/creacion',

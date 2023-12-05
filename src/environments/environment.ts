@@ -4,6 +4,8 @@
 
 export const environment = {
   production: false,
+  urlLocal: 'http://localhost:8083/',
+  urlLocalProd: 'https://nutricion-production.up.railway.app/',
   urlApi: 'http://localhost:8085/api/tecnica/entrar',
   urlApivalidacionSesion: 'http://localhost:8083/api/auth/usersesion/validar-sesion',
   urlCrearUsuarios: 'http://localhost:8083/api/auth/usersesion/creacion',
