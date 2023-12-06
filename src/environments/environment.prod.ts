@@ -4,6 +4,9 @@ export const environment = {
   urlLocalProd: 'https://nutricion-production.up.railway.app/',
   urlServidorProd: 'https://saludnutriciontest.000webhostapp.com/',
   productionServidor: 'saludnutriciontest.000webhostapp.com',
+  urlProxy2: 'http://localhost:4200/autenticacion-login',
+  urlProxy: '/autenticacion-login',
+
   urlApi: 'http://localhost:8085/api/tecnica/entrar',
   urlApivalidacionSesion: 'http://localhost:8083/api/auth/usersesion/validar-sesion',
   urlCrearUsuarios: 'http://localhost:8083/api/auth/usersesion/creacion',
