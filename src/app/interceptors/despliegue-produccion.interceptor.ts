@@ -14,20 +14,12 @@ export class DespliegueProduccionInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(req : HttpRequest<any>, next : HttpHandler) : Observable<HttpEvent<any>> {
-    console.log(req);
-    console.log(req.url.search('localhost'));
-    console.log(req.url.search(environment.urlProxy));
-    console.log(environment.urlProxy,' entrando');
-
     let httpReq:any
     if(!environment.production){
-      console.log('entra', 1);
       httpReq = req.clone({
         url: req.url.replace((req.url.search(environment.urlProxy) > -1 ? environment.urlProxy :  environment.urlLocal) , (req.url.search(environment.urlProxy) > -1 ? environment.urlProxy :  environment.urlLocal))
-        //url: req.url.replace(environment.urlProxy , environment.urlLocal)
       });
     }else if(environment.production){
-      console.log('entra', 2);
       httpReq = req.clone({
         url: req.url.replace((req.url.search(environment.urlLocal) > -1 ? environment.urlLocal :  environment.urlProxy) , environment.urlLocalProd)
       });

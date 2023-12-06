@@ -60,8 +60,9 @@ export class GestionLoginComponent implements OnInit{
         localStorage.setItem('creado','ok');
       },
       (error)=>{
+        console.log('entra incorrecto');
+        console.log(error);
         this.spinner.hide();
-        console.log('entra incorrecto', error);
         this.formLogin.reset();
         localStorage.clear();
         if(error.status == 0){
@@ -69,7 +70,7 @@ export class GestionLoginComponent implements OnInit{
         }
 
         if(error.status != 0){
-          Swal.fire({icon: 'error', title: error.error.status == null ? error.status : error.error.status, text: error.error.mensaje == null ? 'Error en la peticion del servicio' : error.error.msn});
+          Swal.fire({icon: 'error', title: error == null ? error.status : error.error.status, text: error == null ? 'Error en la peticion del servicio' : error.error.msn});
         }
       }
     );

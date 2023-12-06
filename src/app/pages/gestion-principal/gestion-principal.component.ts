@@ -54,6 +54,12 @@ export class GestionPrincipalComponent implements OnInit {
             this.router.navigate(['/', 'login']);
           }
           this.cerrarModal('ModalGestionUsuarios');
+          if (error.error == null) {
+            this.toastr.info('',environment.sesionexpiro);
+            localStorage.clear();
+            this.router.navigate(['/', 'login']);
+          }
+
           if (error.error.status == 'CONFLICT') {
             this.toastr.info(error.error.msn,environment.sesionexpiro);
             localStorage.clear();

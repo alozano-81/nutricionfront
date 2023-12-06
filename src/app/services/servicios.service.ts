@@ -82,7 +82,6 @@ export class ServiciosService {
   validarSesion(token:any){
     let headers = new HttpHeaders({'Content-Type': 'application/json'}).append('token', token);
     let url = `${environment.urlApivalidacionSesion}`;
-    console.log('pasa', url);
     return this.http.get(url,{headers: headers}).pipe(
     tap((result:any)=> (this.login = result)),
     map((result:any)=> result)
@@ -160,8 +159,6 @@ export class ServiciosService {
     let items = Object.assign(usuario);
     let headers = new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', token);
     let url = `${environment.urlCrearUsuarios}`;
-    console.log('crear', url);
-    console.log('form', items);
     return this.http.post(url,items,{headers: headers}).pipe(
     tap((result:any)=> (this.respuestas = result)),
     map((result:any)=> result)

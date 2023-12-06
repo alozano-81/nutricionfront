@@ -31,7 +31,8 @@ import { PagesModule } from './pages/pages.module';
   providers: [
     appRoutingProviders,
     { provide : APP_BASE_HREF, useValue: '/gestion'},
-    { provide: HTTP_INTERCEPTORS, useClass: DespliegueProduccionInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: DespliegueProduccionInterceptor, multi: true }
+
   ],
   bootstrap: [AppComponent]
 })
