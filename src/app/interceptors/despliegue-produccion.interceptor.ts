@@ -29,15 +29,9 @@ export class DespliegueProduccionInterceptor implements HttpInterceptor {
     }else if(environment.production){
       console.log('entra', 2);
       httpReq = req.clone({
-        url: req.url.replace(environment.urlServidorProd, environment.urlLocalProd)
-      });
-    }else{
-      console.log('entra', 3);
-      httpReq = req.clone({
-        url: req.url.replace(environment.urlLocal, environment.urlLocal)
+        url: req.url.replace((req.url.search(environment.urlLocal) > -1 ? environment.urlLocal :  environment.urlProxy) , environment.urlLocalProd)
       });
     }
-
     return next.handle(httpReq);
   }
 }
