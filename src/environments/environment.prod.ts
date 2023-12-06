@@ -2,25 +2,37 @@ export const environment = {
   production: true,
   urlLocal: 'http://localhost:8083/',
   urlLocalProd: 'https://nutricion-production.up.railway.app/',
+  urlServidorProd: 'https://saludnutriciontest.000webhostapp.com/',
+  productionServidor: 'saludnutriciontest.000webhostapp.com',
   urlApi: 'http://localhost:8085/api/tecnica/entrar',
+  urlApivalidacionSesion: 'http://localhost:8083/api/auth/usersesion/validar-sesion',
+  urlCrearUsuarios: 'http://localhost:8083/api/auth/usersesion/creacion',
+  urlListaRoles: 'http://localhost:8083/api/auth/usersesion/get-all-roles',
+
+  urlApiListarComercios: 'http://localhost:8085/api/tecnica/listarcomercios',
+  urlValidarLogin: 'http://localhost:8083/api/login/validar-credenciales',
+  urlListaPaises: 'http://localhost:8083/api/auth/paciente/get-all-paises',
+  urlRegistrarPacientes: 'http://localhost:8083/api/auth/paciente/registrar',
+
+
   /*urlApivalidacionSesion: '/autenticacion-login/api/auth/usersesion/validar-sesion',
   urlCrearUsuarios: '/autenticacion-login/api/auth/usersesion/creacion',
   urlListaRoles: '/autenticacion-login/api/auth/usersesion/get-all-roles',
-
 
   urlApiListarComercios: '/autenticacion-login/api/tecnica/listarcomercios',
   urlValidarLogin: '/autenticacion-login/api/login/validar-credenciales',
   urlListaPaises: '/autenticacion-login/api/auth/paciente/get-all-paises',
   urlRegistrarPacientes: '/autenticacion-login/api/auth/paciente/registrar',*/
 
-  urlApivalidacionSesion: 'https://nutricion-production.up.railway.app/api/auth/usersesion/validar-sesion',
+
+  /*urlApivalidacionSesion: 'https://nutricion-production.up.railway.app/api/auth/usersesion/validar-sesion',
   urlCrearUsuarios: 'https://nutricion-production.up.railway.app/api/auth/usersesion/creacion',
   urlListaRoles: 'https://nutricion-production.up.railway.app/api/auth/usersesion/get-all-roles',
 
   urlApiListarComercios: 'https://nutricion-production.up.railway.app/api/tecnica/listarcomercios',
   urlValidarLogin: 'https://nutricion-production.up.railway.app/api/login/validar-credenciales',
   urlListaPaises: 'https://nutricion-production.up.railway.app/api/auth/paciente/get-all-paises',
-  urlRegistrarPacientes: 'https://nutricion-production.up.railway.app/api/auth/paciente/registrar',
+  urlRegistrarPacientes: 'https://nutricion-production.up.railway.app/api/auth/paciente/registrar',*/
 
 
 

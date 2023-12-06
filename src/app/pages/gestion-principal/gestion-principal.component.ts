@@ -48,6 +48,11 @@ export class GestionPrincipalComponent implements OnInit {
         },
         (error) => {
           console.log('verError: ', error);
+          if (error.status == 0) {
+            this.toastr.error('Servicio no disponible', 'Temporalmente fuera de servicio');
+            localStorage.clear();
+            this.router.navigate(['/', 'login']);
+          }
           this.cerrarModal('ModalGestionUsuarios');
           if (error.error.status == 'CONFLICT') {
             this.toastr.info(error.error.msn,environment.sesionexpiro);

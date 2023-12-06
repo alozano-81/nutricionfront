@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ServiciosService } from 'src/app/services/servicios.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { UserDTO } from './../../models/Parametrizacion-model';
 
@@ -47,9 +48,14 @@ export class GestionUsuariosComponent implements OnInit{
         (error) => {
           console.log('verError: ', error);
           this.cerrarModalCrearUsuario.emit(true);
-          if (error.error.status == 'CONFLICT') {
+          if (error.status == 0) {
+            this.toastr.error('Servicio no disponible', 'Temporalmente fuera de servicio');
+            localStorage.clear();
+            this.router.navigate(['/', 'login']);
+          }
 
-            this.toastr.info('Sesion expiro', error.error.msn);
+          if (error.error.status == 'CONFLICT') {
+            this.toastr.info(environment.sesionexpiro, error.error.msn);
             localStorage.clear();
             this.router.navigate(['/', 'login']);
           }
@@ -86,10 +92,11 @@ export class GestionUsuariosComponent implements OnInit{
         this.usuario = new UserDTO();
         this.cerrarModalCrearUsuario.emit(true);
       },
-      (error)=>{
-        console.log('cerror===> ', error);
+      (er)=>{
+        console.log('cerror===> ', er);
         this.spinner.hide();
-        Swal.fire({icon: 'error', title: error.error.status, text: error.error.msn});
+        this.toastr.error(environment.sesionexpiro);
+        Swal.fire({icon: 'error', title: er.status == 403 ? er.status : er.error.status , text: er.status == 403 ? environment.sesionexpiro : er.error.msn});
       }
     );
   }

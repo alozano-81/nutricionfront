@@ -64,7 +64,13 @@ export class GestionLoginComponent implements OnInit{
         console.log('entra incorrecto', error);
         this.formLogin.reset();
         localStorage.clear();
-        Swal.fire({icon: 'error', title: error.error.status == null ? error.status : error.error.status, text: error.error.mensaje == null ? 'Error en la peticion del servicio' : error.error.msn});
+        if(error.status == 0){
+          Swal.fire({icon: 'error', title: error.status,  text: 'Servicio no disponible'});
+        }
+
+        if(error.status != 0){
+          Swal.fire({icon: 'error', title: error.error.status == null ? error.status : error.error.status, text: error.error.mensaje == null ? 'Error en la peticion del servicio' : error.error.msn});
+        }
       }
     );
 
