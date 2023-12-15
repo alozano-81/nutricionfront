@@ -21,5 +21,6 @@ export class UserDTO {
   password:string | undefined;
   email:string | undefined;
   roless: any[] = [];
+  idRol: any[] = [];
 
 }

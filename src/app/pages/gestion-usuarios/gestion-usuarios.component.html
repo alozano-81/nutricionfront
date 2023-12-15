@@ -1,6 +1,22 @@
 <div class="container">
   <div class="modal-body">
-    <form [formGroup]="formCreacion" class="form" (submit)="crear()" novalidate>
+    <button
+      type="button"
+      data-toggle="modal"
+      class="btn btn-success btn-round btn-fab btn-sm"
+      matTooltip="Registrar Usuarios"
+      [matTooltipPosition]="'below'"
+      (click)="add()"
+    >
+      <mat-icon>{{iconoRegistro}}</mat-icon>
+    </button>
+    <form
+      *ngIf="addUser"
+      [formGroup]="formCreacion"
+      class="form"
+      (submit)="crear()"
+      novalidate
+    >
       <div class="row">
         <div class="col">
           <mat-form-field hintLabel="Max 10 caracteres">
@@ -80,6 +96,58 @@
         Crear
       </button>
     </form>
+
+    <div class="example-container">
+      <table
+        datatable
+
+        id="tabla"
+        class="table table-bordered table-hover"
+      >
+        <caption></caption>
+
+        <thead>
+          <tr>
+            <th >User</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of listUser; let i = index">
+            <td >{{ u.username }}</td>
+            <td>{{ u.email }}</td>
+            <td>{{u.password}}</td>
+            <td >{{u.idRol[0].codigo}}      </td>
+            <td>
+              <button
+                type="button"
+                data-toggle="modal"
+                class="btn btn-info btn-round btn-fab btn-sm"
+                matTooltip="Editar"
+                [matTooltipPosition]="'below'"
+
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <button
+                type="button"
+                data-toggle="modal"
+                class="btn btn-info btn-round btn-fab btn-sm"
+                matTooltip="Actualizar"
+                [matTooltipPosition]="'below'"
+
+              >
+                <mat-icon>assignment</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 <app-spiner></app-spiner>

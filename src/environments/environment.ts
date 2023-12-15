@@ -15,6 +15,7 @@ export const environment = {
   urlApivalidacionSesion: 'http://localhost:8083/api/auth/usersesion/validar-sesion',
   urlCrearUsuarios: 'http://localhost:8083/api/auth/usersesion/creacion',
   urlListaRoles: 'http://localhost:8083/api/auth/usersesion/get-all-roles',
+  urlListaUsuarios: 'http://localhost:8083/api/auth/usersesion/listar',
 
   urlApiListarComercios: 'http://localhost:8085/api/tecnica/listarcomercios',
   urlValidarLogin: 'http://localhost:8083/api/login/validar-credenciales',

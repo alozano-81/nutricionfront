@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, map, tap } from 'rxjs';
-import { Paises, RegistrarPacientes } from '../models/Parametrizacion-model';
+import { Paises, RegistrarPacientes, UserDTO } from '../models/Parametrizacion-model';
 import { environment } from './../../environments/environment';
 
 @Injectable({
@@ -17,6 +17,7 @@ export class ServiciosService {
   listaPaises:Paises[] = [];
   listaRoles:any[] =[];
   registroPacientes:RegistrarPacientes[] =[];
+  listaUsuarios:UserDTO[] =[];
 
   constructor(
     private formularioNuevo: FormBuilder,
@@ -71,6 +72,14 @@ export class ServiciosService {
     }
 
   //******************************servicios
+  getUsuariosTodos(){
+    let url = `${environment.urlListaUsuarios}`;
+    return this.http.get(url).pipe(
+      tap((result:any)=> (this.listaUsuarios = result)),
+      map((result:any)=> result)
+      );
+  }
+
   getListaRoles(){
     let url = `${environment.urlListaRoles}`;
     return this.http.get(url).pipe(

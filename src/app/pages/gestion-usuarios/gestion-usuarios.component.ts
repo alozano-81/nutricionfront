@@ -1,8 +1,16 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DataTableDirective } from 'angular-datatables';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 import { ServiciosService } from 'src/app/services/servicios.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
@@ -11,19 +19,29 @@ import { UserDTO } from './../../models/Parametrizacion-model';
 @Component({
   selector: 'app-gestion-usuarios',
   templateUrl: './gestion-usuarios.component.html',
-  styleUrls: ['./gestion-usuarios.component.scss']
+  styleUrls: ['./gestion-usuarios.component.scss'],
 })
-export class GestionUsuariosComponent implements OnInit{
-  public formCreacion:any;
-  rolUsuario:any;
+export class GestionUsuariosComponent implements OnInit {
+  public formCreacion: any;
+  rolUsuario: any;
   public rol: string = '';
   //public listaRol: string[] = ['ROLE_USER', 'ROLE_ADMIN'];
   public listaRol: any[] = [];
+  public listUser: UserDTO[] = [];
 
   //@Input() cerrarModalCrearUsuario:any;
-   /**Enviar datos al componente externo */
-   @Output()
-   cerrarModalCrearUsuario: EventEmitter<boolean> =  new EventEmitter<boolean>();
+  /**Enviar datos al componente externo */
+  @Output()
+  cerrarModalCrearUsuario: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  /**Parametros tabla */
+  dtOptions: any = {};
+  dtOptionss: DataTables.Settings = {};
+  dtTriggers = new Subject();
+
+  @ViewChild(DataTableDirective, { static: false })
+  dtElements: any = DataTableDirective;
+  isDtInitializeds: boolean = false;
 
   constructor(
     public services: ServiciosService,
@@ -31,10 +49,12 @@ export class GestionUsuariosComponent implements OnInit{
     public router: Router,
     public toastr: ToastrService,
     public spinner: NgxSpinnerService
-  ){}
+  ) {}
 
   ngOnInit(): void {
+    this.getUsuarios();
     this.getRoles();
+    this.viewDateTableEspanol();
     this.formCreacion = this.services.cargarFormCreacionUsuarios();
     this.rolUsuario = localStorage.getItem('rolUser');
     if (localStorage.getItem('creado') == 'ok') {
@@ -49,7 +69,10 @@ export class GestionUsuariosComponent implements OnInit{
           console.log('verError: ', error);
           this.cerrarModalCrearUsuario.emit(true);
           if (error.status == 0) {
-            this.toastr.error('Servicio no disponible', 'Temporalmente fuera de servicio');
+            this.toastr.error(
+              'Servicio no disponible',
+              'Temporalmente fuera de servicio'
+            );
             localStorage.clear();
             this.router.navigate(['/', 'login']);
           }
@@ -64,43 +87,60 @@ export class GestionUsuariosComponent implements OnInit{
     }
   }
 
-  //
-  getRoles(){
-    this.services.getListaRoles().subscribe(
-      (result:any)=>{
+  getUsuarios(){
+    this.services.getUsuariosTodos().subscribe(
+      (result:any) => {
+        this.listUser = result.obj;
         console.log(result);
-        this.listaRol = result.obj
       },
-      (error)=>{}
+      (error) => {
+        console.log(error);
+      }
     );
   }
 
   //
-  usuario:UserDTO = new UserDTO();
-  crear(){
+  getRoles() {
+    this.services.getListaRoles().subscribe(
+      (result: any) => {
+        console.log(result);
+        this.listaRol = result.obj;
+      },
+      (error) => {}
+    );
+  }
+
+  //
+  usuario: UserDTO = new UserDTO();
+  crear() {
     this.spinner.show();
     this.usuario.username = this.formCreacion.get('username').value;
     this.usuario.password = this.formCreacion.get('password').value;
     this.usuario.email = this.formCreacion.get('email').value;
     this.usuario.roless = [this.formCreacion.get('roless').value];
-    this.services.crearUsuario(localStorage.getItem('token'),this.usuario).subscribe(
-      (result:any)=>{
-        console.log('cre===> ', result);
-        this.spinner.hide();
-        this.toastr.info('usuario creado correctamente');
-        this.formCreacion.reset();
-        this.usuario = new UserDTO();
-        this.cerrarModalCrearUsuario.emit(true);
-      },
-      (er)=>{
-        console.log('cerror===> ', er);
-        this.spinner.hide();
-        this.toastr.error(environment.sesionexpiro);
-        Swal.fire({icon: 'error', title: er.status == 403 ? er.status : er.error.status , text: er.status == 403 ? environment.sesionexpiro : er.error.msn});
-      }
-    );
+    this.services
+      .crearUsuario(localStorage.getItem('token'), this.usuario)
+      .subscribe(
+        (result: any) => {
+          console.log('cre===> ', result);
+          this.spinner.hide();
+          this.toastr.info('usuario creado correctamente');
+          this.formCreacion.reset();
+          this.usuario = new UserDTO();
+          this.cerrarModalCrearUsuario.emit(true);
+        },
+        (er) => {
+          console.log('cerror===> ', er);
+          this.spinner.hide();
+          this.toastr.error(environment.sesionexpiro);
+          Swal.fire({
+            icon: 'error',
+            title: er.status == 403 ? er.status : er.error.status,
+            text: er.status == 403 ? environment.sesionexpiro : er.error.msn,
+          });
+        }
+      );
   }
-
 
   /**
    * Cierra modales
@@ -109,5 +149,49 @@ export class GestionUsuariosComponent implements OnInit{
   cerrarModal(modal: any) {
     this.modal.dismissAll(modal);
   }
+
+  addUser: boolean = false;
+  iconoRegistro: string = 'add';
+  add() {
+    this.addUser = this.addUser != false ? false : true;
+    this.iconoRegistro = this.addUser != false ? 'keyboard_hide' : 'add';
+  }
+
+  /**Opciones español datatable */
+  viewDateTableEspanol() {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json',
+      },
+      processing: true,
+      dom: 'Bfrtip',
+      buttons: ['copy', 'csv', 'excel', 'print', 'pdf'],
+    };
+    this.dtOptionss = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json',
+      },
+    };
+    /**Fin opciones español datatable */
+  }
+
+  /**Datetabble */
+  getDataOpcionesTable() {
+    if (this.isDtInitializeds) {
+        this.dtElements.dtInstance.then((dtInstances : DataTables.Api) => {
+            dtInstances.destroy();
+           // this.dtTriggers.next();
+        });
+    } else {
+        this.isDtInitializeds = true;
+       // this.dtTriggers.next();
+    }
+    /** Fin datetabble */
+}
+
 
 }
