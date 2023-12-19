@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  OnDestroy,
   OnInit,
   Output,
   ViewChild,
@@ -21,7 +22,7 @@ import { UserDTO } from './../../models/Parametrizacion-model';
   templateUrl: './gestion-usuarios.component.html',
   styleUrls: ['./gestion-usuarios.component.scss'],
 })
-export class GestionUsuariosComponent implements OnInit {
+export class GestionUsuariosComponent implements OnInit, OnDestroy {
   public formCreacion: any;
   rolUsuario: any;
   public rol: string = '';
@@ -37,7 +38,7 @@ export class GestionUsuariosComponent implements OnInit {
   /**Parametros tabla */
   dtOptions: any = {};
   dtOptionss: DataTables.Settings = {};
-  dtTriggers = new Subject();
+  dtTriggers: Subject<any> = new Subject<any>();
 
   @ViewChild(DataTableDirective, { static: false })
   dtElements: any = DataTableDirective;
@@ -54,9 +55,9 @@ export class GestionUsuariosComponent implements OnInit {
   ngOnInit(): void {
     this.getUsuarios();
     this.getRoles();
-    this.viewDateTableEspanol();
     this.formCreacion = this.services.cargarFormCreacionUsuarios();
     this.rolUsuario = localStorage.getItem('rolUser');
+    this.viewDateTableEspanol();
     if (localStorage.getItem('creado') == 'ok') {
       localStorage.removeItem('creado');
     } else {
@@ -87,10 +88,16 @@ export class GestionUsuariosComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this.dtTriggers.unsubscribe();
+  }
+
   getUsuarios(){
+
     this.services.getUsuariosTodos().subscribe(
       (result:any) => {
         this.listUser = result.obj;
+        this.getDataOpcionesTable();
         console.log(result);
       },
       (error) => {
@@ -160,35 +167,41 @@ export class GestionUsuariosComponent implements OnInit {
   /**Opciones español datatable */
   viewDateTableEspanol() {
     this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 5,
-      language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json',
-      },
-      processing: true,
-      dom: 'Bfrtip',
-      buttons: ['copy', 'csv', 'excel', 'print', 'pdf'],
+        pagingType: 'full_numbers',
+        pageLength: 5,
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
+        },
+        processing: true,
+        dom: 'Bfrtip',
+        buttons: [
+            'copy',
+            'csv',
+            'excel',
+            'print',
+            'pdf'
+        ]
     };
     this.dtOptionss = {
-      pagingType: 'full_numbers',
-      pageLength: 5,
-      language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json',
-      },
+        pagingType: 'full_numbers',
+        pageLength: 5,
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
+        }
     };
     /**Fin opciones español datatable */
-  }
+}
 
   /**Datetabble */
   getDataOpcionesTable() {
     if (this.isDtInitializeds) {
         this.dtElements.dtInstance.then((dtInstances : DataTables.Api) => {
             dtInstances.destroy();
-           // this.dtTriggers.next();
+            this.dtTriggers.next(this.dtElements);
         });
     } else {
         this.isDtInitializeds = true;
-       // this.dtTriggers.next();
+        this.dtTriggers.next(this.dtElements);
     }
     /** Fin datetabble */
 }

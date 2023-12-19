@@ -23,7 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 //import { NgSelectModule } from '@ng-select/ng-select';
-//import { DataTablesModule } from 'angular-datatables';
+import { DataTablesModule } from 'angular-datatables';
 //import { NgxMaskModule } from 'ngx-mask';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ToastrModule } from 'ngx-toastr';
@@ -36,11 +36,11 @@ import { SpinerComponent } from './components/spiner/spiner.component';
 import { TemplateComponent } from './components/template/template.component';
 import { GenerarTurnosComponent } from './generar-turnos/generar-turnos.component';
 import { GestionLoginComponent } from './gestion-login/gestion-login.component';
+import { GestionPacientesComponent } from './gestion-pacientes/gestion-pacientes.component';
 import { GestionPrincipalComponent } from './gestion-principal/gestion-principal.component';
+import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
-import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.component';
-import { GestionPacientesComponent } from './gestion-pacientes/gestion-pacientes.component';
 @NgModule({
   declarations: [
     TemplateComponent,
@@ -70,7 +70,7 @@ import { GestionPacientesComponent } from './gestion-pacientes/gestion-pacientes
     MatNativeDateModule,
     MatDividerModule,
     HttpClientModule,
-    //DataTablesModule,
+    DataTablesModule,
     ToastrModule.forRoot(),
     MatIconModule,
     MatTooltipModule,
