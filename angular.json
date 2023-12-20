@@ -20,6 +20,10 @@
             "outputPath": "dist/nutricionfront",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "allowedCommonJsDependencies": [
+              "rxjs-compat",
+              "lodash"
+           ],
             "polyfills": [
               "zone.js"
             ],

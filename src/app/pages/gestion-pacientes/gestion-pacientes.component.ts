@@ -47,7 +47,9 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
       pagingType: 'full_numbers',
       searching: false,
       pageLength: 5,
-      processing: true
+      serverSide: true,
+      processing: true,
+      responsive: true,
     };
     this.formRegistro = this.services.cargarFormRegistroPacientes();
     if (localStorage.getItem('creado') == 'ok') {
