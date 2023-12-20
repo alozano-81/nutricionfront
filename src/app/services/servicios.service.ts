@@ -18,6 +18,7 @@ export class ServiciosService {
   listaRoles:any[] =[];
   registroPacientes:RegistrarPacientes[] =[];
   listaUsuarios:UserDTO[] =[];
+  listaPacientes: RegistrarPacientes[] =[] ;
 
   constructor(
     private formularioNuevo: FormBuilder,
@@ -142,6 +143,18 @@ export class ServiciosService {
       let url = `${environment.urlListaPaises}`;
       return this.http.get(url).pipe(
         tap((result:any) => (this.listaPaises = result)),
+        map((result:any) => result)
+      );
+    }
+
+    /**
+     * Obtener listado de pacientes actuales
+     * @returns
+     */
+    getPacientes():Observable<any[]>{
+      let url = `${environment.urlListaPacientes}`;
+      return this.http.get(url).pipe(
+        tap((result:any) => (this.listaPacientes = result)),
         map((result:any) => result)
       );
     }

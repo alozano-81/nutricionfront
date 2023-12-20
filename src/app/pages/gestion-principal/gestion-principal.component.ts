@@ -85,7 +85,8 @@ export class GestionPrincipalComponent implements OnInit {
    */
   openModalRegistro(modal: any) {
     //this.modal.open(modal, { fullscreen: true });
-    this.modal.open(modal, { size: 'xl', scrollable: true, backdrop: 'static', keyboard:false });
+    this.router.navigate(['/', 'pacientes']);
+    //this.modal.open(modal, { size: 'xl', scrollable: true, backdrop: 'static', keyboard:false });
   }
 
   /**

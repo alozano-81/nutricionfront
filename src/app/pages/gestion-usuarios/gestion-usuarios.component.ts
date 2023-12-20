@@ -92,10 +92,9 @@ export class GestionUsuariosComponent implements OnInit, OnDestroy {
     this.dtTriggers.unsubscribe();
   }
 
-  getUsuarios(){
-
+  getUsuarios() {
     this.services.getUsuariosTodos().subscribe(
-      (result:any) => {
+      (result: any) => {
         this.listUser = result.obj;
         this.getDataOpcionesTable();
         console.log(result);
@@ -167,44 +166,36 @@ export class GestionUsuariosComponent implements OnInit, OnDestroy {
   /**Opciones español datatable */
   viewDateTableEspanol() {
     this.dtOptions = {
-        pagingType: 'full_numbers',
-        pageLength: 5,
-        language: {
-            url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
-        },
-        processing: true,
-        dom: 'Bfrtip',
-        buttons: [
-            'copy',
-            'csv',
-            'excel',
-            'print',
-            'pdf'
-        ]
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json',
+      },
+      processing: true,
+      dom: 'Bfrtip',
+      buttons: ['copy', 'csv', 'excel', 'print', 'pdf'],
     };
     this.dtOptionss = {
-        pagingType: 'full_numbers',
-        pageLength: 5,
-        language: {
-            url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json'
-        }
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json',
+      },
     };
     /**Fin opciones español datatable */
-}
+  }
 
   /**Datetabble */
   getDataOpcionesTable() {
     if (this.isDtInitializeds) {
-        this.dtElements.dtInstance.then((dtInstances : DataTables.Api) => {
-            dtInstances.destroy();
-            this.dtTriggers.next(this.dtElements);
-        });
-    } else {
-        this.isDtInitializeds = true;
+      this.dtElements.dtInstance.then((dtInstances: DataTables.Api) => {
+        dtInstances.destroy();
         this.dtTriggers.next(this.dtElements);
+      });
+    } else {
+      this.isDtInitializeds = true;
+      this.dtTriggers.next(this.dtElements);
     }
     /** Fin datetabble */
-}
-
-
+  }
 }
