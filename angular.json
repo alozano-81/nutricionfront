@@ -36,7 +36,8 @@
               "src/styles.scss",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css",
-              "node_modules/datatables.net-dt/css/jquery.dataTables.css"
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",

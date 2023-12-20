@@ -43,6 +43,12 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.dtOptionss = {
+      pagingType: 'full_numbers',
+      searching: false,
+      pageLength: 5,
+      processing: true
+    };
     this.formRegistro = this.services.cargarFormRegistroPacientes();
     if (localStorage.getItem('creado') == 'ok') {
       localStorage.removeItem('creado');
@@ -167,6 +173,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
 
   /**Datetabble */
   getDataOpcionesTable() {
+    this.viewDateTableEspanol();
     if (this.isDtInitializeds) {
       this.dtElements.dtInstance.then((dtInstances: DataTables.Api) => {
         dtInstances.destroy();
