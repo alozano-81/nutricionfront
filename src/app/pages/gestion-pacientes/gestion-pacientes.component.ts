@@ -43,18 +43,11 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.dtOptionss = {
-      pagingType: 'full_numbers',
-      pageLength: 5,
-      language: {
-        url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json',
-      },
-    };
     this.formRegistro = this.services.cargarFormRegistroPacientes();
     if (localStorage.getItem('creado') == 'ok') {
       localStorage.removeItem('creado');
       this.getPaises();
-      this.getListPacientes();
+      //this.getListPacientes();
     } else {
       this.services.validarSesion(localStorage.getItem('token')).subscribe(
         (result: any) => {
@@ -107,6 +100,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
           this.spinner.hide();
           this.toastr.success(result.mensaje == null ? 'Paciente creado correctamente' : result.mensaje);
           this.formRegistro.reset();
+          this.getListPacientes();
           this.modal.dismissAll();
         }
       },
@@ -140,7 +134,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   getListPacientes(){
     this.services.getPacientes().subscribe(
       (result:any) => {
-        //this.viewDateTableEspanol();
+        this.viewDateTableEspanol();
         this.getDataOpcionesTable();
         this.listPacientes = result;
 
