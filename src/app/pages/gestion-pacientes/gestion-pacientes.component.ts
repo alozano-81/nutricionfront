@@ -27,7 +27,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
 
     /**Parametros tabla */
   //dtOptions: any = {};
-  dtOptionss: DataTables.Settings = {};
+  dtOptions: DataTables.Settings = {};
   dtTriggers: Subject<any> = new Subject<any>();
 
   @ViewChild(DataTableDirective, { static: false })
@@ -43,12 +43,17 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.dtOptionss = {
+    this.dtOptions = {
       pagingType: 'full_numbers',
       searching: false,
       pageLength: 5,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json',
+      },
       serverSide: true,
       processing: true,
+      dom: 'Bfrtip',
+      //buttons: ['copy', 'csv', 'excel', 'print', 'pdf'],
       responsive: true,
     };
     this.formRegistro = this.services.cargarFormRegistroPacientes();
@@ -163,7 +168,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
 
    /**Opciones español datatable */
    viewDateTableEspanol() {
-    this.dtOptionss = {
+    this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
       language: {
