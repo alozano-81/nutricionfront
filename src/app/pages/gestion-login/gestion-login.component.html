@@ -22,7 +22,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>{{lbl_contrasena}}</mat-label>
-            <input matInput formControlName="pass" [type]="hide ? 'password' : 'text'">
+            <input matInput formControlName="pass" [type]="hide ? 'password' : 'text'" autocomplete="off">
             <button [attr.form]="!idForm" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
