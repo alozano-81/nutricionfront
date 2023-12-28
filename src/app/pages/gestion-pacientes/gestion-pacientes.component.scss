@@ -19,3 +19,14 @@
 .dataTables_wrapper .dataTables_length select {
   padding: 10px;
 }
+
+.expansion-panel-header {
+  background-color: rgb(34, 64, 122) !important;
+  color: white !important;
+}
+
+.expansion-panel-header:hover {
+  background: rgb(10, 102, 145) !important;
+  color:rgb(34, 122, 34)
+  //color: white!;
+}

@@ -60,6 +60,7 @@ export class ServiciosService {
     //form registro pacientes
     cargarFormRegistroPacientes(): FormGroup{
       return this.formularioNuevo.group({
+        id:[''],
         nombres: ['',Validators.compose([Validators.required])],
         apellidos:['',Validators.compose([Validators.required])],
         sexo:[],
@@ -166,12 +167,15 @@ export class ServiciosService {
    * @return {*}
    * @memberof ServiciosService
    */
-  registrarPacientes(form: any, token:any) {
+  registrarPacientes(form: any, token:any, tipo:boolean) {
     //let user ={usuario: usu};
     let headers = new HttpHeaders({'Content-Type': 'application/json'}).append('Authorization', token);
     let items = Object.assign(form);
-    let url = `${environment.urlRegistrarPacientes}`;
-    return this.http.post(url, items, {headers: headers}).pipe(
+    let url = tipo ? `${environment.urlActualizarPacientes}` : `${environment.urlRegistrarPacientes}`;
+    return tipo ? this.http.put(url, items, {headers: headers}).pipe(
+      tap((result: any) => (this.registroPacientes = result)),
+      map((result: any) => result)
+    ) : this.http.post(url, items, {headers: headers}).pipe(
       tap((result: any) => (this.registroPacientes = result)),
       map((result: any) => result)
     );

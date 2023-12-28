@@ -31,6 +31,13 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   public sex: string = '';
   public listaSex: string[] = ['Masculino', 'Femenino'];
   listPacientes: RegistrarPacientes[] = [];
+  matAcordionTabla : boolean = false;
+
+  actualizar:boolean = false;
+  customCollapsedHeight : string = '40px';
+  customExpandedHeight : string = '40px';
+
+  idForm:string = 'idForm';
 
   @Output()
   cerrarModalPaciente: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -49,7 +56,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
     private modal: NgbModal,
     public router: Router,
     public toastr: ToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
   ) {}
 
   ngOnInit(): void {
@@ -107,7 +114,8 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
     this.services
       .registrarPacientes(
         this.formRegistro.value,
-        localStorage.getItem('token')
+        localStorage.getItem('token'),
+        this.actualizarR
       )
       .subscribe(
         (result: any) => {
@@ -117,7 +125,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
             this.toastr.success(
               result.mensaje == null
                 ? 'Paciente creado correctamente'
-                : result.mensaje
+                : result.mensaje.message
             );
             this.formRegistro.reset();
             this.getListPacientes();
@@ -139,6 +147,18 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
             );
           }
 
+          if (error.status == 409) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: error.error.mensaje['message'],
+            });
+            this.toastr.info(
+              'No es posible registrar el paciente con este número de documento',
+              error.error.mensaje['message']
+            );
+          }
+
           if (error.status == 403) {
             this.spinner.hide();
             localStorage.clear();
@@ -146,6 +166,14 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
             this.modal.dismissAll();
             this.router.navigate(['/', 'login']);
           }
+
+          if (error.status == 400) {
+            this.spinner.hide();
+            this.toastr.info('', 'Error en el servicio');
+
+          }
+
+
         }
       );
   }
@@ -170,6 +198,38 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
    */
   cerrarModal(modal: any) {
     this.modal.dismissAll(modal);
+  }
+
+  cambiarEstado(){
+    if(this.matAcordionTabla){
+      this.matAcordionTabla  = false;
+    }else{
+      this.matAcordionTabla = false;
+    }
+  }
+
+  actualizarR:boolean = false;
+  update(confirma:boolean){
+    this.actualizarR = !confirma ? false :true;
+  }
+
+  cleanForm(){
+    this.formRegistro.reset();
+  }
+
+  editar(form:any,modal:any){
+    //this.formRegistro.setValue(form);
+    this.matAcordionTabla = true;
+    for(let obj in form ){
+      for(let f in this.formRegistro.value){
+        if(f == obj){
+          this.formRegistro.get(obj).setValue(form[obj]);
+        }
+      }
+    }
+    let enviarIdRegistro = this.formRegistro.value;
+    enviarIdRegistro.id = form.id;
+    //this.modal.open(modal, { size: 'xl', scrollable: true, backdrop: 'static', keyboard:false });
   }
 
   /**Opciones español datatable */
@@ -198,4 +258,5 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
     }
     /** Fin datetabble */
   }
+
 }

@@ -1,9 +1,9 @@
 <div class="container">
   <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
+    <mat-expansion-panel #panel1 [expanded]="matAcordionTabla" (click)="cambiarEstado();">
+      <mat-expansion-panel-header class="expansion-panel-header" [collapsedHeight]="customCollapsedHeight" [expandedHeight]="customExpandedHeight">
         <mat-panel-title>
-          REgistro Pacientes
+          Registro Pacientes
         </mat-panel-title>
         <mat-panel-description>
           Registro base
@@ -15,6 +15,7 @@
           [formGroup]="formRegistro"
           class="form"
           (submit)="registrar()"
+          id="{{ idForm }}"
           novalidate
         >
           <div class="row">
@@ -201,14 +202,36 @@
               </mat-form-field>
             </div>
           </div>
+        </form>
+        <div>
           <button
             [disabled]="formRegistro.invalid"
             class="btn btn-primary btn-sm"
             type="submit"
+            [attr.form]="idForm"
+            (click)="update(false)"
           >
             Crear
           </button>
-        </form>
+          <button
+            [disabled]="formRegistro.invalid"
+            class="btn btn-secondary btn-sm"
+            type="submit"
+            (click)="update(true)"
+            [attr.form]="idForm"
+          >
+            Actualizar
+          </button>
+
+          <button
+            [disabled]="actualizar"
+            class="btn btn-warning btn-sm"
+            type="submit"
+            (click)="cleanForm()"
+          >
+            Limpiar
+          </button>
+        </div>
       </div>
     </mat-expansion-panel>
 
@@ -254,7 +277,7 @@
                   class="btn btn-info btn-round btn-fab btn-sm"
                   matTooltip="Editar"
                   [matTooltipPosition]="'below'"
-
+                  (click)="editar(p, ModalEditarPacientes)"
                 >
                   <mat-icon>edit</mat-icon>
                 </button>
@@ -262,7 +285,7 @@
                 <button
                   type="button"
                   data-toggle="modal"
-                  class="btn btn-info btn-round btn-fab btn-sm"
+                  class="btn btn-debug btn-round btn-fab btn-sm"
                   matTooltip="Actualizar"
                   [matTooltipPosition]="'below'"
 
@@ -277,4 +300,29 @@
     </mat-expansion-panel>
   </mat-accordion>
 </div>
+
+<ng-template #ModalEditarPacientes let-modal>
+  <div class="modal-header">
+    <h2 class="modal-title">EditaR</h2>
+
+    <button
+      mat-raised-button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="cerrarModal(ModalEditarPacientes)"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+  </div>
+  <div class="modal-footer">
+    <button mat-raised-button (click)="cerrarModal(ModalEditarPacientes)">
+      Cerrar
+    </button>
+  </div>
+</ng-template>
+
 <app-spiner></app-spiner>
