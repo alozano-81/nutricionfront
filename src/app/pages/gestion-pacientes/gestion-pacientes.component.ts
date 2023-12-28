@@ -32,17 +32,16 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   public sex: string = '';
   public listaSex: string[] = ['Masculino', 'Femenino'];
   listPacientes: RegistrarPacientes[] = [];
-  matAcordionTabla : boolean = false;
+  matAcordionTabla: boolean = false;
 
   @ViewChild('panel1')
   firstPanel!: MatExpansionPanel;
 
+  actualizar: boolean = false;
+  customCollapsedHeight: string = '40px';
+  customExpandedHeight: string = '40px';
 
-  actualizar:boolean = false;
-  customCollapsedHeight : string = '40px';
-  customExpandedHeight : string = '40px';
-
-  idForm:string = 'idForm';
+  idForm: string = 'idForm';
 
   @Output()
   cerrarModalPaciente: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -61,7 +60,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
     private modal: NgbModal,
     public router: Router,
     public toastr: ToastrService,
-    private spinner: NgxSpinnerService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -89,7 +88,6 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
         }
       );
     }
-
   }
 
   ngOnDestroy(): void {
@@ -115,72 +113,75 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   }
 
   registrar() {
-    this.spinner.show();
-    this.services
-      .registrarPacientes(
-        this.formRegistro.value,
-        localStorage.getItem('token'),
-        this.actualizarR
-      )
-      .subscribe(
-        (result: any) => {
-          console.log('correcot', result);
-          if (result.status == 'ACCEPTED') {
+    if (this.formRegistro.pristine) {
+      console.log('sin cambios');
+      this.toastr.info('No ha cambiado nada');
+    } else {
+      console.log('con cambios');
+      this.spinner.show();
+      this.services
+        .registrarPacientes(
+          this.formRegistro.value,
+          localStorage.getItem('token'),
+          this.actualizarR
+        )
+        .subscribe(
+          (result: any) => {
+            console.log('correcot', result);
+            if (result.status == 'ACCEPTED') {
+              this.spinner.hide();
+              this.toastr.success(
+                result.mensaje == null
+                  ? 'Paciente creado correctamente'
+                  : result.mensaje.message
+              );
+              this.formRegistro.reset();
+              this.getListPacientes();
+              this.modal.dismissAll();
+            }
+          },
+          (error) => {
+            console.log('err', error);
             this.spinner.hide();
-            this.toastr.success(
-              result.mensaje == null
-                ? 'Paciente creado correctamente'
-                : result.mensaje.message
-            );
-            this.formRegistro.reset();
-            this.getListPacientes();
-            this.modal.dismissAll();
+            if (error.status == 302) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error.error.mensaje['message'],
+              });
+              this.toastr.info(
+                'No es posible registrar el paciente con este número de documento',
+                error.error.obj.documento
+              );
+            }
+
+            if (error.status == 409) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error.error.mensaje['message'],
+              });
+              this.toastr.info(
+                'No es posible registrar el paciente con este número de documento',
+                error.error.mensaje['message']
+              );
+            }
+
+            if (error.status == 403) {
+              this.spinner.hide();
+              localStorage.clear();
+              this.toastr.info('', environment.sesionexpiro);
+              this.modal.dismissAll();
+              this.router.navigate(['/', 'login']);
+            }
+
+            if (error.status == 400) {
+              this.spinner.hide();
+              this.toastr.info('', 'Error en el servicio');
+            }
           }
-        },
-        (error) => {
-          console.log('err', error);
-          this.spinner.hide();
-          if (error.status == 302) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: error.error.mensaje['message'],
-            });
-            this.toastr.info(
-              'No es posible registrar el paciente con este número de documento',
-              error.error.obj.documento
-            );
-          }
-
-          if (error.status == 409) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: error.error.mensaje['message'],
-            });
-            this.toastr.info(
-              'No es posible registrar el paciente con este número de documento',
-              error.error.mensaje['message']
-            );
-          }
-
-          if (error.status == 403) {
-            this.spinner.hide();
-            localStorage.clear();
-            this.toastr.info('', environment.sesionexpiro);
-            this.modal.dismissAll();
-            this.router.navigate(['/', 'login']);
-          }
-
-          if (error.status == 400) {
-            this.spinner.hide();
-            this.toastr.info('', 'Error en el servicio');
-
-          }
-
-
-        }
-      );
+        );
+    }
   }
 
   getListPacientes() {
@@ -205,24 +206,24 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
     this.modal.dismissAll(modal);
   }
 
-  actualizarR:boolean = false;
-  update(confirma:boolean){
-    this.actualizarR = !confirma ? false :true;
+  actualizarR: boolean = false;
+  update(confirma: boolean) {
+    this.actualizarR = !confirma ? false : true;
   }
 
-  cleanForm(){
+  cleanForm() {
     this.formRegistro.reset();
   }
 
-  editar(form:any,modal:any){
+  editar(form: any, modal: any) {
     //this.formRegistro.setValue(form);
-    if(!this.firstPanel.expanded){
+    if (!this.firstPanel.expanded) {
       this.firstPanel.toggle();
     }
 
-    for(let obj in form ){
-      for(let f in this.formRegistro.value){
-        if(f == obj){
+    for (let obj in form) {
+      for (let f in this.formRegistro.value) {
+        if (f == obj) {
           this.formRegistro.get(obj).setValue(form[obj]);
         }
       }
@@ -258,5 +259,4 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
     }
     /** Fin datetabble */
   }
-
 }
