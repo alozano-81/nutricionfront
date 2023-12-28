@@ -6,6 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { MatExpansionPanel } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataTableDirective } from 'angular-datatables';
@@ -32,6 +33,10 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   public listaSex: string[] = ['Masculino', 'Femenino'];
   listPacientes: RegistrarPacientes[] = [];
   matAcordionTabla : boolean = false;
+
+  @ViewChild('panel1')
+  firstPanel!: MatExpansionPanel;
+
 
   actualizar:boolean = false;
   customCollapsedHeight : string = '40px';
@@ -200,14 +205,6 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
     this.modal.dismissAll(modal);
   }
 
-  cambiarEstado(){
-    if(this.matAcordionTabla){
-      this.matAcordionTabla  = false;
-    }else{
-      this.matAcordionTabla = false;
-    }
-  }
-
   actualizarR:boolean = false;
   update(confirma:boolean){
     this.actualizarR = !confirma ? false :true;
@@ -219,7 +216,10 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
 
   editar(form:any,modal:any){
     //this.formRegistro.setValue(form);
-    this.matAcordionTabla = true;
+    if(!this.firstPanel.expanded){
+      this.firstPanel.toggle();
+    }
+
     for(let obj in form ){
       for(let f in this.formRegistro.value){
         if(f == obj){
