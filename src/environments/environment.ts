@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   urlLocal: 'http://localhost:8083',
-  urlLocalProd: 'https://nutricion-production.up.railway.app',
+  urlLocalProd: 'https://nutricioncc.onrender.com',
   urlServidorProd: 'https://saludnutriciontest.000webhostapp.com/',
   productionServidor: 'saludnutriciontest.000webhostapp.com',
   urlProxy2: 'http://localhost:4200/autenticacion-login',

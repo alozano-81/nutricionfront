@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   urlLocal: 'http://localhost:8083/',
-  urlLocalProd: 'https://nutricion-production.up.railway.app/',
+  urlLocalProd: 'https://nutricioncc.onrender.com/',
   urlServidorProd: 'https://saludnutriciontest.000webhostapp.com/',
   productionServidor: 'saludnutriciontest.000webhostapp.com',
   urlProxy2: 'http://localhost:4200/autenticacion-login',
@@ -30,14 +30,14 @@ export const environment = {
   urlRegistrarPacientes: '/autenticacion-login/api/auth/paciente/registrar',*/
 
 
-  /*urlApivalidacionSesion: 'https://nutricion-production.up.railway.app/api/auth/usersesion/validar-sesion',
-  urlCrearUsuarios: 'https://nutricion-production.up.railway.app/api/auth/usersesion/creacion',
-  urlListaRoles: 'https://nutricion-production.up.railway.app/api/auth/usersesion/get-all-roles',
+  /*urlApivalidacionSesion: 'https://nutricioncc.onrender.com/api/auth/usersesion/validar-sesion',
+  urlCrearUsuarios: 'https://nutricioncc.onrender.com/api/auth/usersesion/creacion',
+  urlListaRoles: 'https://nutricioncc.onrender.com/api/auth/usersesion/get-all-roles',
 
-  urlApiListarComercios: 'https://nutricion-production.up.railway.app/api/tecnica/listarcomercios',
-  urlValidarLogin: 'https://nutricion-production.up.railway.app/api/login/validar-credenciales',
-  urlListaPaises: 'https://nutricion-production.up.railway.app/api/auth/paciente/get-all-paises',
-  urlRegistrarPacientes: 'https://nutricion-production.up.railway.app/api/auth/paciente/registrar',*/
+  urlApiListarComercios: 'https://nutricioncc.onrender.com/api/tecnica/listarcomercios',
+  urlValidarLogin: 'https://nutricioncc.onrender.com/api/login/validar-credenciales',
+  urlListaPaises: 'https://nutricioncc.onrender.com/api/auth/paciente/get-all-paises',
+  urlRegistrarPacientes: 'https://nutricioncc.onrender.com/api/auth/paciente/registrar',*/
 
 
 

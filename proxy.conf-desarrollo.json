@@ -1,6 +1,6 @@
 {
   "/autenticacion-login/*":{
-    "target":"https://nutricion-production.up.railway.app",
+    "target":"https://nutricioncc.onrender.com",
     "secure":false,
     "changeOrigin":true,
     "pathRewrite": {"^/autenticacion-login" : ""}
