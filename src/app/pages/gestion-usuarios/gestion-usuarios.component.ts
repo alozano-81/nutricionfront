@@ -43,6 +43,7 @@ export class GestionUsuariosComponent implements OnInit, OnDestroy {
   @ViewChild(DataTableDirective, { static: false })
   dtElements: any = DataTableDirective;
   isDtInitializeds: boolean = false;
+  atras:string = environment.atras;
 
   constructor(
     public services: ServiciosService,
@@ -197,5 +198,9 @@ export class GestionUsuariosComponent implements OnInit, OnDestroy {
       this.dtTriggers.next(this.dtElements);
     }
     /** Fin datetabble */
+  }
+
+  regresar(){
+    this.router.navigate(['/', 'gestion-principal']);
   }
 }

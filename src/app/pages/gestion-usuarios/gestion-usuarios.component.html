@@ -8,7 +8,17 @@
       [matTooltipPosition]="'below'"
       (click)="add()"
     >
-      <mat-icon>{{iconoRegistro}}</mat-icon>
+      <mat-icon>{{ iconoRegistro }}</mat-icon>
+    </button>
+    <button
+      type="button"
+      data-toggle="modal"
+      class="btn btn-info btn-round btn-fab btn-sm"
+      matTooltip="Regresar"
+      [matTooltipPosition]="'below'"
+      (click)="regresar()"
+    >
+      <mat-icon>{{ atras }}</mat-icon>
     </button>
     <form
       *ngIf="addUser"
@@ -99,10 +109,9 @@
 
     <div class="example-container">
       <table
-      datatable
-      [dtOptions]="dtOptionss"
-      [dtTrigger]="dtTriggers"
-
+        datatable
+        [dtOptions]="dtOptionss"
+        [dtTrigger]="dtTriggers"
         id="tabla"
         class="table table-bordered table-hover"
       >
@@ -110,7 +119,7 @@
 
         <thead>
           <tr>
-            <th >User</th>
+            <th>User</th>
             <th>Email</th>
             <th>Password</th>
             <th>Rol</th>
@@ -119,10 +128,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let u of listUser; let i = index">
-            <td >{{ u.username }}</td>
+            <td>{{ u.username }}</td>
             <td>{{ u.email }}</td>
-            <td>{{u.password}}</td>
-            <td >{{u.idRol[0].codigo}}      </td>
+            <td>{{ u.password }}</td>
+            <td>{{ u.idRol[0].codigo }}</td>
             <td>
               <button
                 type="button"
@@ -130,7 +139,6 @@
                 class="btn btn-info btn-round btn-fab btn-sm"
                 matTooltip="Editar"
                 [matTooltipPosition]="'below'"
-
               >
                 <mat-icon>edit</mat-icon>
               </button>
@@ -141,7 +149,6 @@
                 class="btn btn-info btn-round btn-fab btn-sm"
                 matTooltip="Actualizar"
                 [matTooltipPosition]="'below'"
-
               >
                 <mat-icon>assignment</mat-icon>
               </button>

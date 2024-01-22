@@ -17,7 +17,14 @@
 }
 
 .dataTables_wrapper .dataTables_length select {
-  padding: 10px;
+  padding: 50px !important;
+  background-color: red  !important;
+}
+
+.dataTables_length select  {
+  width: 50px !important;
+  padding: 50px !important;
+  background-color: white !important;
 }
 
 .expansion-panel-header {

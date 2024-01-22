@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GestionLoginComponent } from './gestion-login/gestion-login.component';
 import { GestionPacientesComponent } from './gestion-pacientes/gestion-pacientes.component';
 import { GestionPrincipalComponent } from './gestion-principal/gestion-principal.component';
+import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.component';
 import { PagesComponent } from './pages.component';
 
 const routes: Routes = [
@@ -30,6 +31,11 @@ const routes: Routes = [
         path: 'pacientes',
         component: GestionPacientesComponent,
         data: { showRootComponents:true}
+      },
+      {
+        path: 'usuarios',
+        component: GestionUsuariosComponent,
+        data: {showRootComponents:true}
       }
       //{ path: '', redirectTo: '/inicio', pathMatch: 'full' },
     ],

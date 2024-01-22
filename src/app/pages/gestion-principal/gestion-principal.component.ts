@@ -83,9 +83,9 @@ export class GestionPrincipalComponent implements OnInit {
    * Abre modal en caso de que nit no exista, queda a requerimiento del cliente
    * @param modal
    */
-  openModalRegistro(modal: any) {
+  openModalRegistro(modal: any, tipoUsuario:string) {console.log('valormodla:',modal);
     //this.modal.open(modal, { fullscreen: true });
-    this.router.navigate(['/', 'pacientes']);
+    tipoUsuario == 'users' ? this.router.navigate(['/', 'usuarios']) : this.router.navigate(['/', 'pacientes']);
     //this.modal.open(modal, { size: 'xl', scrollable: true, backdrop: 'static', keyboard:false });
   }
 

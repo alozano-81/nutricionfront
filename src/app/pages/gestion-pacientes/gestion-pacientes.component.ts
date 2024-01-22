@@ -44,6 +44,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   customExpandedHeight: string = '40px';
 
   idForm: string = 'idForm';
+  atras:string = environment.atras;
 
   @Output()
   cerrarModalPaciente: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -275,5 +276,9 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
       this.dtTriggers.next(this.dtElements);
     }
     /** Fin datetabble */
+  }
+
+  regresar(){
+    this.router.navigate(['/', 'gestion-principal']);
   }
 }

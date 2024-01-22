@@ -3,10 +3,10 @@
     *ngIf="rolUsuario == 'ROLE_USER'"
     type="button"
     data-toggle="modal"
-    class="btn btn-success btn-round btn-fab btn-sm"
+    class="btn btn-info btn-round btn-fab btn-sm"
     matTooltip="Registrar Pacientes"
     [matTooltipPosition]="'below'"
-    (click)="openModalRegistro(ModalRegistro)"
+    (click)="openModalRegistro(ModalRegistro,'pacientes')"
   >
     <mat-icon>add</mat-icon>
   </button>
@@ -18,7 +18,7 @@
     class="btn btn-success btn-round btn-fab btn-sm"
     matTooltip="Gestion Usuarios"
     [matTooltipPosition]="'below'"
-    (click)="openModalRegistro(ModalGestionUsuarios)"
+    (click)="openModalRegistro(ModalGestionUsuarios,'users')"
   >
     <mat-icon>add</mat-icon>
   </button>
