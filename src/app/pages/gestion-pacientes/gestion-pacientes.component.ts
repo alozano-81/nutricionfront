@@ -27,6 +27,8 @@ import Swal from 'sweetalert2';
 })
 export class GestionPacientesComponent implements OnInit, OnDestroy {
   formRegistro: any;
+  habilitarBotonCrear:boolean = false;
+  habilitarBotonActualizar:boolean = false;
   paises: Paises[] = [];
   selected: any;
   public sex: string = '';
@@ -64,6 +66,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.habilitarBotonCrear = true;
     this.formRegistro = this.services.cargarFormRegistroPacientes();
     if (localStorage.getItem('creado') == 'ok') {
       localStorage.removeItem('creado');
@@ -213,10 +216,24 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
 
   cleanForm() {
     this.formRegistro.reset();
+    this.habilitarBotonCrear = true;
+    this.habilitarBotonActualizar = false;
   }
 
+
+  habilitarRegistroNuevo(){
+    this.formRegistro.reset();
+    this.habilitarBotonCrear = true;
+  }
+
+  valido:boolean =false;
   editar(form: any, modal: any) {
     //this.formRegistro.setValue(form);
+    //this.formRegistro.get('documento').disable({ onlySelf: true });
+    //this.formRegistro.controls['documento'].disable();
+    this.habilitarBotonActualizar = true;
+    this.habilitarBotonCrear = false;
+    this.valido = true;
     if (!this.firstPanel.expanded) {
       this.firstPanel.toggle();
     }

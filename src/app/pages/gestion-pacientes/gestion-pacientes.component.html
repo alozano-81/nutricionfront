@@ -1,6 +1,6 @@
 <div class="container">
   <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel #panel1 [expanded]="matAcordionTabla" >
+    <mat-expansion-panel #panel1   >
       <mat-expansion-panel-header class="expansion-panel-header" [collapsedHeight]="customCollapsedHeight" [expandedHeight]="customExpandedHeight">
         <mat-panel-title>
           Registro Pacientes
@@ -153,6 +153,7 @@
                   #inputC
                   placeholder="Documento de identidad"
                   required="true"
+                  readonly="{{valido}}"
                 />
                 <mat-error
                   *ngIf="formRegistro.controls['documento'].errors?.required"
@@ -204,7 +205,7 @@
           </div>
         </form>
         <div>
-          <button
+          <button *ngIf="habilitarBotonCrear"
             [disabled]="formRegistro.invalid"
             class="btn btn-primary btn-sm"
             type="submit"
@@ -213,7 +214,7 @@
           >
             Crear
           </button>
-          <button
+          <button *ngIf="habilitarBotonActualizar"
             [disabled]="formRegistro.invalid"
             class="btn btn-secondary btn-sm"
             type="submit"
