@@ -1,0 +1,335 @@
+<div class="container">
+  <mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel #panel1>
+      <mat-expansion-panel-header
+        class="expansion-panel-header"
+        [collapsedHeight]="customCollapsedHeight"
+        [expandedHeight]="customExpandedHeight"
+      >
+        <mat-panel-title> Registro Pacientes </mat-panel-title>
+        <mat-panel-description>
+          Registro base
+          <mat-icon
+            (click)="regresar()"
+            matTooltip="Regresar"
+            [matTooltipPosition]="'below'"
+            >keyboard_backspace</mat-icon
+          >
+          <mat-icon>account_circle</mat-icon
+          >
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div>
+        <form
+          [formGroup]="formRegistro"
+          class="form"
+          (submit)="registrar()"
+          id="{{ idForm }}"
+          novalidate
+        >
+          <div class="row">
+            <div class="col">
+              <mat-form-field hintLabel="Max 10 caracteres">
+                <mat-label>Nombres</mat-label>
+                <input
+                  matInput
+                  #nombres
+                  required="true"
+                  formControlName="nombres"
+                />
+              </mat-form-field>
+
+              <div *ngIf="formRegistro.controls['nombres'].errors">
+                <mat-error
+                  *ngIf="formRegistro.controls['nombres'].errors?.required"
+                >
+                  <p style="color: F44336">Debe ingresar datos.</p>
+                </mat-error>
+              </div>
+            </div>
+
+            <div class="col">
+              <mat-form-field hintLabel="Max 10 caracteres">
+                <mat-label>Apellidos</mat-label>
+                <input
+                  matInput
+                  #apellidos
+                  required="true"
+                  formControlName="apellidos"
+                />
+              </mat-form-field>
+
+              <div *ngIf="formRegistro.controls['apellidos'].errors">
+                <mat-error
+                  *ngIf="formRegistro.controls['apellidos'].errors?.required"
+                >
+                  <p style="color: F44336">Debe ingresar datos.</p>
+                </mat-error>
+              </div>
+            </div>
+
+            <div class="col">
+              <label id="example-radio-group-label">Sexo</label>
+              <mat-radio-group
+                formControlName="sexo"
+                aria-labelledby="example-radio-group-label"
+                class="example-radio-group"
+                [(ngModel)]="sex"
+              >
+                <mat-radio-button
+                  class="example-radio-button"
+                  *ngFor="let cont of listaSex"
+                  [value]="cont"
+                >
+                  {{ cont }}
+                </mat-radio-button>
+              </mat-radio-group>
+              <div>Seleccione uno</div>
+            </div>
+
+            <div class="col">
+              <mat-form-field>
+                <mat-label>País de residencia</mat-label>
+                <mat-select formControlName="pais" placeholder="Paises">
+                  <mat-option
+                    style="z-index: 99999"
+                    *ngFor="let ite of paises"
+                    [value]="ite.codigo"
+                    >{{ ite.nombre }}
+                  </mat-option>
+                </mat-select>
+                <mat-error
+                  *ngIf="formRegistro.controls['pais'].errors?.required"
+                >
+                  <span> Se debe seleccionar una pa&acuoteis </span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field color="accent">
+                <mat-label>Fecha Nacimiento</mat-label>
+                <input
+                  readonly="true"
+                  required="true"
+                  matInput
+                  [matDatepicker]="picker1"
+                  formControlName="fechaNacimiento"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker1"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker1 color="primary"></mat-datepicker>
+
+                <mat-error
+                  *ngIf="
+                    formRegistro.controls['fechaNacimiento'].errors?.required
+                  "
+                >
+                  Se debe seleccionar una fecha
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="example-full-width">
+                <mat-label>Correo Electrónico</mat-label>
+                <input
+                  type="email"
+                  matInput
+                  formControlName="email"
+                  placeholder="xxxx@example.com"
+                />
+
+                <mat-error> Ingrese un email valido! </mat-error>
+                <mat-error> Email es <strong>requerido</strong> </mat-error>
+              </mat-form-field>
+              <div *ngIf="formRegistro.controls['email'].errors">
+                <mat-error
+                  *ngIf="formRegistro.controls['email'].errors?.required"
+                >
+                  <p style="color: F44336">Debe ingresar datos.</p>
+                </mat-error>
+              </div>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Documento</mat-label>
+                <input
+                  formControlName="documento"
+                  matInput
+                  type="number"
+                  #inputC
+                  placeholder="Documento de identidad"
+                  required="true"
+                  readonly="{{ valido }}"
+                />
+                <mat-error
+                  *ngIf="formRegistro.controls['documento'].errors?.required"
+                >
+                  Se debe ingresar un datos
+                </mat-error>
+              </mat-form-field>
+              <div *ngIf="formRegistro.controls['documento'].errors">
+                <mat-error
+                  *ngIf="formRegistro.controls['documento'].errors?.required"
+                >
+                  <p style="color: F44336">Debe ingresar datos.</p>
+                </mat-error>
+              </div>
+            </div>
+            <div class="col">
+              <mat-label>Ocupaci&oacute;n</mat-label>
+              <mat-form-field hintLabel="Max 10 caracteres">
+                <input matInput #nombres formControlName="ocupacion" />
+              </mat-form-field>
+
+              <div *ngIf="formRegistro.controls['ocupacion'].errors">
+                <mat-error
+                  *ngIf="formRegistro.controls['ocupacion'].errors?.required"
+                >
+                  <p style="color: F44336">Debe ingresar datos.</p>
+                </mat-error>
+              </div>
+            </div>
+
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Teléfono</mat-label>
+                <mat-icon matSuffix>phone</mat-icon>
+                <input
+                  formControlName="telefono"
+                  matInput
+                  type="number"
+                  #inputC
+                  placeholder="Número de teléfono"
+                />
+                <mat-error
+                  *ngIf="formRegistro.controls['telefono'].errors?.required"
+                >
+                  Se debe ingresar un teléfono de contacto
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+        <div>
+          <button
+            *ngIf="habilitarBotonCrear"
+            [disabled]="formRegistro.invalid"
+            class="btn btn-primary btn-sm"
+            type="submit"
+            [attr.form]="idForm"
+            (click)="update(false)"
+          >
+            Crear
+          </button>
+          <button
+            *ngIf="habilitarBotonActualizar"
+            [disabled]="formRegistro.invalid"
+            class="btn btn-secondary btn-sm"
+            type="submit"
+            (click)="update(true)"
+            [attr.form]="idForm"
+          >
+            Actualizar
+          </button>
+
+          <button
+            [disabled]="actualizar"
+            class="btn btn-warning btn-sm"
+            type="submit"
+            (click)="cleanForm()"
+          >
+            Limpiar
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Datos Pacientes </mat-panel-title>
+        <mat-panel-description>
+          Tabla
+          <mat-icon>map</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="">
+        <table
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTriggers"
+          id="tabla"
+          class="table table-bordered table-hover"
+        >
+          <caption></caption>
+
+          <thead>
+            <tr>
+              <th>Nombres</th>
+              <th>Apellidos</th>
+              <th>Documento</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of listPacientes; let i = index">
+              <td>{{ p.nombres }}</td>
+              <td>{{ p.apellidos }}</td>
+              <td>{{ p.documento }}</td>
+              <td>
+                <button
+                  type="button"
+                  data-toggle="modal"
+                  class="btn btn-info btn-round btn-fab btn-sm"
+                  matTooltip="Editar"
+                  [matTooltipPosition]="'below'"
+                  (click)="editar(p, ModalEditarPacientes)"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button
+                  type="button"
+                  data-toggle="modal"
+                  class="btn btn-debug btn-round btn-fab btn-sm"
+                  matTooltip="Eliminar"
+                  [matTooltipPosition]="'below'"
+                  (click)="delete(p)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<ng-template #ModalEditarPacientes let-modal>
+  <div class="modal-header">
+    <h2 class="modal-title">EditaR</h2>
+
+    <button
+      mat-raised-button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="cerrarModal(ModalEditarPacientes)"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body"></div>
+  <div class="modal-footer">
+    <button mat-raised-button (click)="cerrarModal(ModalEditarPacientes)">
+      Cerrar
+    </button>
+  </div>
+</ng-template>
+
+<app-spiner></app-spiner>

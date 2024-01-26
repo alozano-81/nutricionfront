@@ -1,0 +1,8 @@
+{
+  "/autenticacion-login/*":{
+    "target":"https://nutricioncc.onrender.com",
+    "secure":false,
+    "changeOrigin":true,
+    "pathRewrite": {"^/autenticacion-login" : ""}
+  }
+}

@@ -1,1 +1,92 @@
-<p>gestion-principal works!</p>
+<div class="container">
+  <button
+    *ngIf="rolUsuario == 'ROLE_USER'"
+    type="button"
+    data-toggle="modal"
+    class="btn btn-info btn-round btn-fab btn-sm"
+    matTooltip="Registrar Pacientes"
+    [matTooltipPosition]="'below'"
+    (click)="openModalRegistro(ModalRegistro,'pacientes')"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <button
+    *ngIf="rolUsuario == 'ROLE_ADMIN'"
+    type="button"
+    data-toggle="modal"
+    class="btn btn-success btn-round btn-fab btn-sm"
+    matTooltip="Gestion Usuarios"
+    [matTooltipPosition]="'below'"
+    (click)="openModalRegistro(ModalGestionUsuarios,'users')"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <button
+    type="button"
+    data-toggle="modal"
+    class="btn btn-info btn-round btn-fab btn-sm"
+    matTooltip="Inicio"
+    [matTooltipPosition]="'below'"
+    (click)="regresar()"
+  >
+  <mat-icon>{{atras}}</mat-icon>
+</button>
+
+  <!--Modal para registrar pacientes-->
+  <ng-template #ModalRegistro let-modal>
+    <div class="modal-header">
+      <h2 class="modal-title">Registrar</h2>
+
+      <button
+        mat-raised-button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="cerrarModal(ModalRegistro)"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-gestion-pacientes
+        *ngIf="this.rolUsuario == 'ROLE_USER'"
+        (cerrarModalCrearUsuario)="eventoCerrarModalCreacionUsuario($event)"
+      ></app-gestion-pacientes>
+    </div>
+    <div class="modal-footer">
+      <button mat-raised-button (click)="cerrarModal(ModalRegistro)">
+        Cerrar
+      </button>
+    </div>
+  </ng-template>
+
+  <!--Modal componente gestion de usuarios-->
+  <ng-template #ModalGestionUsuarios let-modal>
+    <div class="modal-header">
+      <h2 class="modal-title">Registrar</h2>
+
+      <button
+        mat-raised-button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="cerrarModal(ModalGestionUsuarios)"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-gestion-usuarios
+        *ngIf="this.rolUsuario == 'ROLE_ADMIN'"
+        (cerrarModalCrearUsuario)="eventoCerrarModalCreacionUsuario($event)"
+      ></app-gestion-usuarios>
+    </div>
+    <div class="modal-footer">
+      <button mat-raised-button (click)="cerrarModal(ModalGestionUsuarios)">
+        Cerrar
+      </button>
+    </div>
+  </ng-template>
+</div>

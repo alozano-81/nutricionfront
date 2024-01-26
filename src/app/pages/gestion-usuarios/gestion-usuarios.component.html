@@ -1,0 +1,199 @@
+<div class="container">
+  <div class="modal-body">
+    <button
+      type="button"
+      data-toggle="modal"
+      class="btn btn-success btn-round btn-fab btn-sm"
+      matTooltip="Registrar Usuarios"
+      [matTooltipPosition]="'below'"
+      (click)="add()"
+    >
+      <mat-icon>{{ iconoRegistro }}</mat-icon>
+    </button>
+    <button
+      type="button"
+      data-toggle="modal"
+      class="btn btn-info btn-round btn-fab btn-sm"
+      matTooltip="Regresar"
+      [matTooltipPosition]="'below'"
+      (click)="regresar()"
+    >
+      <mat-icon>{{ atras }}</mat-icon>
+    </button>
+    <div *ngIf="addUser">
+      <form
+        id="{{ idForm }}"
+        [formGroup]="formCreacion"
+        class="form"
+        (submit)="crear()"
+        novalidate
+      >
+        <div class="row">
+          <div class="col">
+            <mat-form-field hintLabel="Max 10 caracteres">
+              <mat-label>User</mat-label>
+              <input
+                matInput
+                #nombres
+                required="true"
+                formControlName="username"
+              />
+            </mat-form-field>
+
+            <div *ngIf="formCreacion.controls['username'].errors">
+              <mat-error
+                *ngIf="formCreacion.controls['username'].errors?.required"
+              >
+                <p style="color: F44336">Debe ingresar datos.</p>
+              </mat-error>
+            </div>
+          </div>
+
+          <div class="col">
+            <mat-form-field hintLabel="Max 10 caracteres">
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                #nombres
+                required="true"
+                formControlName="password"
+              />
+            </mat-form-field>
+
+            <div *ngIf="formCreacion.controls['password'].errors">
+              <mat-error
+                *ngIf="formCreacion.controls['password'].errors?.required"
+              >
+                <p style="color: F44336">Debe ingresar datos.</p>
+              </mat-error>
+            </div>
+          </div>
+
+          <div class="col">
+            <mat-form-field hintLabel="Max 10 caracteres">
+              <mat-label>Email</mat-label>
+              <input
+                type="email"
+                matInput
+                #nombres
+                required="true"
+                formControlName="email"
+                placeholder="xxxx@example.com"
+              />
+              <mat-error> Ingrese un email valido! </mat-error>
+              <mat-error> Email es <strong>requerido</strong> </mat-error>
+            </mat-form-field>
+
+            <div *ngIf="formCreacion.controls['email'].errors">
+              <mat-error
+                *ngIf="formCreacion.controls['email'].errors?.required"
+              >
+                <p style="color: F44336">Debe ingresar datos.</p>
+              </mat-error>
+            </div>
+          </div>
+
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Rol</mat-label>
+              <mat-select formControlName="idRol" placeholder="Rol">
+                <mat-option
+                  style="z-index: 99999"
+                  *ngFor="let ite of listaRol"
+                  [value]="ite.codigo"
+                  >{{ ite.nombre }}
+                </mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="formCreacion.controls['idRol'].errors?.required"
+              >
+                <span> Se debe seleccionar un Rol </span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <button
+          *ngIf="habilitarBotonCrear"
+          [attr.form]="idForm"
+          (click)="update(false)"
+          [disabled]="formCreacion.invalid"
+          class="btn btn-primary btn-sm"
+          type="submit"
+        >
+          Crear
+        </button>
+        <button
+          *ngIf="habilitarBotonActualizar"
+          [disabled]="formCreacion.invalid"
+          class="btn btn-secondary btn-sm"
+          type="submit"
+          (click)="update(true)"
+          [attr.form]="idForm"
+        >
+          Actualizar
+        </button>
+      </form>
+      <button
+          class="btn btn-warning btn-sm"
+          type="submit"
+          (click)="cleanForm()"
+        >
+          Limpiar
+        </button>
+    </div>
+
+    <div class="example-container">
+      <table
+        datatable
+        [dtOptions]="dtOptionss"
+        [dtTrigger]="dtTriggers"
+        id="tabla"
+        class="table table-bordered table-hover"
+      >
+        <caption></caption>
+
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of listUser; let i = index">
+            <td>{{ u.username }}</td>
+            <td>{{ u.email }}</td>
+            <td>{{ u.password }}</td>
+            <td>{{ u.idRol[0].nombre }}</td>
+            <td>
+              <button
+                type="button"
+                data-toggle="modal"
+                class="btn btn-info btn-round btn-fab btn-sm"
+                matTooltip="Editar"
+                [matTooltipPosition]="'below'"
+                (click)="edit(u)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <button
+                type="button"
+                data-toggle="modal"
+                class="btn btn-info btn-round btn-fab btn-sm"
+                matTooltip="Actualizar"
+                [matTooltipPosition]="'below'"
+              >
+                <mat-icon>assignment</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<app-spiner></app-spiner>
