@@ -27,8 +27,8 @@ import Swal from 'sweetalert2';
 })
 export class GestionPacientesComponent implements OnInit, OnDestroy {
   formRegistro: any;
-  habilitarBotonCrear:boolean = false;
-  habilitarBotonActualizar:boolean = false;
+  habilitarBotonCrear: boolean = false;
+  habilitarBotonActualizar: boolean = false;
   paises: Paises[] = [];
   selected: any;
   public sex: string = '';
@@ -44,7 +44,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   customExpandedHeight: string = '40px';
 
   idForm: string = 'idForm';
-  atras:string = environment.atras;
+  atras: string = environment.atras;
 
   @Output()
   cerrarModalPaciente: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -221,13 +221,12 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
     this.habilitarBotonActualizar = false;
   }
 
-
-  habilitarRegistroNuevo(){
+  habilitarRegistroNuevo() {
     this.formRegistro.reset();
     this.habilitarBotonCrear = true;
   }
 
-  valido:boolean =false;
+  valido: boolean = false;
   editar(form: any, modal: any) {
     //this.formRegistro.setValue(form);
     //this.formRegistro.get('documento').disable({ onlySelf: true });
@@ -243,12 +242,69 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
       for (let f in this.formRegistro.value) {
         if (f == obj) {
           this.formRegistro.get(obj).setValue(form[obj]);
+          if (f == 'pais') {
+            this.formRegistro.get(obj).setValue((form[obj] = +form[obj]));
+          }
         }
       }
     }
     let enviarIdRegistro = this.formRegistro.value;
     enviarIdRegistro.id = form.id;
     //this.modal.open(modal, { size: 'xl', scrollable: true, backdrop: 'static', keyboard:false });
+  }
+
+  delete(form: any) {
+    Swal.fire({
+      title: `Documento #: ${form.documento}`,
+      text: '¿Eliminar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((resultado) => {
+      this.spinner.show();
+      if (resultado.value) {
+        this.services.deletePaciente(form, localStorage.getItem('token')).subscribe(
+          (result: any) => {
+            this.spinner.hide();
+            console.log('1', result);
+            if (result.status == 'ACCEPTED') {
+              this.spinner.hide();
+              this.toastr.success(
+                result.mensaje == null
+                  ? 'Paciente creado correctamente'
+                  : result.mensaje.message
+              );
+              this.formRegistro.reset();
+              this.getListPacientes();
+              this.modal.dismissAll();
+            }
+          },
+          (error) => {
+            this.spinner.hide();
+            console.log('2error', error);
+            if (error.status == 403) {
+              this.toastr.info(
+                environment.sesionexpiro,
+                error.error == null ? environment.sesionexpiro : error.error.msn
+              );
+              localStorage.clear();
+              this.router.navigate(['/', 'login']);
+            }
+
+            if (error.status == 409) {
+              this.toastr.info(
+                error.error.status,
+                error.error == null ? 'Error' : error.error.mensaje.message
+              );
+            }
+          }
+        );
+      } else {
+        this.spinner.hide();
+      }
+    });
+
   }
 
   /**Opciones español datatable */
@@ -278,7 +334,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
     /** Fin datetabble */
   }
 
-  regresar(){
+  regresar() {
     this.router.navigate(['/', 'gestion-principal']);
   }
 }

@@ -19,6 +19,7 @@ export const environment = {
   urlRegistrarPacientes: 'http://localhost:8083/api/auth/paciente/registrar',
   urlActualizarPacientes: 'http://localhost:8083/api/auth/paciente/actualizar',
   urlListaPacientes: 'http://localhost:8083/api/auth/paciente/get-all-datos-personales',
+  urlDeletePaciente:'http://localhost:8083/api/auth/paciente/delete',
 
   /*urlApivalidacionSesion: '/autenticacion-login/api/auth/usersesion/validar-sesion',
   urlCrearUsuarios: '/autenticacion-login/api/auth/usersesion/creacion',

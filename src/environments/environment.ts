@@ -23,6 +23,7 @@ export const environment = {
   urlRegistrarPacientes: 'http://localhost:8083/api/auth/paciente/registrar',
   urlActualizarPacientes: 'http://localhost:8083/api/auth/paciente/actualizar',
   urlListaPacientes: 'http://localhost:8083/api/auth/paciente/get-all-datos-personales',
+  urlDeletePaciente:'http://localhost:8083/api/auth/paciente/delete',
 
 //proxy
   /*urlApi: 'http://localhost:8085/api/tecnica/entrar',

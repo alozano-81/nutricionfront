@@ -20,92 +20,128 @@
     >
       <mat-icon>{{ atras }}</mat-icon>
     </button>
-    <form
-      *ngIf="addUser"
-      [formGroup]="formCreacion"
-      class="form"
-      (submit)="crear()"
-      novalidate
-    >
-      <div class="row">
-        <div class="col">
-          <mat-form-field hintLabel="Max 10 caracteres">
-            <mat-label>User</mat-label>
-            <input
-              matInput
-              #nombres
-              required="true"
-              formControlName="username"
-            />
-          </mat-form-field>
-
-          <div *ngIf="formCreacion.controls['username'].errors">
-            <mat-error
-              *ngIf="formCreacion.controls['username'].errors?.required"
-            >
-              <p style="color: F44336">Debe ingresar datos.</p>
-            </mat-error>
-          </div>
-        </div>
-
-        <div class="col">
-          <mat-form-field hintLabel="Max 10 caracteres">
-            <mat-label>Password</mat-label>
-            <input
-              matInput
-              #nombres
-              required="true"
-              formControlName="password"
-            />
-          </mat-form-field>
-
-          <div *ngIf="formCreacion.controls['password'].errors">
-            <mat-error
-              *ngIf="formCreacion.controls['password'].errors?.required"
-            >
-              <p style="color: F44336">Debe ingresar datos.</p>
-            </mat-error>
-          </div>
-        </div>
-
-        <div class="col">
-          <mat-form-field hintLabel="Max 10 caracteres">
-            <mat-label>Email</mat-label>
-            <input matInput #nombres required="true" formControlName="email" />
-          </mat-form-field>
-
-          <div *ngIf="formCreacion.controls['email'].errors">
-            <mat-error *ngIf="formCreacion.controls['email'].errors?.required">
-              <p style="color: F44336">Debe ingresar datos.</p>
-            </mat-error>
-          </div>
-        </div>
-
-        <div class="col">
-          <mat-form-field>
-            <mat-label>Rol</mat-label>
-            <mat-select formControlName="roless" placeholder="Rol">
-              <mat-option
-                style="z-index: 99999"
-                *ngFor="let ite of listaRol"
-                [value]="ite.codigo"
-                >{{ ite.nombre }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="formCreacion.controls['roless'].errors?.required">
-              <span> Se debe seleccionar un Rol </span>
-            </mat-error>
-          </mat-form-field>
-        </div>
-      </div>
-      <button
-        [disabled]="formCreacion.invalid"
-        class="btn btn-primary btn-sm"
-        type="submit"
+    <div *ngIf="addUser">
+      <form
+        id="{{ idForm }}"
+        [formGroup]="formCreacion"
+        class="form"
+        (submit)="crear()"
+        novalidate
       >
-        Crear
-      </button>
-    </form>
+        <div class="row">
+          <div class="col">
+            <mat-form-field hintLabel="Max 10 caracteres">
+              <mat-label>User</mat-label>
+              <input
+                matInput
+                #nombres
+                required="true"
+                formControlName="username"
+              />
+            </mat-form-field>
+
+            <div *ngIf="formCreacion.controls['username'].errors">
+              <mat-error
+                *ngIf="formCreacion.controls['username'].errors?.required"
+              >
+                <p style="color: F44336">Debe ingresar datos.</p>
+              </mat-error>
+            </div>
+          </div>
+
+          <div class="col">
+            <mat-form-field hintLabel="Max 10 caracteres">
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                #nombres
+                required="true"
+                formControlName="password"
+              />
+            </mat-form-field>
+
+            <div *ngIf="formCreacion.controls['password'].errors">
+              <mat-error
+                *ngIf="formCreacion.controls['password'].errors?.required"
+              >
+                <p style="color: F44336">Debe ingresar datos.</p>
+              </mat-error>
+            </div>
+          </div>
+
+          <div class="col">
+            <mat-form-field hintLabel="Max 10 caracteres">
+              <mat-label>Email</mat-label>
+              <input
+                type="email"
+                matInput
+                #nombres
+                required="true"
+                formControlName="email"
+                placeholder="xxxx@example.com"
+              />
+              <mat-error> Ingrese un email valido! </mat-error>
+              <mat-error> Email es <strong>requerido</strong> </mat-error>
+            </mat-form-field>
+
+            <div *ngIf="formCreacion.controls['email'].errors">
+              <mat-error
+                *ngIf="formCreacion.controls['email'].errors?.required"
+              >
+                <p style="color: F44336">Debe ingresar datos.</p>
+              </mat-error>
+            </div>
+          </div>
+
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Rol</mat-label>
+              <mat-select formControlName="idRol" placeholder="Rol">
+                <mat-option
+                  style="z-index: 99999"
+                  *ngFor="let ite of listaRol"
+                  [value]="ite.codigo"
+                  >{{ ite.nombre }}
+                </mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="formCreacion.controls['idRol'].errors?.required"
+              >
+                <span> Se debe seleccionar un Rol </span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <button
+          *ngIf="habilitarBotonCrear"
+          [attr.form]="idForm"
+          (click)="update(false)"
+          [disabled]="formCreacion.invalid"
+          class="btn btn-primary btn-sm"
+          type="submit"
+        >
+          Crear
+        </button>
+        <button
+          *ngIf="habilitarBotonActualizar"
+          [disabled]="formCreacion.invalid"
+          class="btn btn-secondary btn-sm"
+          type="submit"
+          (click)="update(true)"
+          [attr.form]="idForm"
+        >
+          Actualizar
+        </button>
+      </form>
+      <button
+          class="btn btn-warning btn-sm"
+          type="submit"
+          (click)="cleanForm()"
+        >
+          Limpiar
+        </button>
+    </div>
 
     <div class="example-container">
       <table
@@ -131,7 +167,7 @@
             <td>{{ u.username }}</td>
             <td>{{ u.email }}</td>
             <td>{{ u.password }}</td>
-            <td>{{ u.idRol[0].codigo }}</td>
+            <td>{{ u.idRol[0].nombre }}</td>
             <td>
               <button
                 type="button"
@@ -139,6 +175,7 @@
                 class="btn btn-info btn-round btn-fab btn-sm"
                 matTooltip="Editar"
                 [matTooltipPosition]="'below'"
+                (click)="edit(u)"
               >
                 <mat-icon>edit</mat-icon>
               </button>

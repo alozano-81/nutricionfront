@@ -44,6 +44,9 @@ export class GestionUsuariosComponent implements OnInit, OnDestroy {
   dtElements: any = DataTableDirective;
   isDtInitializeds: boolean = false;
   atras:string = environment.atras;
+  idForm: string = 'idForm';
+  habilitarBotonCrear:boolean = true;
+  habilitarBotonActualizar:boolean = false;
 
   constructor(
     public services: ServiciosService,
@@ -164,6 +167,24 @@ export class GestionUsuariosComponent implements OnInit, OnDestroy {
     this.iconoRegistro = this.addUser != false ? 'keyboard_hide' : 'add';
   }
 
+  edit(form:any){
+    this.addUser = true;console.log(form);
+    for (let obj in form) {
+      for (let f in this.formCreacion.value) {
+        if (f == obj) {
+          this.formCreacion.get(obj).setValue(form[obj]);
+          if(f == 'idRol'){
+            console.log(f);
+           //this.formCreacion.get(f).setValue(form[obj][0].codigo);
+           this.formCreacion.get(f).setValue('mod');
+          }
+        }
+      }
+    }
+    let enviarIdRegistro = this.formCreacion.value;
+    enviarIdRegistro.id = form.id;
+  }
+
   /**Opciones español datatable */
   viewDateTableEspanol() {
     this.dtOptions = {
@@ -198,6 +219,17 @@ export class GestionUsuariosComponent implements OnInit, OnDestroy {
       this.dtTriggers.next(this.dtElements);
     }
     /** Fin datetabble */
+  }
+
+  actualizarR: boolean = false;
+  update(confirma: boolean) {
+    this.actualizarR = !confirma ? false : true;
+  }
+
+  cleanForm() {
+    this.formCreacion.reset();
+    this.habilitarBotonCrear = true;
+    this.habilitarBotonActualizar = false;
   }
 
   regresar(){

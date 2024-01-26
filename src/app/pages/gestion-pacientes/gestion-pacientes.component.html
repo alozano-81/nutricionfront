@@ -90,7 +90,7 @@
             <div class="col">
               <mat-form-field>
                 <mat-label>País de residencia</mat-label>
-                <mat-select formControlName="pais" placeholder="Taller">
+                <mat-select formControlName="pais" placeholder="Paises">
                   <mat-option
                     style="z-index: 99999"
                     *ngFor="let ite of paises"
@@ -295,10 +295,11 @@
                   type="button"
                   data-toggle="modal"
                   class="btn btn-debug btn-round btn-fab btn-sm"
-                  matTooltip="Actualizar"
+                  matTooltip="Eliminar"
                   [matTooltipPosition]="'below'"
+                  (click)="delete(p)"
                 >
-                  <mat-icon>assignment</mat-icon>
+                  <mat-icon>delete</mat-icon>
                 </button>
               </td>
             </tr>
