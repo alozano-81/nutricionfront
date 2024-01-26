@@ -168,15 +168,13 @@ export class GestionUsuariosComponent implements OnInit, OnDestroy {
   }
 
   edit(form:any){
-    this.addUser = true;console.log(form);
+    this.addUser = true;
     for (let obj in form) {
       for (let f in this.formCreacion.value) {
         if (f == obj) {
           this.formCreacion.get(obj).setValue(form[obj]);
           if(f == 'idRol'){
-            console.log(f);
-           //this.formCreacion.get(f).setValue(form[obj][0].codigo);
-           this.formCreacion.get(f).setValue('mod');
+           this.formCreacion.get(f).setValue(form[obj][0].codigo);
           }
         }
       }
