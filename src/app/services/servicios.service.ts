@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, map, tap } from 'rxjs';
 import {
+  EstadosCivil,
   Paises,
   RegistrarPacientes,
   UserDTO,
@@ -18,6 +19,7 @@ export class ServiciosService {
   login: any[] = [];
   respuestas: any[] = [];
   listaPaises: Paises[] = [];
+  listaEstadosCivil: EstadosCivil[] = [];
   listaRoles: any[] = [];
   registroPacientes: RegistrarPacientes[] = [];
   listaUsuarios: UserDTO[] = [];
@@ -27,6 +29,7 @@ export class ServiciosService {
     private formularioNuevo: FormBuilder,
     private formularioTurnos: FormBuilder,
     private formularioCreacionUsuarios: FormBuilder,
+    private formularioHistorialAmnesis: FormBuilder,
     private http: HttpClient,
     private router: Router
   ) {}
@@ -73,6 +76,19 @@ export class ServiciosService {
       documento: ['', Validators.compose([Validators.required])],
       ocupacion: [],
       telefono: [],
+      estadoCivil: [],
+    });
+  }
+
+  /**
+   * Formulario para llenar el historial/anamnesis del paciente
+   */
+  cargarDatosAnamnesisPaciente(): FormGroup{
+    return this.formularioHistorialAmnesis.group({
+      id: [],
+      idPaciente: [],
+      motivo: [],
+
     });
   }
 
@@ -145,6 +161,19 @@ export class ServiciosService {
     let url = `${environment.urlListaPaises}`;
     return this.http.get(url).pipe(
       tap((result: any) => (this.listaPaises = result)),
+      map((result: any) => result)
+    );
+  }
+
+  /**
+   *
+   * @returns Obtener listado de estados civil
+   */
+
+  getEstadoCivil(): Observable<any[]> {
+    let url = `${environment.urlListaEstadoCivil}`;
+    return this.http.get(url).pipe(
+      tap((result: any) => (this.listaEstadosCivil = result)),
       map((result: any) => result)
     );
   }

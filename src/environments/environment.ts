@@ -20,6 +20,7 @@ export const environment = {
   urlApiListarComercios: 'http://localhost:8085/api/tecnica/listarcomercios',
   urlValidarLogin: 'http://localhost:8083/api/login/validar-credenciales',
   urlListaPaises: 'http://localhost:8083/api/auth/paciente/get-all-paises',
+  urlListaEstadoCivil: 'http://localhost:8083/api/auth/paciente/get-all-estados-civil',
   urlRegistrarPacientes: 'http://localhost:8083/api/auth/paciente/registrar',
   urlActualizarPacientes: 'http://localhost:8083/api/auth/paciente/actualizar',
   urlListaPacientes: 'http://localhost:8083/api/auth/paciente/get-all-datos-personales',
@@ -53,4 +54,47 @@ export const environment = {
 
   //iconos
   atras: 'keyboard_backspace',
+
+  pestana_objetivos: 'score',
+  pestana_indicadores_clinicos: 'thumb_up',
+  pestana_estilo_vida: 'insert_emoticon',
+  pestana_aspectos_ginecologicos: 'woman',
+  pestana_x: 'add',
+
+  //variables pestanas
+  lbl_objetivos: 'Objetivos',
+  lbl_indicadoresClinicos: 'Indicadores Clínicos',
+  lbl_aspectosGinecologicos: 'Aspectos Ginecológicos',
+  lbl_estiloVida: 'Estilos de vida',
+  lbl_indicadoresBiomedicos: 'Indicadores Biomédicos',
+  lbl_indicadoresDieteticos: 'Indicadores Dietéticos',
+  lbl_frecuenciaConsumoAlimentos: 'Frecuencia de Consumo de Alimentos',
+  lbl_recordatorio24Horas: 'Recordatorio de 24 Horas',
+  lbl_indicadoresAntropometricos: 'Indicadores Antropométricos',
+  lbl_interpretacionDatos: 'Interpretacion de datos',
+
+  lbl_pestana_objetivos: 'objetivos',
+  lbl_pestana_indicadoresClinicos: 'indicadoresclinicos',
+  lbl_pestana_aspectosGinecologicos: 'aspectosginecologicos',
+  lbl_pestana_estiloVida: 'estilosdevida',
+  lbl_pestana_indicadoresBiomedicos: 'indicadoresbiomedicos',
+  lbl_pestana_indicadoresDieteticos: 'indicadoresdieteticos',
+  lbl_pestana_frecuenciaConsumoAlimentos: 'frecuenciaconsumoalimentos',
+  lbl_pestana_recordatorio24Horas: 'recordatorio24horas',
+  lbl_pestana_indicadoresAntropometricos: 'indicadoresantropometricos',
+  lbl_pestana_interpretacionDatos: 'interpretaciondatos',
+
+  //varios
+  lbl_completed:'f',
+
+  //mensajes validaciones
+  lbl_solo_numeros:'Solo puede ingresar números',
+  lbl_max_caracteres:'Caracteres permitidos ',
+  lbl_debe_ingresar: 'Debe ingresar datos',
+  lbl_componente_obligatorio_email: 'Debe ingresar un email correcto',
+
+  //formulario anamnesis
+  lbl_form_anam_motivo: 'Motivo',
+
+
 }
