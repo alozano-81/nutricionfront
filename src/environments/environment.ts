@@ -86,6 +86,42 @@ export const environment = {
 
   //varios
   lbl_completed:'f',
+  lbl_antecedentes: 'Antecedentes Salu/Enfermedad',
+  lbl_problemas_actuales: 'Problemas actuales',
+
+  //etiquetas antecedentes
+  check_diarrea: 'Diarrea',
+  check_Estrenimiento:'Estreñimiento',
+  check_Deposicion: 'Deposicion',
+  check_Gastritis: 'Gastritis',
+  check_Ulcera: 'Úlcera',
+  check_Nausea: 'Naucea',
+  check_Pirosis: 'Pirosis',
+  check_Vomito: 'Vomito',
+  check_Colitis: 'Colitis',
+  lbl_dentadura: 'Dentadura',
+  lbl_otros: 'Otros',
+  lbl_Observaciones:'Observaciones',
+  lbl_enfermedad_diagnosticada: 'Padece alguna enfermedad diagnosticada',
+  lbl_enfermedad_importantes: 'Ha padecido alguna enfermedad importante',
+  lbl_toma_medicamento: 'Toma algun medicamento',
+  lbl_dosis: 'Dosis',
+  lbl_desde_cuando: 'Desde cuando',
+  lbl_toma: 'Toma',
+  check_laxantes: 'Laxantes',
+  check_diureticos: 'Diureticos',
+  check_antiacidos:'Antiacidos',
+  check_analgesicos: 'Analgesicos',
+  lbl_practica_cirujia: 'Le han practicado alguna cirugia',
+  lbl_obesidad: 'Obecidad',
+  lbl_diabetes: 'Diabetes',
+  lbl_ta: 'TA',
+  lbl_cancer:'Cancer',
+  lbl_hipercolesterolemia: 'Hipercolesterolemia',
+  lbl_hipertrigeceridemia: 'Hipertrigliceridemia',
+  lbl_hipotiroidismo: 'Hipotiroidismo',
+
+
 
   //mensajes validaciones
   lbl_solo_numeros:'Solo puede ingresar números',

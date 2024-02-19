@@ -1,3 +1,5 @@
+import { ThemePalette } from "@angular/material/core";
+
 export interface Paises{
   id:number;
   codigo:number;
@@ -50,4 +52,11 @@ export interface ListaAnamnesis{
   arreglo?:any[];
   longitudCampoDB:number;
   valores?:ListaAnamnesis[];
+}
+
+export interface Task {
+  name: string;
+  completed: boolean;
+  color: ThemePalette;
+  subtasks?: Task[];
 }

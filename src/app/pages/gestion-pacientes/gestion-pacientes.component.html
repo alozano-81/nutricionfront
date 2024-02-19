@@ -290,7 +290,15 @@
         [backgroundColor]="'primary'"
       >
         <div *ngFor="let pes of pestanas.subtasks; let i = index">
+
+
           <mat-tab *ngIf="pes.mostrar">
+            <div *ngIf="pes.nombrePestana == 'indicadoresclinicos'">
+
+              <app-gestion-indicadores-clinicos>
+
+              </app-gestion-indicadores-clinicos>
+            </div>
             <ng-template mat-tab-label>
               <mat-icon class="example-tab-icon">{{ pes.icono }}</mat-icon>
               {{ pes.name }}
@@ -377,7 +385,7 @@
                                 : campoMaximo)
                             "
                             align="end"
-                            >{{ max.value?.length || 0 }}/{{
+                            >{{ max.value || 0 }}/{{
                               listaFormG.longitudCampoDB != 0
                                 ? listaFormG.longitudCampoDB
                                 : campoMaximo

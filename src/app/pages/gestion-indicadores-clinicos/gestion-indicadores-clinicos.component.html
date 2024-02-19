@@ -1,0 +1,101 @@
+<mat-card-content>
+  <mat-card-header class="mat_card_header">
+    <div mat-card-avatar>
+      <mat-icon matTooltip="{{ problemasActuales }}">table_chart</mat-icon>
+    </div>
+    <mat-card-title
+      ><strong>{{ lbl_antecedentesIndCli }}</strong></mat-card-title
+    >
+  </mat-card-header>
+  <mat-card>
+    <mat-card-subtitle></mat-card-subtitle>
+    <mat-card-content>
+      <section class="example-section">
+        <span class="example-list-section">
+          <form
+            [formGroup]="formIndicadoresClinicos"
+            class="form"
+            (ngSubmit)="enviarDatos()"
+            id="{{ idForm }}"
+            novalidate
+          >
+            <ul>
+              <li
+                *ngFor="let subtask of listProblemasActuales.subtasks"
+                class="vertical"
+              >
+                <div class="row">
+                  <div class="col-6">
+                    <mat-checkbox
+                      formControlName="problemasactuales"
+                      [(ngModel)]="subtask.completed"
+                      [color]="subtask.color"
+                      (click)="enviarDatos()"
+                    >
+                      {{ subtask.name }}
+                    </mat-checkbox>
+                  </div>
+                  <div class="col-6">
+                    <mat-form-field
+                      *ngIf="subtask.name == 'Deposicion' && subtask.completed"
+                      class="example-full-width"
+                      appearance="outline"
+                    >
+                      <mat-label>t</mat-label>
+                      <mat-select
+                        required="false"
+                        formControlName="deposicion"
+                        name="miselectdeps"
+                      >
+                        <ng-container>
+                          <mat-option selected>Seleccione</mat-option>
+                          <mat-option
+                            (click)="seleccionarFiltros(item)"
+                            *ngFor="let item of arregloVecesDeposicion"
+                            [value]="item.codigo"
+                          >
+                            {{ item.nombre }}
+                          </mat-option>
+                        </ng-container>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="row">
+              <div class="col-6">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Dentadura</mat-label>
+                  <input
+                    matInput
+                    #campoDen
+                    #max
+                    formControlName="dentadura"
+                    maxlength="3"
+                    required="true"
+                    readonly="false"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Otros</mat-label>
+                  <input
+                    matInput
+                    #campoDe
+                    #max
+                    formControlName="otros"
+                    maxlength="3"
+                    required="true"
+                    readonly="false"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+        </span>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</mat-card-content>

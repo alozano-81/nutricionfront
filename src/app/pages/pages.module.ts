@@ -22,6 +22,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { GestionIndicadoresClinicosComponent } from './gestion-indicadores-clinicos/gestion-indicadores-clinicos.component';
 //import { NgSelectModule } from '@ng-select/ng-select';
 import { DataTablesModule } from 'angular-datatables';
 //import { NgxMaskModule } from 'ngx-mask';
@@ -42,53 +43,54 @@ import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.co
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
 @NgModule({
-  declarations: [
-    TemplateComponent,
-    PagesComponent,
-    GestionLoginComponent,
-    GenerarTurnosComponent,
-    SpinerComponent,
-    GestionPrincipalComponent,
-    GestionUsuariosComponent,
-    GestionPacientesComponent
-  ],
-  imports: [
-    CommonModule,
-    //ComponentsModule,
-    PagesRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatCardModule,
-    MatSelectModule,
-    //NgSelectModule,
-    MatFormFieldModule,
-    MatGridListModule,
-    MatCheckboxModule,
-    MatButtonToggleModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatDividerModule,
-    HttpClientModule,
-    DataTablesModule,
-    ToastrModule.forRoot(),
-    MatIconModule,
-    MatTooltipModule,
-    MatBottomSheetModule,
-    MatDialogModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    NgxSpinnerModule,
-    //NgxMaskModule.forRoot(),
-    MatProgressBarModule,
-    MatExpansionModule,
-    MatTabsModule,
-    MatSlideToggleModule,
-    MatListModule,
-    MatDatepickerModule,
-    MatToolbarModule
-  ],
-  exports: [TemplateComponent],
+    declarations: [
+        TemplateComponent,
+        PagesComponent,
+        GestionLoginComponent,
+        GenerarTurnosComponent,
+        SpinerComponent,
+        GestionPrincipalComponent,
+        GestionUsuariosComponent,
+        GestionPacientesComponent,
+        GestionIndicadoresClinicosComponent
+    ],
+    exports: [TemplateComponent],
+    imports: [
+        CommonModule,
+        //ComponentsModule,
+        PagesRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatCardModule,
+        MatSelectModule,
+        //NgSelectModule,
+        MatFormFieldModule,
+        MatGridListModule,
+        MatCheckboxModule,
+        MatButtonToggleModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatDividerModule,
+        HttpClientModule,
+        DataTablesModule,
+        ToastrModule.forRoot(),
+        MatIconModule,
+        MatTooltipModule,
+        MatBottomSheetModule,
+        MatDialogModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatProgressSpinnerModule,
+        NgxSpinnerModule,
+        //NgxMaskModule.forRoot(),
+        MatProgressBarModule,
+        MatExpansionModule,
+        MatTabsModule,
+        MatSlideToggleModule,
+        MatListModule,
+        MatDatepickerModule,
+        MatToolbarModule
+    ]
 })
 export class PagesModule {}

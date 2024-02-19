@@ -92,6 +92,35 @@ export class ServiciosService {
     });
   }
 
+    /**
+   * Formulario para llenar el indicadores clinicos
+   */
+  cargarDatosIndicadoresClinicos(): FormGroup{
+    return this.formularioHistorialAmnesis.group({
+      id: [''],
+      idPaciente: [''],
+      problemasactuales: [''],
+      deposicion: [''],
+      dentadura: [''],
+      otros: [''],
+      observaciones: [''],
+      enfermedad_diagnosticada: [''],
+      enfermedad_importante: [''],
+      medicamento: [''],
+      dosis: [''],
+      desdecuandodosis: [''],
+      toma: [''],
+      antecedente_familiares: [],
+      obecidad: [''],
+      diabetes: [''],
+      ta:[''],
+      cancer:[''],
+      hipercolesterolemia: [''],
+      hipertrigeceridemia: [''],
+      hipotiroidismo: [''],
+    });
+  }
+
   //******************************servicios
   getUsuariosTodos() {
     let url = `${environment.urlListaUsuarios}`;
