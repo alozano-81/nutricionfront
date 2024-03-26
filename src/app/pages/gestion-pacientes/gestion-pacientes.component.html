@@ -15,8 +15,7 @@
             [matTooltipPosition]="'below'"
             >keyboard_backspace</mat-icon
           >
-          <mat-icon>account_circle</mat-icon
-          >
+          <mat-icon>account_circle</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div>
@@ -80,6 +79,7 @@
                   class="example-radio-button"
                   *ngFor="let cont of listaSex"
                   [value]="cont"
+                  (click)="modificaTest(cont)"
                 >
                   {{ cont }}
                 </mat-radio-button>
@@ -107,6 +107,28 @@
             </div>
 
             <div class="col">
+              <mat-form-field>
+                <mat-label>Estado Civil</mat-label>
+                <mat-select
+                  formControlName="estadoCivil"
+                  placeholder="Estado Civil"
+                >
+                  <mat-option
+                    style="z-index: 99999"
+                    *ngFor="let estc of estadosCivil"
+                    [value]="estc.codigo"
+                    >{{ estc.nombre }}
+                  </mat-option>
+                </mat-select>
+                <mat-error
+                  *ngIf="formRegistro.controls['estadoCivil'].errors?.required"
+                >
+                  <span> Se debe seleccionar una estado civil </span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col">
               <mat-form-field color="accent">
                 <mat-label>Fecha Nacimiento</mat-label>
                 <input
@@ -115,13 +137,17 @@
                   matInput
                   [matDatepicker]="picker1"
                   formControlName="fechaNacimiento"
+                  [(ngModel)]="age"
                 />
                 <mat-datepicker-toggle
                   matSuffix
                   [for]="picker1"
                 ></mat-datepicker-toggle>
-                <mat-datepicker #picker1 color="primary"></mat-datepicker>
-
+                <mat-datepicker
+                  #picker1
+                  color="primary"
+                  (closed)="calcularEdad()"
+                ></mat-datepicker>
                 <mat-error
                   *ngIf="
                     formRegistro.controls['fechaNacimiento'].errors?.required
@@ -130,7 +156,9 @@
                   Se debe seleccionar una fecha
                 </mat-error>
               </mat-form-field>
+              <p *ngIf="age">Tu edad es: {{ edadcalculada }} años</p>
             </div>
+
             <div class="col">
               <mat-form-field class="example-full-width">
                 <mat-label>Correo Electrónico</mat-label>
@@ -245,6 +273,166 @@
           </button>
         </div>
       </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Informacion Pacientes </mat-panel-title>
+        <mat-panel-description>
+          Varios
+          <mat-icon>map</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-tab-group
+        mat-stretch-tabs
+        [color]="'primary'"
+        [backgroundColor]="'primary'"
+      >
+        <div *ngFor="let pes of pestanas.subtasks; let i = index">
+
+
+          <mat-tab *ngIf="pes.mostrar">
+            <div *ngIf="pes.nombrePestana == 'indicadoresclinicos'">
+
+              <app-gestion-indicadores-clinicos>
+
+              </app-gestion-indicadores-clinicos>
+            </div>
+            <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon">{{ pes.icono }}</mat-icon>
+              {{ pes.name }}
+            </ng-template>
+            <br />
+            <span class="example-list-section">
+              <form
+                [formGroup]="formularioAnamnesisGeneral"
+                class="form"
+                (submit)="enviarDatos()"
+                id="{{ idFormAnamnesis }}"
+                novalidate
+              >
+                <ul>
+                  <li
+                    *ngFor="
+                      let listaFormG of datosAnamnesis.valores;
+                      let ind = index
+                    "
+                  >
+                    <div
+                      class="row"
+                      *ngIf="
+                        listaFormG.nombrePestana == pes.nombrePestana &&
+                        listaFormG.campo != ''
+                      "
+                    >
+                      <div class="col-md-12">
+                        <mat-form-field
+                          *ngIf="
+                            listaFormG.campo != '' &&
+                            listaFormG.nombrePestana == pes.nombrePestana &&
+                            listaFormG.tipocampoform === 'input'
+                          "
+                          class="example-full-width"
+                          appearance="outline"
+                          hintLabel="{{
+                            listaFormG.campo == 'motivo'
+                              ? lbl_max_caracteres + campoMaximo
+                              : ''
+                          }}"
+                        >
+                          <mat-label>{{ listaFormG.name }}</mat-label>
+                          <input
+                            matInput
+                            #listaFormG.campo
+                            #max
+                            formControlName="{{ listaFormG.campo }}"
+                            maxlength="{{
+                              listaFormG.longitudCampoDB != 0
+                                ? listaFormG.longitudCampoDB
+                                : campoMaximo
+                            }}"
+                            required="{{ listaFormG.completed }}"
+                            readonly="{{
+                              (listaFormG.campo != 'nu_tele' ? false : true) ||
+                                (listaFormG.campo != 'de_emai'
+                                  ? false
+                                  : true) ||
+                                (listaFormG.campo != 'de_dire'
+                                  ? false
+                                  : true) ||
+                                (listaFormG.campo != 'cd_ciud'
+                                  ? false
+                                  : true) ||
+                                (listaFormG.campo != 'correopersonasolicito'
+                                  ? false
+                                  : true) ||
+                                (listaFormG.campo != 'cd_logi_soli'
+                                  ? false
+                                  : true)
+                            }}"
+                            (keypress)="
+                              validateFormat($event, listaFormG.campo)
+                            "
+                            (paste)="validateFormat($event, listaFormG.campo)"
+                          />
+
+                          <mat-hint
+                            *ngIf="
+                              listaFormG.campo &&
+                              (listaFormG.longitudCampoDB != 0
+                                ? listaFormG.longitudCampoDB
+                                : campoMaximo)
+                            "
+                            align="end"
+                            >{{ max.value || 0 }}/{{
+                              listaFormG.longitudCampoDB != 0
+                                ? listaFormG.longitudCampoDB
+                                : campoMaximo
+                            }}</mat-hint
+                          >
+                          <mat-error
+                            *ngIf="
+                              formularioAnamnesisGeneral.controls[
+                                listaFormG.campo
+                              ].errors?.required
+                            "
+                          >
+                            <p style="color: F44336">
+                              {{ lbl_debe_ingresar }}
+                            </p>
+                          </mat-error>
+                          <mat-error
+                            *ngIf="
+                              (listaFormG.campo == 'nu_nit_prov' ||
+                                listaFormG.campo == 'nu_nit_clie') &&
+                              formularioAnamnesisGeneral.controls[
+                                listaFormG.campo
+                              ].errors?.pattern
+                            "
+                          >
+                            <span>{{ lbl_solo_numeros }}</span>
+                          </mat-error>
+                          <mat-error
+                            *ngIf="
+                              listaFormG.campo == 'correopersonasolicito' &&
+                              formularioAnamnesisGeneral.controls[
+                                listaFormG.campo
+                              ].errors?.email
+                            "
+                          >
+                            <span>{{ lbl_msn_formato_incorrecto }}</span>
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </form>
+            </span>
+          </mat-tab>
+        </div>
+      </mat-tab-group>
     </mat-expansion-panel>
 
     <mat-expansion-panel>

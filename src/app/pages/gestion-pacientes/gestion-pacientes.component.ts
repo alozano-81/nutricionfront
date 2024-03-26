@@ -4,7 +4,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { Router } from '@angular/router';
@@ -14,7 +14,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import {
+  EstadosCivil,
+  ListaAnamnesis,
   Paises,
+  Pestanas,
   RegistrarPacientes,
 } from 'src/app/models/Parametrizacion-model';
 import { ServiciosService } from 'src/app/services/servicios.service';
@@ -24,17 +27,22 @@ import Swal from 'sweetalert2';
   selector: 'app-gestion-pacientes',
   templateUrl: './gestion-pacientes.component.html',
   styleUrls: ['./gestion-pacientes.component.scss'],
+ // encapsulation: ViewEncapsulation.None
 })
 export class GestionPacientesComponent implements OnInit, OnDestroy {
   formRegistro: any;
   habilitarBotonCrear: boolean = false;
   habilitarBotonActualizar: boolean = false;
   paises: Paises[] = [];
+  estadosCivil: EstadosCivil[] = [];
   selected: any;
   public sex: string = '';
   public listaSex: string[] = ['Masculino', 'Femenino'];
   listPacientes: RegistrarPacientes[] = [];
   matAcordionTabla: boolean = false;
+
+  public lbl_debe_ingresar:string = environment.lbl_debe_ingresar;
+  public lbl_msn_formato_incorrecto:string = environment.lbl_componente_obligatorio_email;
 
   @ViewChild('panel1')
   firstPanel!: MatExpansionPanel;
@@ -44,7 +52,10 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   customExpandedHeight: string = '40px';
 
   idForm: string = 'idForm';
+  idFormAnamnesis: string = 'idFormAnamnesis';
   atras: string = environment.atras;
+  edadcalculada:any;
+  age:any;
 
   @Output()
   cerrarModalPaciente: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -58,6 +69,51 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   dtElements: any = DataTableDirective;
   isDtInitializeds: boolean = false;
 
+  formularioAnamnesisGeneral: any;
+
+  pestanas: Pestanas = {
+    name: 'Indeterminate',
+    completed: false,
+    nombrePestana: 'N',
+    mostrar: false,
+    icono: 'x',
+    subtasks: [
+      { name: environment.lbl_objetivos, completed: false, nombrePestana: environment.lbl_pestana_objetivos, mostrar: true, icono: environment.pestana_objetivos },
+      { name: environment.lbl_indicadoresClinicos, completed: false, nombrePestana: environment.lbl_pestana_indicadoresClinicos, mostrar: true, icono: environment.pestana_indicadores_clinicos },
+      { name: environment.lbl_aspectosGinecologicos, completed: false,  nombrePestana: environment.lbl_pestana_aspectosGinecologicos, mostrar: false, icono: environment.pestana_aspectos_ginecologicos },
+      { name: environment.lbl_estiloVida, completed: false,  nombrePestana: environment.lbl_pestana_estiloVida, mostrar: true, icono: environment.pestana_estilo_vida },
+      { name: environment.lbl_indicadoresBiomedicos, completed: false,  nombrePestana: environment.lbl_pestana_indicadoresBiomedicos, mostrar: true, icono: environment.pestana_x },
+      { name: environment.lbl_indicadoresDieteticos, completed: false,  nombrePestana: environment.lbl_pestana_indicadoresDieteticos, mostrar: true, icono: environment.pestana_x },
+      { name: environment.lbl_frecuenciaConsumoAlimentos, completed: false,  nombrePestana: environment.lbl_pestana_frecuenciaConsumoAlimentos, mostrar: true, icono: environment.pestana_x },
+      { name: environment.lbl_recordatorio24Horas, completed: false, nombrePestana: environment.lbl_pestana_recordatorio24Horas, mostrar: true, icono: environment.pestana_x},
+      { name: environment.lbl_indicadoresAntropometricos, completed: false, nombrePestana: environment.lbl_pestana_indicadoresAntropometricos, mostrar: true, icono: environment.pestana_x},
+      { name: environment.lbl_interpretacionDatos, completed: false, nombrePestana: environment.lbl_pestana_interpretacionDatos, mostrar: true, icono: environment.pestana_x}
+    ],
+  };
+
+  lista:any [] =[];
+  campoMaximo:number = 40;
+  //mensajes validator del formulario
+  public lbl_solo_numeros:string = environment.lbl_solo_numeros;
+  public lbl_max_caracteres:string = environment.lbl_max_caracteres;
+
+
+  datosAnamnesis: ListaAnamnesis =  {
+    name: 'Indeterminate',
+    nombrePestana:'N',
+    completed: environment.lbl_completed,
+    tabla:'',
+    campo:'',
+    tipocampoform:'',
+    arreglo: [],
+    longitudCampoDB:0,
+    valores: [
+      { name: environment.lbl_form_anam_motivo, completed:environment.lbl_completed,nombrePestana: environment.lbl_pestana_objetivos, tabla:'',campo: 'motivo', tipocampoform: 'input',arreglo:this.lista, longitudCampoDB:0 }
+    ],
+  };
+
+
+
   constructor(
     public services: ServiciosService,
     private modal: NgbModal,
@@ -69,15 +125,18 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.habilitarBotonCrear = true;
     this.formRegistro = this.services.cargarFormRegistroPacientes();
+    this.formularioAnamnesisGeneral = this.services.cargarDatosAnamnesisPaciente();
     if (localStorage.getItem('creado') == 'ok') {
       localStorage.removeItem('creado');
       this.getPaises();
+      this.getEstadosCivil();
       //this.getListPacientes();
     } else {
       this.services.validarSesion(localStorage.getItem('token')).subscribe(
         (result: any) => {
           console.log('verr: ', result);
           this.getPaises();
+          this.getEstadosCivil();
           this.getListPacientes();
           this.toastr.success(result.status);
         },
@@ -108,6 +167,24 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
         console.log(result);
         this.paises = result;
         console.log(this.paises);
+      },
+      (error) => {
+        console.log('nok');
+        console.log(error);
+      }
+    );
+  }
+
+  /**
+   * carga la lista de estados civil
+   */
+  getEstadosCivil() {
+    this.services.getEstadoCivil().subscribe(
+      (result) => {
+        console.log('ok');
+        console.log(result);
+        this.estadosCivil = result;
+        console.log(this.estadosCivil);
       },
       (error) => {
         console.log('nok');
@@ -307,6 +384,19 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
 
   }
 
+  calcularEdad(){
+    if(this.age){
+      //const convertAge = new Date(this.age);
+      if(Date.now() < (this.formRegistro.get('fechaNacimiento').value).getTime()){
+        this.edadcalculada = 0;
+      }else{
+        const timeDiff = Math.abs(Date.now() - (this.formRegistro.get('fechaNacimiento').value).getTime());
+        this.edadcalculada = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
+      }
+
+    }
+  }
+
   /**Opciones español datatable */
   viewDateTableEspanol() {
     this.dtOptions = {
@@ -336,5 +426,54 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
 
   regresar() {
     this.router.navigate(['/', 'gestion-principal']);
+  }
+
+  modificaTest(t:any){
+    if(t == 'Femenino'){
+     for(let r in this.pestanas.subtasks){
+      this.pestanas.subtasks[2].mostrar = true;
+     }
+    }
+
+    if(t == 'Masculino'){
+      for(let r in this.pestanas.subtasks){
+       this.pestanas.subtasks[2].mostrar = false;
+      }
+     }
+  }
+
+  //enviar datos
+  enviarDatos(){
+
+  }
+
+   // validar campos numeros
+   validateFormat(event:any,campo:string) {
+   /* if(campo == environment.lbl_campo_nu_nit_prov || campo == environment.lbl_campo_nu_nit_clie || campo == environment.lbl_campo_pc_rete_iva || campo == environment.lbl_campo_nu_cta_banc
+      || campo == environment.lbl_campo_ct_plaz_pago
+      ){
+      let key;
+      const regexPaste = /[^0-9]+/g;
+      if(campo == environment.lbl_campo_nu_nit_prov || campo == environment.lbl_campo_nu_nit_clie || campo == environment.lbl_campo_pc_rete_iva || campo == environment.lbl_campo_nu_cta_banc
+        || campo == environment.lbl_campo_ct_plaz_pago
+        ){
+      if (event.type === 'paste') {
+          key = event.clipboardData.getData('text/plain');
+          key = key.replaceAll(regexPaste, "");
+          key = this.formularioLlenarParametros.get(campo).setValue(key);
+      } else {
+          key = event.keyCode;
+          key = String.fromCharCode(key);
+      }
+      const regex = /[0-9]|\./;
+      if (! regex.test(key)) {
+          event.returnValue = false;
+          if (event.preventDefault) {
+              event.preventDefault();
+          }
+      }
+     }
+    }*/
+
   }
 }

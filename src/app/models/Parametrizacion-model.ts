@@ -1,4 +1,12 @@
+import { ThemePalette } from "@angular/material/core";
+
 export interface Paises{
+  id:number;
+  codigo:number;
+  nombre:string;
+}
+
+export interface EstadosCivil{
   id:number;
   codigo:number;
   nombre:string;
@@ -23,4 +31,39 @@ export class UserDTO {
   roless: any[] = [];
   idRol: any[] = [];
 
+}
+
+export interface Pestanas {
+  name: string;
+  completed: boolean;
+  nombrePestana: string;
+  mostrar:boolean;
+  icono: string;
+  subtasks?: Pestanas[];
+}
+
+export interface ListaAnamnesis{
+  name: string;
+  completed: string;
+  nombrePestana:string;
+  tabla:string;
+  campo:string;
+  tipocampoform:string;
+  arreglo?:any[];
+  longitudCampoDB:number;
+  valores?:ListaAnamnesis[];
+}
+
+export interface ProblemasActuales {
+  name: string;
+  completed: boolean;
+  color: ThemePalette;
+  subtasks?: ProblemasActuales[];
+}
+
+export interface Toma {
+  name: string;
+  completed: boolean;
+  color: ThemePalette;
+  subtasks?: Toma[];
 }
