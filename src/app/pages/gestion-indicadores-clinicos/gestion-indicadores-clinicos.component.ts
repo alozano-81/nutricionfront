@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { Task } from 'src/app/models/Parametrizacion-model';
+import { ProblemasActuales, Toma } from 'src/app/models/Parametrizacion-model';
 import { ServiciosService } from 'src/app/services/servicios.service';
 import { environment } from 'src/environments/environment';
 
@@ -63,8 +63,9 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
   public lbl_hipercolesterolemia: string = environment.lbl_hipercolesterolemia;
   public lbl_hipertrigeceridemia: string = environment.lbl_hipertrigeceridemia;
   public lbl_hipotiroidismo: string = environment.lbl_hipotiroidismo;
+  public lbl_cirujia: string = environment.lbl_cirujia;
 
-  listProblemasActuales: Task = {
+  listProblemasActuales: ProblemasActuales = {
     name: 'Indeterminate',
     completed: false,
     color: 'primary',
@@ -86,6 +87,30 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
       { name: environment.check_Pirosis, completed: false, color: 'primary' },
       { name: environment.check_Vomito, completed: false, color: 'primary' },
       { name: environment.check_Colitis, completed: false, color: 'primary' },
+    ],
+  };
+
+  listTomas: Toma = {
+    name: 'Indeterminate',
+    completed: false,
+    color: 'primary',
+    subtasks: [
+      { name: environment.check_laxantes, completed: false, color: 'primary' },
+      {
+        name: environment.check_diureticos,
+        completed: false,
+        color: 'primary',
+      },
+      {
+        name: environment.check_antiacidos,
+        completed: false,
+        color: 'primary',
+      },
+      {
+        name: environment.check_analgesicos,
+        completed: false,
+        color: 'primary',
+      },
     ],
   };
 
@@ -114,10 +139,23 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
         console.log(this.listProblemasActuales.subtasks);
       }
     });
+
+    console.log('==listTomas=> ', this.listTomas.subtasks);
   }
-  seleccionarFiltros(subtask: any) {
+
+  validaMed: boolean = false;
+  validaCirujia: boolean = false;
+  seleccionarFiltros(evento: any, tipo: string) {
     console.log('llega');
-    console.log(subtask);
-    console.log(this.formIndicadoresClinicos);
+    console.log(evento.value);
+
+    if (tipo === 'medicamento') {
+      this.validaMed = evento.value;
+    }
+    if (tipo === 'cirujia') {
+      this.validaCirujia = evento.value;
+    }
+
+    //console.log(this.formIndicadoresClinicos);
   }
 }

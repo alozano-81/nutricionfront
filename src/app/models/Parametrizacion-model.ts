@@ -54,9 +54,16 @@ export interface ListaAnamnesis{
   valores?:ListaAnamnesis[];
 }
 
-export interface Task {
+export interface ProblemasActuales {
   name: string;
   completed: boolean;
   color: ThemePalette;
-  subtasks?: Task[];
+  subtasks?: ProblemasActuales[];
+}
+
+export interface Toma {
+  name: string;
+  completed: boolean;
+  color: ThemePalette;
+  subtasks?: Toma[];
 }

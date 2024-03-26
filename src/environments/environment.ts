@@ -120,6 +120,7 @@ export const environment = {
   lbl_hipercolesterolemia: 'Hipercolesterolemia',
   lbl_hipertrigeceridemia: 'Hipertrigliceridemia',
   lbl_hipotiroidismo: 'Hipotiroidismo',
+  lbl_cirujia: 'Cirujía',
 
 
 

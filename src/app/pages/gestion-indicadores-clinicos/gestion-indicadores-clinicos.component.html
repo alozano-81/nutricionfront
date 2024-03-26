@@ -50,7 +50,7 @@
                         <ng-container>
                           <mat-option selected>Seleccione</mat-option>
                           <mat-option
-                            (click)="seleccionarFiltros(item)"
+                            (click)="seleccionarFiltros(item,'')"
                             *ngFor="let item of arregloVecesDeposicion"
                             [value]="item.codigo"
                           >
@@ -77,6 +77,16 @@
                     readonly="false"
                   />
                 </mat-form-field>
+
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Observaciones</mat-label>
+                  <textarea matInput
+                  formControlName="observaciones"
+                            cdkTextareaAutosize
+                            #autosize="cdkTextareaAutosize"
+                            cdkAutosizeMinRows="1"
+                            cdkAutosizeMaxRows="5"></textarea>
+                </mat-form-field>
               </div>
               <div class="col-6">
                 <mat-form-field class="example-full-width" appearance="outline">
@@ -91,8 +101,156 @@
                     readonly="false"
                   />
                 </mat-form-field>
+
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>{{lbl_enfermedad_diagnosticada}}</mat-label>
+                  <input
+                    matInput
+                    #campoEnfDiag
+                    #max
+                    formControlName="enfermedad_diagnosticada"
+                    required="true"
+                    readonly="false"
+                  />
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>{{lbl_enfermedad_importantes}}</mat-label>
+                  <input
+                    matInput
+                    #campoEnfImp
+                    #max
+                    formControlName="enfermedad_importante"
+                    required="true"
+                    readonly="false"
+                  />
+                </mat-form-field>
+
+
+                <div class="col-md-6">
+                  <mat-label>{{ lbl_toma_medicamento }}</mat-label>
+                </div>
+                <div class="col-md-6">
+                  <mat-button-toggle-group
+                    name="sino"
+                    appearance="legacy"
+                    name="fontStyle"
+                    aria-label="Font Style"
+                    [value]="false"
+                    (change)="seleccionarFiltros($event,'medicamento')"
+                  >
+                    <mat-button-toggle
+                      [value]="true"
+                      matTooltip="{{ lbl_toma_medicamento }}"
+                      >SI</mat-button-toggle
+                    >
+                    <mat-button-toggle
+                      [value]="false"
+                      matTooltip="{{ lbl_toma_medicamento }}"
+                      >NO</mat-button-toggle
+                    >
+                  </mat-button-toggle-group>
+                </div>
+
+                <mat-form-field *ngIf="validaMed"
+                class="example-full-width" appearance="outline">
+                  <mat-label>Cual</mat-label>
+                  <input
+                    matInput
+                    #campoMedicamento
+                    #max
+                    formControlName="medicamento"
+                    required="true"
+                    readonly="false"
+                  />
+                </mat-form-field>
+                <mat-form-field *ngIf="validaMed"
+                class="example-full-width" appearance="outline">
+                  <mat-label>{{lbl_dosis}}</mat-label>
+                  <input
+                    matInput
+                    #campoMedicamento
+                    #max
+                    formControlName="dosis"
+                    required="true"
+                    readonly="false"
+                  />
+                </mat-form-field>
+
+                <mat-form-field *ngIf="validaMed"
+                class="example-full-width" appearance="outline">
+                  <mat-label>{{lbl_desde_cuando}}</mat-label>
+                  <input
+                    matInput
+                    #campoMedicamento
+                    #max
+                    formControlName="desdecuandodosis"
+                    required="true"
+                    readonly="false"
+                  />
+                </mat-form-field>
               </div>
             </div>
+
+            <ul>
+              <li
+                *ngFor="let subtask of listTomas.subtasks"
+                class="vertical"
+              >
+                <div class="row">
+                  <div class="col-6">
+                    <mat-checkbox
+                      formControlName="toma"
+                      [(ngModel)]="subtask.completed"
+                      [color]="subtask.color"
+                      (click)="enviarDatos()"
+                    >
+                      {{ subtask.name }}
+                    </mat-checkbox>
+                  </div>
+
+                </div>
+              </li>
+            </ul>
+
+            <div class="col-md-6">
+              <mat-label>{{ lbl_cirujia }}</mat-label>
+            </div>
+            <div class="col-md-6">
+              <mat-button-toggle-group
+                name="sino"
+                appearance="legacy"
+                name="fontStyle"
+                aria-label="Font Style"
+                [value]="false"
+                (change)="seleccionarFiltros($event,'cirujia')"
+              >
+                <mat-button-toggle
+                  [value]="true"
+                  matTooltip="{{ lbl_cirujia }}"
+                  >SI</mat-button-toggle
+                >
+                <mat-button-toggle
+                  [value]="false"
+                  matTooltip="{{ lbl_cirujia }}"
+                  >NO</mat-button-toggle
+                >
+              </mat-button-toggle-group>
+            </div>
+
+            <mat-form-field *ngIf="validaCirujia"
+            class="example-full-width" appearance="outline">
+              <mat-label>Cual</mat-label>
+              <input
+                matInput
+                #campoCirujia
+                #max
+                formControlName="cirujia"
+                required="true"
+                readonly="false"
+              />
+            </mat-form-field>
+
           </form>
         </span>
       </section>

@@ -111,6 +111,7 @@ export class ServiciosService {
       desdecuandodosis: [''],
       toma: [''],
       antecedente_familiares: [],
+      cirujia: [''],
       obecidad: [''],
       diabetes: [''],
       ta:[''],
