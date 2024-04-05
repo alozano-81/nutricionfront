@@ -88,6 +88,7 @@ export const environment = {
   lbl_completed:'f',
   lbl_antecedentes: 'Antecedentes Salu/Enfermedad',
   lbl_problemas_actuales: 'Problemas actuales',
+  lbl_antecedentes_familiares: 'Antecedentes familiares',
 
   //etiquetas antecedentes
   check_diarrea: 'Diarrea',
@@ -121,6 +122,13 @@ export const environment = {
   lbl_hipertrigeceridemia: 'Hipertrigliceridemia',
   lbl_hipotiroidismo: 'Hipotiroidismo',
   lbl_cirujia: 'Cirujía',
+  check_obesidad: 'Obesidad',
+  check_Diabetes: 'Diabetes',
+  check_TA: 'TA',
+  check_Cancer: 'Cáncer',
+  check_hipercolesterolemia: 'Hipercolesterolemia',
+  check_hipertrigeceridemia: 'Hipertrigliceridemia',
+  check_hipotiroidismo: 'Hipotiroidismo',
 
 
 
