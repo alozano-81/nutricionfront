@@ -10,6 +10,7 @@ export const environment = {
   productionServidor: 'saludnutriciontest.000webhostapp.com',
   urlProxy2: 'http://localhost:4200/autenticacion-login',
   urlProxy: '/autenticacion-login',
+  urlTunelLocal: 'https://4qjxjq2d-8083.use.devtunnels.ms',
 
   urlApi: 'http://localhost:8085/api/tecnica/entrar',
   urlApivalidacionSesion: 'http://localhost:8083/api/auth/usersesion/validar-sesion',
