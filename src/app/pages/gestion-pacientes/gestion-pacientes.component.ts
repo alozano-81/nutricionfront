@@ -432,14 +432,14 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
     if(t == 'Femenino'){
      for(let r in this.pestanas.subtasks){
       this.pestanas.subtasks[2].mostrar = true;
-     }
+     }     
     }
 
     if(t == 'Masculino'){
       for(let r in this.pestanas.subtasks){
        this.pestanas.subtasks[2].mostrar = false;
       }
-     }
+     }    
   }
 
   //enviar datos

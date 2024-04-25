@@ -119,6 +119,18 @@ export class ServiciosService {
       hipercolesterolemia: [''],
       hipertrigeceridemia: [''],
       hipotiroidismo: [''],
+      embarazoActual: [''],
+      sdg: [''],
+      sdg_por: [''],
+      anticonceptivos_orales: [''],
+      anticonceptivos_orales_cual: [''],
+      anticonceptivos_orales_dosis: [''],
+      climaterio:[''],
+      climaterio_fecha:[''],
+      terapiaHormonal:[''],
+      terapiaHormonal_cual:[''],
+      terapiaHormonal_dosis:[''],
+
     });
   }
 

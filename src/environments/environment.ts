@@ -131,6 +131,21 @@ export const environment = {
   check_hipertrigeceridemia: 'Hipertrigliceridemia',
   check_hipotiroidismo: 'Hipotiroidismo',
 
+  //aspectos ginecologicos
+  check_Embarazo_actual: 'Embarazo actual',
+  check_anticoncentivos:'Anticonceptivos',
+  check_climaterio: 'Climaterio',
+  check_terapiaReemplazoHormonal: 'Terapia de reemplazo hormonal',
+  lbl_sdg: 'SDG',
+  lbl_sdg_por: 'Por',
+  lbl_anticoncentivos_cual: 'Cual',
+  lbl_anticoncentivos_dosis: 'Dosis',
+  lbl_climaterioFecha: 'Fecha',
+  lbl_terapiaReemplazoHormonal_cual: 'Cual',
+  lbl_terapiaReemplazoHormonal_dosis: 'Dosis',
+
+  
+
 
 
   //mensajes validaciones
