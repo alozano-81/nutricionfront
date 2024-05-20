@@ -78,7 +78,7 @@
                 <mat-radio-button
                   class="example-radio-button"
                   *ngFor="let cont of listaSex"
-                  [value]="cont"                  
+                  [value]="cont"
                   (click)="modificaTest(cont)"
                 >
                   {{ cont }}
@@ -290,11 +290,16 @@
         [backgroundColor]="'primary'"
       >
         <div *ngFor="let pes of pestanas.subtasks; let i = index">
-          <mat-tab *ngIf="pes.mostrar">            
-            <div *ngIf="pes.nombrePestana == 'indicadoresclinicos'">              
+          <mat-tab *ngIf="pes.mostrar">
+            <div *ngIf="pes.nombrePestana == 'indicadoresclinicos'">
               <app-gestion-indicadores-clinicos
               [arregloPestanaApetosGine]="sex">
               </app-gestion-indicadores-clinicos>
+            </div>
+            <div *ngIf="pes.nombrePestana == 'aspectosginecologicos'">
+              <app-gestion-aspectos-ginecologicos
+              [arregloPestanaApetosGine]="sex">
+              </app-gestion-aspectos-ginecologicos>
             </div>
             <ng-template mat-tab-label>
               <mat-icon class="example-tab-icon">{{ pes.icono }}</mat-icon>

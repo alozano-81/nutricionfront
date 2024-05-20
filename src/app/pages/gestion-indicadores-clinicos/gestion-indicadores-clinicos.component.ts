@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -16,11 +16,9 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
   formIndicadoresClinicos: any;
   idForm: string = 'idform';
   validaDeposicion: boolean = false;
-  public embarazoActual: string = '';
-  public listaEmbarazoActual: string[] = ['Si', 'No'];
-  
+
   @Input() arregloPestanaApetosGine:any;
-  
+
   /**Enviar datos al componente externo */
     @Output()
     datosGestion: EventEmitter<any[]> =
@@ -176,7 +174,7 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
     private spinner: NgxSpinnerService
   ) {}
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.formIndicadoresClinicos =
       this.services.cargarDatosIndicadoresClinicos();
       console.log('ver arre:',this.arregloPestanaApetosGine);

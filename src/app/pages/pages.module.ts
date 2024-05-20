@@ -36,6 +36,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { SpinerComponent } from './components/spiner/spiner.component';
 import { TemplateComponent } from './components/template/template.component';
 import { GenerarTurnosComponent } from './generar-turnos/generar-turnos.component';
+import { GestionAspectosGinecologicosComponent } from "./gestion-aspectos-ginecologicos/gestion-aspectos-ginecologicos.component";
 import { GestionLoginComponent } from './gestion-login/gestion-login.component';
 import { GestionPacientesComponent } from './gestion-pacientes/gestion-pacientes.component';
 import { GestionPrincipalComponent } from './gestion-principal/gestion-principal.component';
@@ -52,7 +53,9 @@ import { PagesComponent } from './pages.component';
         GestionPrincipalComponent,
         GestionUsuariosComponent,
         GestionPacientesComponent,
-        GestionIndicadoresClinicosComponent
+        GestionIndicadoresClinicosComponent,
+        GestionAspectosGinecologicosComponent
+
     ],
     exports: [TemplateComponent],
     imports: [
@@ -90,7 +93,7 @@ import { PagesComponent } from './pages.component';
         MatSlideToggleModule,
         MatListModule,
         MatDatepickerModule,
-        MatToolbarModule
+        MatToolbarModule,
     ]
 })
 export class PagesModule {}

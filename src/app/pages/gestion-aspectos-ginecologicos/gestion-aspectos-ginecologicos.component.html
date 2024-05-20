@@ -1,0 +1,21 @@
+<div class="row" >
+  <div class="col">
+    <label id="example-radio-group-label">Sexo</label>
+    <mat-radio-group
+      formControlName="embarazoActual"
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+      [(ngModel)]="embarazoActual"
+    >
+      <mat-radio-button
+        class="example-radio-button"
+        *ngFor="let cont of listaEmbarazoActual"
+        [value]="cont"
+
+      >
+        {{ cont }}
+      </mat-radio-button>
+    </mat-radio-group>
+    <div>Seleccione uno</div>
+  </div>
+</div>

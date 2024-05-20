@@ -30,6 +30,7 @@ export class ServiciosService {
     private formularioTurnos: FormBuilder,
     private formularioCreacionUsuarios: FormBuilder,
     private formularioHistorialAmnesis: FormBuilder,
+    private formularioAspectosGinecologicos: FormBuilder,
     private http: HttpClient,
     private router: Router
   ) {}
@@ -119,7 +120,14 @@ export class ServiciosService {
       hipercolesterolemia: [''],
       hipertrigeceridemia: [''],
       hipotiroidismo: [''],
+
+    });
+  }
+
+  cargarDatosAspectosGinecologicos(): FormGroup{
+     return this.formularioAspectosGinecologicos.group({
       embarazoActual: [''],
+      edadGestacional: [''],
       sdg: [''],
       sdg_por: [''],
       anticonceptivos_orales: [''],
@@ -130,8 +138,7 @@ export class ServiciosService {
       terapiaHormonal:[''],
       terapiaHormonal_cual:[''],
       terapiaHormonal_dosis:[''],
-
-    });
+     });
   }
 
   //******************************servicios
