@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { ProblemasActuales, Toma } from 'src/app/models/Parametrizacion-model';
+import { AntecedentesFamiliares, ProblemasActuales, Toma } from 'src/app/models/Parametrizacion-model';
 import { ServiciosService } from 'src/app/services/servicios.service';
 import { environment } from 'src/environments/environment';
 
@@ -17,6 +17,13 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
   idForm: string = 'idform';
   validaDeposicion: boolean = false;
 
+  @Input() arregloPestanaApetosGine:any;
+
+  /**Enviar datos al componente externo */
+    @Output()
+    datosGestion: EventEmitter<any[]> =
+      new EventEmitter<any[]>();
+    /**Fin enviar datos al componente externo */
   //Listas generales
 
   arregloVecesDeposicion = [
@@ -64,6 +71,7 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
   public lbl_hipertrigeceridemia: string = environment.lbl_hipertrigeceridemia;
   public lbl_hipotiroidismo: string = environment.lbl_hipotiroidismo;
   public lbl_cirujia: string = environment.lbl_cirujia;
+  public lbl_antecedentes_familiares:string = environment.lbl_antecedentes_familiares;
 
   listProblemasActuales: ProblemasActuales = {
     name: 'Indeterminate',
@@ -114,6 +122,50 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
     ],
   };
 
+  listAntecedentesFAmiliares: AntecedentesFamiliares = {
+    name: 'Indeterminate',
+    completed: false,
+    color: 'primary',
+    subtasks: [
+      {name: environment.check_obesidad,
+        completed: false,
+        color: 'primary',
+      },
+
+      {name: environment.check_Diabetes,
+        completed: false,
+        color: 'primary',
+      },
+
+      {name: environment.check_TA,
+        completed: false,
+        color: 'primary',
+      },
+
+      {name: environment.check_Cancer,
+        completed: false,
+        color: 'primary',
+      },
+
+      {name: environment.check_hipercolesterolemia,
+        completed: false,
+        color: 'primary',
+      },
+
+      {name: environment.check_hipertrigeceridemia,
+        completed: false,
+        color: 'primary',
+      },
+
+      {name: environment.check_hipotiroidismo,
+        completed: false,
+        color: 'primary',
+      },
+
+
+    ],
+  };
+
   constructor(
     public services: ServiciosService,
     private modal: NgbModal,
@@ -125,6 +177,7 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.formIndicadoresClinicos =
       this.services.cargarDatosIndicadoresClinicos();
+      console.log('ver arre:',this.arregloPestanaApetosGine);
   }
 
   ngOnDestroy(): void {}

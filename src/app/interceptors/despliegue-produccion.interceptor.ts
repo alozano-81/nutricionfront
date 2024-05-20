@@ -17,7 +17,8 @@ export class DespliegueProduccionInterceptor implements HttpInterceptor {
     let httpReq:any
     if(!environment.production){
       httpReq = req.clone({
-        url: req.url.replace((req.url.search(environment.urlProxy) > -1 ? environment.urlProxy :  environment.urlLocal) , (req.url.search(environment.urlProxy) > -1 ? environment.urlProxy :  environment.urlLocal))
+        //url: req.url.replace((req.url.search(environment.urlProxy) > -1 ? environment.urlProxy :  environment.urlLocal) , (req.url.search(environment.urlProxy) > -1 ? environment.urlProxy :  environment.urlLocal))
+        url: req.url.replace(environment.urlLocal, environment.urlTunelLocal)
       });
     }else if(environment.production){
       httpReq = req.clone({

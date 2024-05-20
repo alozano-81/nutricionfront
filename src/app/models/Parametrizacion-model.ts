@@ -67,3 +67,10 @@ export interface Toma {
   color: ThemePalette;
   subtasks?: Toma[];
 }
+
+export interface AntecedentesFamiliares {
+  name: string;
+  completed: boolean;
+  color: ThemePalette;
+  subtasks?: AntecedentesFamiliares[];
+}

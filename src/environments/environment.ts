@@ -10,6 +10,7 @@ export const environment = {
   productionServidor: 'saludnutriciontest.000webhostapp.com',
   urlProxy2: 'http://localhost:4200/autenticacion-login',
   urlProxy: '/autenticacion-login',
+  urlTunelLocal: 'https://4qjxjq2d-8083.use.devtunnels.ms',
 
   urlApi: 'http://localhost:8085/api/tecnica/entrar',
   urlApivalidacionSesion: 'http://localhost:8083/api/auth/usersesion/validar-sesion',
@@ -88,6 +89,7 @@ export const environment = {
   lbl_completed:'f',
   lbl_antecedentes: 'Antecedentes Salu/Enfermedad',
   lbl_problemas_actuales: 'Problemas actuales',
+  lbl_antecedentes_familiares: 'Antecedentes familiares',
 
   //etiquetas antecedentes
   check_diarrea: 'Diarrea',
@@ -121,6 +123,28 @@ export const environment = {
   lbl_hipertrigeceridemia: 'Hipertrigliceridemia',
   lbl_hipotiroidismo: 'Hipotiroidismo',
   lbl_cirujia: 'Cirujía',
+  check_obesidad: 'Obesidad',
+  check_Diabetes: 'Diabetes',
+  check_TA: 'TA',
+  check_Cancer: 'Cáncer',
+  check_hipercolesterolemia: 'Hipercolesterolemia',
+  check_hipertrigeceridemia: 'Hipertrigliceridemia',
+  check_hipotiroidismo: 'Hipotiroidismo',
+
+  //aspectos ginecologicos
+  check_Embarazo_actual: 'Embarazo actual',
+  check_anticoncentivos:'Anticonceptivos',
+  check_climaterio: 'Climaterio',
+  check_terapiaReemplazoHormonal: 'Terapia de reemplazo hormonal',
+  lbl_sdg: 'SDG',
+  lbl_sdg_por: 'Por',
+  lbl_anticoncentivos_cual: 'Cual',
+  lbl_anticoncentivos_dosis: 'Dosis',
+  lbl_climaterioFecha: 'Fecha',
+  lbl_terapiaReemplazoHormonal_cual: 'Cual',
+  lbl_terapiaReemplazoHormonal_dosis: 'Dosis',
+
+  
 
 
 
