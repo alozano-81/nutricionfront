@@ -428,18 +428,21 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
     this.router.navigate(['/', 'gestion-principal']);
   }
 
+  validaSex: number = 0;
   modificaTest(t:any){
     if(t == 'Femenino'){
+      this.validaSex = 1;
      for(let r in this.pestanas.subtasks){
       this.pestanas.subtasks[2].mostrar = true;
-     }     
+     }
     }
 
     if(t == 'Masculino'){
+      this.validaSex = 2;
       for(let r in this.pestanas.subtasks){
        this.pestanas.subtasks[2].mostrar = false;
       }
-     }    
+     }
   }
 
   //enviar datos
