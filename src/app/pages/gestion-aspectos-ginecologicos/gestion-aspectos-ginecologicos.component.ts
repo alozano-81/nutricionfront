@@ -20,6 +20,8 @@ export class GestionAspectosGinecologicosComponent implements OnInit, OnDestroy{
   idForm: string = 'idForm';
   validaEmbActual:boolean = false;
   validaAnticonceptivo:boolean = false;
+  validaClimaterio:boolean = false;
+  validaTerapiaHormonal:boolean = false;
 
   public lbl_dosis: string = environment.lbl_dosis;
 
@@ -47,27 +49,37 @@ export class GestionAspectosGinecologicosComponent implements OnInit, OnDestroy{
   seleccionarFiltros(evento: any, tipo: string) {
     console.log('llega');
     console.log(evento.value);
+    console.log(tipo);
 
     if (evento.value && tipo == 'embarazoactual') {
       this.validaEmbActual = evento.value;
-      console.log(this.calculoGestacional());
       this.formularioAspectosGinecologicos.get('edadGestacional').setValue(this.calculoGestacional());
-
-    }else{
+    }else if(!evento.value && tipo == 'embarazoactual'){
       this.validaEmbActual = evento.value;
       this.formularioAspectosGinecologicos.get('edadGestacional').setValue('');
     }
 
     if (evento.value && tipo == 'anticonceptivooral') {
       this.validaAnticonceptivo = evento.value;
-      console.log(this.calculoGestacional());
-    }else{
+    }else if(!evento.value && tipo == 'anticonceptivooral'){
       this.validaAnticonceptivo = evento.value;
     }
 
+    if (evento.value && tipo == 'climaterio') {
+      this.validaClimaterio = evento.value;
+    }else if(!evento.value && tipo == 'climaterio'){
+      this.validaClimaterio = evento.value;
+      this.formularioAspectosGinecologicos.get('climaterio_fecha').setValue('');
+    }
 
+    if (evento.value && tipo == 'terapiahormonal') {
+      this.validaTerapiaHormonal = evento.value;
+    }else if(!evento.value && tipo == 'terapiahormonal'){
+      this.validaTerapiaHormonal = evento.value;
+      this.formularioAspectosGinecologicos.get('terapiaHormonal_cual').setValue('');
+      this.formularioAspectosGinecologicos.get('terapiaHormonal_dosis').setValue('');
+    }
 
-    //console.log(this.formIndicadoresClinicos);
   }
 
   calculoGestacional(){
