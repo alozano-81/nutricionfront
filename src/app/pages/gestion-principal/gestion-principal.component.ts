@@ -7,10 +7,11 @@ import { ServiciosService } from 'src/app/services/servicios.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-gestion-principal',
-  templateUrl: './gestion-principal.component.html',
-  styleUrls: ['./gestion-principal.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-gestion-principal',
+    templateUrl: './gestion-principal.component.html',
+    styleUrls: ['./gestion-principal.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class GestionPrincipalComponent implements OnInit {
   public formRegistro: any;

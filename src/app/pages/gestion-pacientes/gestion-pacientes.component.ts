@@ -24,10 +24,10 @@ import { ServiciosService } from 'src/app/services/servicios.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 @Component({
-  selector: 'app-gestion-pacientes',
-  templateUrl: './gestion-pacientes.component.html',
-  styleUrls: ['./gestion-pacientes.component.scss'],
- // encapsulation: ViewEncapsulation.None
+    selector: 'app-gestion-pacientes',
+    templateUrl: './gestion-pacientes.component.html',
+    styleUrls: ['./gestion-pacientes.component.scss'],
+    standalone: false
 })
 export class GestionPacientesComponent implements OnInit, OnDestroy {
   formRegistro: any;

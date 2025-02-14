@@ -7,9 +7,10 @@ import { ServiciosService } from 'src/app/services/servicios.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-gestion-aspectos-ginecologicos',
-  templateUrl: './gestion-aspectos-ginecologicos.component.html',
-  styleUrl: './gestion-aspectos-ginecologicos.component.scss'
+    selector: 'app-gestion-aspectos-ginecologicos',
+    templateUrl: './gestion-aspectos-ginecologicos.component.html',
+    styleUrl: './gestion-aspectos-ginecologicos.component.scss',
+    standalone: false
 })
 export class GestionAspectosGinecologicosComponent implements OnInit, OnDestroy{
 

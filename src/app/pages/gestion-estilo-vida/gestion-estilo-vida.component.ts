@@ -7,9 +7,10 @@ import { ServiciosService } from 'src/app/services/servicios.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-gestion-estilo-vida',
-  templateUrl: './gestion-estilo-vida.component.html',
-  styleUrl: './gestion-estilo-vida.component.scss'
+    selector: 'app-gestion-estilo-vida',
+    templateUrl: './gestion-estilo-vida.component.html',
+    styleUrl: './gestion-estilo-vida.component.scss',
+    standalone: false
 })
 export class GestionEstiloVidaComponent implements OnInit, OnDestroy{
 

@@ -7,9 +7,10 @@ import { ServiciosService } from 'src/app/services/servicios.service';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 @Component({
-  selector: 'app-generar-turnos',
-  templateUrl: './generar-turnos.component.html',
-  styleUrls: ['./generar-turnos.component.scss']
+    selector: 'app-generar-turnos',
+    templateUrl: './generar-turnos.component.html',
+    styleUrls: ['./generar-turnos.component.scss'],
+    standalone: false
 })
 export class GenerarTurnosComponent {
 
