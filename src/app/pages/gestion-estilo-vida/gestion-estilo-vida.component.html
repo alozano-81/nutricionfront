@@ -1,1 +1,19 @@
-<p>gestion-estilo-vida works!</p>
+<mat-card-content>
+  <mat-card-header class="mat_card_header">
+    <div mat-card-avatar>
+      <mat-icon matTooltip="{{ diarioActividades }}">table_chart</mat-icon>
+    </div>
+    <mat-card-title><strong>{{ diarioActividades }}</strong></mat-card-title>
+  </mat-card-header>
+  <mat-card>
+    <div>
+
+      <input [(ngModel)]="actividad" placeholder="Escribe una actividad" />
+      <button (click)="registrarActividad()">Registrar</button>
+    </div>
+    <ul>
+      <li *ngFor="let act of actividades">{{ act.hora }} - {{ act.actividad }}</li>
+    </ul>
+
+  </mat-card>
+</mat-card-content>

@@ -141,6 +141,28 @@ export class ServiciosService {
      });
   }
 
+  cargarDatosEstiloVida(): FormGroup{
+    return this.formularioHistorialAmnesis.group({
+      actividad: [''],
+      tipoEjercicio: [''],
+      claseEjercicio: [''],
+      frecuencia: [''],
+      duracion: [''],
+      inicio: [''],
+      consumoFrecuencia: [''],
+      consumoCantidad: [''],
+      consumoTipo: [''],
+      fuerzaPrencil: [''],
+      md: [''],
+      mi: [''],
+      unas: [''],
+      presionArterial: [''],
+      presionArterialCuanto: [''],
+      hora: [''],
+      brazoDerecho: ['']
+    });
+  }
+
   //******************************servicios
   getUsuariosTodos() {
     let url = `${environment.urlListaUsuarios}`;

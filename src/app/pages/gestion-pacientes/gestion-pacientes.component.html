@@ -300,6 +300,11 @@
               [arregloPestanaApetosGine]="sex">
               </app-gestion-aspectos-ginecologicos>
             </div>
+            <div *ngIf="pes.nombrePestana == 'estilosdevida'">
+              <app-gestion-estilo-vida>
+
+              </app-gestion-estilo-vida>
+            </div>
             <ng-template mat-tab-label>
               <mat-icon class="example-tab-icon">{{ pes.icono }}</mat-icon>
               {{ pes.name }}

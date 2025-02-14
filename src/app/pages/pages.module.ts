@@ -37,12 +37,14 @@ import { SpinerComponent } from './components/spiner/spiner.component';
 import { TemplateComponent } from './components/template/template.component';
 import { GenerarTurnosComponent } from './generar-turnos/generar-turnos.component';
 import { GestionAspectosGinecologicosComponent } from "./gestion-aspectos-ginecologicos/gestion-aspectos-ginecologicos.component";
+import { GestionEstiloVidaComponent } from "./gestion-estilo-vida/gestion-estilo-vida.component";
 import { GestionLoginComponent } from './gestion-login/gestion-login.component';
 import { GestionPacientesComponent } from './gestion-pacientes/gestion-pacientes.component';
 import { GestionPrincipalComponent } from './gestion-principal/gestion-principal.component';
 import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
+//import {MatTimepickerModule} from '@angular/material/timepicker';
 @NgModule({
     declarations: [
         TemplateComponent,
@@ -54,46 +56,48 @@ import { PagesComponent } from './pages.component';
         GestionUsuariosComponent,
         GestionPacientesComponent,
         GestionIndicadoresClinicosComponent,
-        GestionAspectosGinecologicosComponent
+        GestionAspectosGinecologicosComponent,
+        GestionEstiloVidaComponent
 
     ],
     exports: [TemplateComponent],
     imports: [
-        CommonModule,
-        //ComponentsModule,
-        PagesRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatCardModule,
-        MatSelectModule,
-        //NgSelectModule,
-        MatFormFieldModule,
-        MatGridListModule,
-        MatCheckboxModule,
-        MatButtonToggleModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatDividerModule,
-        HttpClientModule,
-        DataTablesModule,
-        ToastrModule.forRoot(),
-        MatIconModule,
-        MatTooltipModule,
-        MatBottomSheetModule,
-        MatDialogModule,
-        MatRadioModule,
-        MatButtonModule,
-        MatProgressSpinnerModule,
-        NgxSpinnerModule,
-        //NgxMaskModule.forRoot(),
-        MatProgressBarModule,
-        MatExpansionModule,
-        MatTabsModule,
-        MatSlideToggleModule,
-        MatListModule,
-        MatDatepickerModule,
-        MatToolbarModule,
-    ]
+    CommonModule,
+    //ComponentsModule,
+    PagesRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatCardModule,
+    MatSelectModule,
+    //NgSelectModule,
+    MatFormFieldModule,
+    MatGridListModule,
+    MatCheckboxModule,
+    MatButtonToggleModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDividerModule,
+    HttpClientModule,
+    DataTablesModule,
+    ToastrModule.forRoot(),
+    MatIconModule,
+    MatTooltipModule,
+    MatBottomSheetModule,
+    MatDialogModule,
+    MatRadioModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    NgxSpinnerModule,
+    //NgxMaskModule.forRoot(),
+    MatProgressBarModule,
+    MatExpansionModule,
+    MatTabsModule,
+    MatSlideToggleModule,
+    MatListModule,
+    MatDatepickerModule,
+    MatToolbarModule
+    //,    MatTimepickerModule
+]
 })
 export class PagesModule {}

@@ -91,6 +91,7 @@ export const environment = {
   lbl_antecedentes: 'Antecedentes Salu/Enfermedad',
   lbl_problemas_actuales: 'Problemas actuales',
   lbl_antecedentes_familiares: 'Antecedentes familiares',
+  lbl_diario_actividades: 'Diario de actividades (24 hrs)',
 
   //etiquetas antecedentes
   check_diarrea: 'Diarrea',
