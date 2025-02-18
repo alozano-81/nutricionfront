@@ -8,11 +8,18 @@
   <mat-card>
     <div>
 
+      <mat-form-field>
+        <mat-label>Pick a time</mat-label>
+        <input matInput [matTimepicker]="picker"  [(ngModel)]="hora">
+        <mat-timepicker-toggle matIconSuffix [for]="picker" />
+        <mat-timepicker #picker />
+      </mat-form-field>
       <input [(ngModel)]="actividad" placeholder="Escribe una actividad" />
-      <button (click)="registrarActividad()">Registrar</button>
+      <button (click)="registrarActividad(hora)">Registrar</button>
+
     </div>
     <ul>
-      <li *ngFor="let act of actividades">{{ act.hora }} - {{ act.actividad }}</li>
+      <li *ngFor="let act of actividades">{{ act.hora }} - {{act.horas}} - {{ act.actividad }}</li>
     </ul>
 
   </mat-card>

@@ -141,9 +141,10 @@ export class ServiciosService {
      });
   }
 
-  cargarDatosEstiloVida(): FormGroup{
+  cargarFormDatosEstiloVida(): FormGroup{
     return this.formularioHistorialAmnesis.group({
       actividad: [''],
+      horaActividad: [''],
       tipoEjercicio: [''],
       claseEjercicio: [''],
       frecuencia: [''],

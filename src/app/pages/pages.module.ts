@@ -32,6 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTimepickerModule } from '@angular/material/timepicker';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SpinerComponent } from './components/spiner/spiner.component';
 import { TemplateComponent } from './components/template/template.component';
@@ -44,7 +45,6 @@ import { GestionPrincipalComponent } from './gestion-principal/gestion-principal
 import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
-//import {MatTimepickerModule} from '@angular/material/timepicker';
 @NgModule({
     declarations: [
         TemplateComponent,
@@ -96,8 +96,8 @@ import { PagesComponent } from './pages.component';
     MatSlideToggleModule,
     MatListModule,
     MatDatepickerModule,
-    MatToolbarModule
-    //,    MatTimepickerModule
+    MatToolbarModule,
+    MatTimepickerModule
 ]
 })
 export class PagesModule {}
