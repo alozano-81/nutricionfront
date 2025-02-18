@@ -34,6 +34,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTimepickerModule } from '@angular/material/timepicker';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { SpinerComponent } from './components/spiner/spiner.component';
 import { TemplateComponent } from './components/template/template.component';
 import { GenerarTurnosComponent } from './generar-turnos/generar-turnos.component';
@@ -97,7 +98,8 @@ import { PagesComponent } from './pages.component';
     MatListModule,
     MatDatepickerModule,
     MatToolbarModule,
-    MatTimepickerModule
+    MatTimepickerModule,
+    NgxMaterialTimepickerModule
 ]
 })
 export class PagesModule {}

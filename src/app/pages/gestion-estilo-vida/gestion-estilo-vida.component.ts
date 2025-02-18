@@ -6,8 +6,9 @@ import { ToastrService } from 'ngx-toastr';
 import { ServiciosService } from 'src/app/services/servicios.service';
 import { environment } from 'src/environments/environment';
 
+
+
 //import { Moment } from 'moment';
-import moment from 'moment';
 
 @Component({
   selector: 'app-gestion-estilo-vida',
@@ -16,11 +17,11 @@ import moment from 'moment';
   standalone: false
 })
 export class GestionEstiloVidaComponent implements OnInit, OnDestroy {
-  idForm: string = 'idForm';
+  idForm1: string = 'idForm';
   hora: any;
   formRegistro: any;
   actividad = '';
-  actividades: { hora: string; actividad: string; horas: any }[] = [];
+  actividades: { hora: string; actividad: any; horas: any }[] = [];
 
   public diarioActividades: string = environment.lbl_diario_actividades;
 
@@ -42,8 +43,9 @@ export class GestionEstiloVidaComponent implements OnInit, OnDestroy {
     throw new Error('Method not implemented.');
   }
 
-  registrar() {
-    console.log(this.formRegistro.get('horaActividad').getValue);
+  registrarDiario() {console.log('entra aqui...');
+      this.agregarActividad(this.formRegistro.get('actividad').value, this.formRegistro.get('horaActividad').value);
+      this.formRegistro.reset();
   }
 
   agregarActividad(actividad: string, horas: any) {
@@ -58,13 +60,13 @@ export class GestionEstiloVidaComponent implements OnInit, OnDestroy {
   registrarActividad(hora: any) {
     console.log(hora);
 
-    var laHora = moment(hora);
+    //var laHora = moment(hora);
 
-    const horaFormateada = laHora.format("HH:mm:ss");
-    console.log(horaFormateada)
+   // const horaFormateada = laHora.format("HH:mm:ss");
+    //console.log(horaFormateada)
 
     if (this.actividad.trim()) {
-      this.agregarActividad(this.actividad, horaFormateada);
+      this.agregarActividad(this.actividad, hora);
       this.actividad = '';
     }
   }

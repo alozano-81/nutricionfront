@@ -178,7 +178,7 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.formIndicadoresClinicos =
       this.services.cargarDatosIndicadoresClinicos();
-      console.log('ver arre:',this.arregloPestanaApetosGine);
+      //console.log('ver arre:',this.arregloPestanaApetosGine);
   }
 
   ngOnDestroy(): void {}

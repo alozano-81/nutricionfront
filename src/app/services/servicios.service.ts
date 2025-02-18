@@ -143,8 +143,8 @@ export class ServiciosService {
 
   cargarFormDatosEstiloVida(): FormGroup{
     return this.formularioHistorialAmnesis.group({
-      actividad: [''],
-      horaActividad: [''],
+      actividad: ['', Validators.compose([Validators.required])],
+      horaActividad: ['', Validators.compose([Validators.required])],
       tipoEjercicio: [''],
       claseEjercicio: [''],
       frecuencia: [''],
