@@ -8,9 +8,10 @@ import { ServiciosService } from 'src/app/services/servicios.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-gestion-indicadores-clinicos',
-  templateUrl: './gestion-indicadores-clinicos.component.html',
-  styleUrl: './gestion-indicadores-clinicos.component.scss',
+    selector: 'app-gestion-indicadores-clinicos',
+    templateUrl: './gestion-indicadores-clinicos.component.html',
+    styleUrl: './gestion-indicadores-clinicos.component.scss',
+    standalone: false
 })
 export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
   formIndicadoresClinicos: any;
@@ -177,7 +178,7 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.formIndicadoresClinicos =
       this.services.cargarDatosIndicadoresClinicos();
-      console.log('ver arre:',this.arregloPestanaApetosGine);
+      //console.log('ver arre:',this.arregloPestanaApetosGine);
   }
 
   ngOnDestroy(): void {}

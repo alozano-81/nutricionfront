@@ -10,7 +10,8 @@ export const environment = {
   productionServidor: 'saludnutriciontest.000webhostapp.com',
   urlProxy2: 'http://localhost:4200/autenticacion-login',
   urlProxy: '/autenticacion-login',
-  urlTunelLocal: 'https://4qjxjq2d-8083.use.devtunnels.ms',
+  //urlTunelLocal: 'https://4qjxjq2d-8083.use.devtunnels.ms',
+  urlTunelLocal: 'https://9cnz3p2c-8083.use2.devtunnels.ms',
 
   urlApi: 'http://localhost:8085/api/tecnica/entrar',
   urlApivalidacionSesion: 'http://localhost:8083/api/auth/usersesion/validar-sesion',
@@ -26,6 +27,8 @@ export const environment = {
   urlActualizarPacientes: 'http://localhost:8083/api/auth/paciente/actualizar',
   urlListaPacientes: 'http://localhost:8083/api/auth/paciente/get-all-datos-personales',
   urlDeletePaciente:'http://localhost:8083/api/auth/paciente/delete',
+
+  urlRegistrarInfoPacientes: 'http://localhost:8083/api/auth/paciente/registrarInfoPaciente',
 
 //proxy
   /*urlApi: 'http://localhost:8085/api/tecnica/entrar',
@@ -90,6 +93,7 @@ export const environment = {
   lbl_antecedentes: 'Antecedentes Salu/Enfermedad',
   lbl_problemas_actuales: 'Problemas actuales',
   lbl_antecedentes_familiares: 'Antecedentes familiares',
+  lbl_diario_actividades: 'Diario de actividades (24 hrs)',
 
   //etiquetas antecedentes
   check_diarrea: 'Diarrea',
@@ -144,7 +148,7 @@ export const environment = {
   lbl_terapiaReemplazoHormonal_cual: 'Cual',
   lbl_terapiaReemplazoHormonal_dosis: 'Dosis',
 
-  
+
 
 
 

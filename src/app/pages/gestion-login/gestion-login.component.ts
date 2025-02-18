@@ -7,9 +7,10 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-gestion-login',
-  templateUrl: './gestion-login.component.html',
-  styleUrls: ['./gestion-login.component.scss'],
+    selector: 'app-gestion-login',
+    templateUrl: './gestion-login.component.html',
+    styleUrls: ['./gestion-login.component.scss'],
+    standalone: false
 })
 export class GestionLoginComponent implements OnInit{
 

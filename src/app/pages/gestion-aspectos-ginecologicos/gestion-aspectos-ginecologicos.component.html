@@ -1,21 +1,247 @@
-<div class="row" >
-  <div class="col">
-    <label id="example-radio-group-label">Sexo</label>
-    <mat-radio-group
-      formControlName="embarazoActual"
-      aria-labelledby="example-radio-group-label"
-      class="example-radio-group"
-      [(ngModel)]="embarazoActual"
-    >
-      <mat-radio-button
-        class="example-radio-button"
-        *ngFor="let cont of listaEmbarazoActual"
-        [value]="cont"
+<mat-card-content>
+  <mat-card-header class="mat_card_header">
+    <div mat-card-avatar>
+      <mat-icon matTooltip="xx">table_chart</mat-icon>
+    </div>
+    <mat-card-title><strong>xx</strong></mat-card-title>
+  </mat-card-header>
+  <mat-card>
+    <mat-card-subtitle></mat-card-subtitle>
+    <mat-card-content>
+      <section class="example-section">
+        <span class="example-list-section">
+          <form
+            [formGroup]="formularioAspectosGinecologicos"
+            class="form"
+            (submit)="registrar()"
+            id="{{ idForm }}"
+            novalidate
+          >
+            <div class="row">
+              <div class="col">
+                <div class="col-md-12">
+                  <mat-label>Embarazo actual </mat-label>
+                </div>
+                <div class="col-md-12">
+                  <mat-button-toggle-group
+                    name="sino"
+                    appearance="legacy"
+                    name="fontStyle"
+                    aria-label="Font Style"
+                    [value]="false"
+                    (change)="seleccionarFiltros($event, 'embarazoactual')"
+                  >
+                    <mat-button-toggle [value]="true" matTooltip="Emb"
+                      >SI</mat-button-toggle
+                    >
+                    <mat-button-toggle [value]="false" matTooltip="Emb"
+                      >NO</mat-button-toggle
+                    >
+                  </mat-button-toggle-group>
+                  <mat-form-field
+                    *ngIf="validaEmbActual"
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Edad Gestacional</mat-label>
+                    <input
+                      matInput
+                      #edadGestacional
+                      #max
+                      formControlName="edadGestacional"
+                      required="true"
+                      readonly="true"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
 
-      >
-        {{ cont }}
-      </mat-radio-button>
-    </mat-radio-group>
-    <div>Seleccione uno</div>
-  </div>
-</div>
+              <div class="col">
+                <mat-form-field
+                  hintLabel="Max 10 caracteres"
+                  class="example-full-width"
+                  appearance="outline"
+                >
+                  <mat-label>SDG</mat-label>
+                  <input matInput #sdg required="true" formControlName="sdg" />
+                </mat-form-field>
+
+                <mat-form-field
+                  hintLabel="Max 10 caracteres"
+                  class="example-full-width"
+                  appearance="outline"
+                >
+                  <mat-label>Por</mat-label>
+                  <input
+                    matInput
+                    #sdg_por
+                    required="true"
+                    formControlName="sdg_por"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="col-md-6">
+                  <mat-label>AntiOrales</mat-label>
+                </div>
+                <div class="col-md-6">
+                  <mat-button-toggle-group
+                    name="sino"
+                    appearance="legacy"
+                    name="fontStyle"
+                    aria-label="Font Style"
+                    [value]="false"
+                    (change)="seleccionarFiltros($event, 'anticonceptivooral')"
+                  >
+                    <mat-button-toggle [value]="true" matTooltip="Si"
+                      >SI</mat-button-toggle
+                    >
+                    <mat-button-toggle [value]="false" matTooltip="No"
+                      >NO</mat-button-toggle
+                    >
+                  </mat-button-toggle-group>
+                </div>
+
+                <mat-form-field
+                  *ngIf="validaAnticonceptivo"
+                  class="example-full-width"
+                  appearance="outline"
+                >
+                  <mat-label>Cual</mat-label>
+                  <input
+                    matInput
+                    #anticonceptivos_orales_cual
+                    #max
+                    formControlName="anticonceptivos_orales_cual"
+                    required="true"
+                    readonly="false"
+                  />
+                </mat-form-field>
+                <mat-form-field
+                  *ngIf="validaAnticonceptivo"
+                  class="example-full-width"
+                  appearance="outline"
+                >
+                  <mat-label>{{ lbl_dosis }}</mat-label>
+                  <input
+                    matInput
+                    #anticonceptivos_orales_dosis
+                    #max
+                    formControlName="anticonceptivos_orales_dosis"
+                    required="true"
+                    readonly="false"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <div class="col-md-6">
+                  <mat-label>Climaterio</mat-label>
+                </div>
+                <div class="col-md-6">
+                  <mat-button-toggle-group
+                    name="sino"
+                    appearance="legacy"
+                    name="fontStyle"
+                    aria-label="Font Style"
+                    [value]="false"
+                    (change)="seleccionarFiltros($event, 'climaterio')"
+                  >
+                    <mat-button-toggle [value]="true" matTooltip="Si"
+                      >SI</mat-button-toggle
+                    >
+                    <mat-button-toggle [value]="false" matTooltip="No"
+                      >NO</mat-button-toggle
+                    >
+                  </mat-button-toggle-group>
+                </div>
+
+                <mat-form-field color="accent" *ngIf="validaClimaterio">
+                  <mat-label>Fecha</mat-label>
+                  <input
+                    readonly="true"
+                    required="true"
+                    matInput
+                    [matDatepicker]="picker1"
+                    formControlName="climaterio_fecha"
+
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker1"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker
+                    #picker1
+                    color="primary"
+
+                  ></mat-datepicker>
+                  <mat-error
+                    *ngIf="formularioAspectosGinecologicos.controls['climaterio_fecha'].errors?.required"
+                  >
+                    Se debe seleccionar una fecha
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col">
+                <div class="col-md-6">
+                  <mat-label>Terapia Hormonal</mat-label>
+                </div>
+                <div class="col-md-6">
+                  <mat-button-toggle-group
+                    name="sino"
+                    appearance="legacy"
+                    name="fontStyle"
+                    aria-label="Font Style"
+                    [value]="false"
+                    (change)="seleccionarFiltros($event, 'terapiahormonal')"
+                  >
+                    <mat-button-toggle [value]="true" matTooltip="Si"
+                      >SI</mat-button-toggle
+                    >
+                    <mat-button-toggle [value]="false" matTooltip="No"
+                      >NO</mat-button-toggle
+                    >
+                  </mat-button-toggle-group>
+                </div>
+
+                <mat-form-field
+                  *ngIf="validaTerapiaHormonal"
+                  class="example-full-width"
+                  appearance="outline"
+                >
+                  <mat-label>Cual</mat-label>
+                  <input
+                    matInput
+                    #terapiaHormonal_cual
+                    #max
+                    formControlName="terapiaHormonal_cual"
+                    required="true"
+                    readonly="false"
+                  />
+                </mat-form-field>
+                <mat-form-field
+                  *ngIf="validaTerapiaHormonal"
+                  class="example-full-width"
+                  appearance="outline"
+                >
+                  <mat-label>{{ lbl_dosis }}</mat-label>
+                  <input
+                    matInput
+                    #terapiaHormonal_dosis
+                    #max
+                    formControlName="terapiaHormonal_dosis"
+                    required="true"
+                    readonly="false"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+        </span>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</mat-card-content>

@@ -18,9 +18,10 @@ import Swal from 'sweetalert2';
 import { UserDTO } from './../../models/Parametrizacion-model';
 
 @Component({
-  selector: 'app-gestion-usuarios',
-  templateUrl: './gestion-usuarios.component.html',
-  styleUrls: ['./gestion-usuarios.component.scss'],
+    selector: 'app-gestion-usuarios',
+    templateUrl: './gestion-usuarios.component.html',
+    styleUrls: ['./gestion-usuarios.component.scss'],
+    standalone: false
 })
 export class GestionUsuariosComponent implements OnInit, OnDestroy {
   public formCreacion: any;

@@ -1,0 +1,40 @@
+<mat-card-content>
+  <mat-card-header class="mat_card_header">
+    <div mat-card-avatar>
+      <mat-icon matTooltip="{{ diarioActividades }}">table_chart</mat-icon>
+    </div>
+    <mat-card-title><strong>{{ diarioActividades }}</strong></mat-card-title>
+  </mat-card-header>
+  <mat-card>
+    <div>
+      <form
+          [formGroup]="formRegistro"
+          class="form"
+          (submit)="registrarDiario()"
+          id="{{ idForm1 }}"
+          novalidate
+        >
+      <mat-form-field class="Placeholder" appearance="outline">
+        <mat-label>Hora</mat-label>
+        <input matInput type="text" formControlName="horaActividad" [ngxTimepicker]="picker" >
+        <ngx-material-timepicker #picker></ngx-material-timepicker>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Tipo de actividad</mat-label>
+      <input matInput type="text" formControlName="actividad" placeholder="Escribe una actividad" />
+      </mat-form-field>
+      </form>
+      <button [disabled]="formRegistro.invalid"
+      class="btn btn-primary btn-sm"
+      type="submit"
+      [attr.form]="idForm1"
+      (click)="registrarDiario()"  >Registrar</button>
+
+    </div>
+    <ul>
+      <li *ngFor="let act of actividades">{{ act.hora }} - {{act.horas}} - {{ act.actividad }}</li>
+    </ul>
+
+
+  </mat-card>
+</mat-card-content>

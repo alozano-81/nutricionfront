@@ -24,10 +24,10 @@ import { ServiciosService } from 'src/app/services/servicios.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 @Component({
-  selector: 'app-gestion-pacientes',
-  templateUrl: './gestion-pacientes.component.html',
-  styleUrls: ['./gestion-pacientes.component.scss'],
- // encapsulation: ViewEncapsulation.None
+    selector: 'app-gestion-pacientes',
+    templateUrl: './gestion-pacientes.component.html',
+    styleUrls: ['./gestion-pacientes.component.scss'],
+    standalone: false
 })
 export class GestionPacientesComponent implements OnInit, OnDestroy {
   formRegistro: any;
@@ -265,6 +265,24 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
     }
   }
 
+  registrarInfoPaciente(){
+    if (this.formularioAnamnesisGeneral.pristine) {
+      console.log('sin cambios datos generales info paciente');
+      this.toastr.info('No ha cambiado nada');
+    } else {
+      this.formularioAnamnesisGeneral.get('idPaciente').setValue(this.formRegistro.get('documento').value);
+      this.services.registrarInfoPacientes(this.formularioAnamnesisGeneral.value, localStorage.getItem('token'), this.actualizarR).subscribe(
+        (result: any) => {
+          console.log('correcot', result);
+        },
+        (error) =>{
+          console.log('entra error');
+          console.log(error);
+        }
+      );
+    }
+  }
+
   getListPacientes() {
     this.services.getPacientes().subscribe(
       (result: any) => {
@@ -428,18 +446,21 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
     this.router.navigate(['/', 'gestion-principal']);
   }
 
+  validaSex: number = 0;
   modificaTest(t:any){
-    if(t == 'Femenino'){
+    if(t == 'Femenino' && this.formRegistro.get('documento').value != ''){
+      this.validaSex = 1;
      for(let r in this.pestanas.subtasks){
       this.pestanas.subtasks[2].mostrar = true;
-     }     
+     }
     }
 
-    if(t == 'Masculino'){
+    if(t == 'Masculino' && this.formRegistro.get('documento').value != ''){
+      this.validaSex = 2;
       for(let r in this.pestanas.subtasks){
        this.pestanas.subtasks[2].mostrar = false;
       }
-     }    
+     }
   }
 
   //enviar datos

@@ -7,6 +7,7 @@ import {
   EstadosCivil,
   Paises,
   RegistrarPacientes,
+  RegistroInfoPaciente,
   UserDTO,
 } from '../models/Parametrizacion-model';
 import { environment } from './../../environments/environment';
@@ -22,6 +23,7 @@ export class ServiciosService {
   listaEstadosCivil: EstadosCivil[] = [];
   listaRoles: any[] = [];
   registroPacientes: RegistrarPacientes[] = [];
+  registroInfoPaciente: RegistroInfoPaciente[] = [];
   listaUsuarios: UserDTO[] = [];
   listaPacientes: RegistrarPacientes[] = [];
 
@@ -86,7 +88,7 @@ export class ServiciosService {
    */
   cargarDatosAnamnesisPaciente(): FormGroup{
     return this.formularioHistorialAmnesis.group({
-      id: [],
+
       idPaciente: [],
       motivo: [],
 
@@ -139,6 +141,29 @@ export class ServiciosService {
       terapiaHormonal_cual:[''],
       terapiaHormonal_dosis:[''],
      });
+  }
+
+  cargarFormDatosEstiloVida(): FormGroup{
+    return this.formularioHistorialAmnesis.group({
+      actividad: ['', Validators.compose([Validators.required])],
+      horaActividad: ['', Validators.compose([Validators.required])],
+      tipoEjercicio: [''],
+      claseEjercicio: [''],
+      frecuencia: [''],
+      duracion: [''],
+      inicio: [''],
+      consumoFrecuencia: [''],
+      consumoCantidad: [''],
+      consumoTipo: [''],
+      fuerzaPrencil: [''],
+      md: [''],
+      mi: [''],
+      unas: [''],
+      presionArterial: [''],
+      presionArterialCuanto: [''],
+      hora: [''],
+      brazoDerecho: ['']
+    });
   }
 
   //******************************servicios
@@ -303,4 +328,24 @@ export class ServiciosService {
         map((result: any) => result)
       );
   }
+
+  registrarInfoPacientes(form: any, token: any, tipo: boolean) {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    }).append('Authorization', token);
+    let items = Object.assign(form);
+    let url = tipo
+      ? `${environment.urlActualizarPacientes}`
+      : `${environment.urlRegistrarInfoPacientes}`;
+    return tipo
+      ? this.http.put(url, items, { headers: headers }).pipe(
+          tap((result: any) => (this.registroInfoPaciente = result)),
+          map((result: any) => result)
+        )
+      : this.http.post(url, items, { headers: headers }).pipe(
+          tap((result: any) => (this.registroInfoPaciente = result)),
+          map((result: any) => result)
+        );
+  }
+
 }
