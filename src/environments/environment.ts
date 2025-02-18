@@ -28,6 +28,8 @@ export const environment = {
   urlListaPacientes: 'http://localhost:8083/api/auth/paciente/get-all-datos-personales',
   urlDeletePaciente:'http://localhost:8083/api/auth/paciente/delete',
 
+  urlRegistrarInfoPacientes: 'http://localhost:8083/api/auth/paciente/registrarInfoPaciente',
+
 //proxy
   /*urlApi: 'http://localhost:8085/api/tecnica/entrar',
   urlApivalidacionSesion: '/autenticacion-login/api/auth/usersesion/validar-sesion',

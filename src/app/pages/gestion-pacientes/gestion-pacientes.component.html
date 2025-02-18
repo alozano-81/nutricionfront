@@ -1,47 +1,27 @@
 <div class="container">
   <mat-accordion class="example-headers-align" multi>
     <mat-expansion-panel #panel1>
-      <mat-expansion-panel-header
-        class="expansion-panel-header"
-        [collapsedHeight]="customCollapsedHeight"
-        [expandedHeight]="customExpandedHeight"
-      >
+      <mat-expansion-panel-header class="expansion-panel-header" [collapsedHeight]="customCollapsedHeight"
+        [expandedHeight]="customExpandedHeight">
         <mat-panel-title> Registro Pacientes </mat-panel-title>
         <mat-panel-description>
           Registro base
-          <mat-icon
-            (click)="regresar()"
-            matTooltip="Regresar"
-            [matTooltipPosition]="'below'"
-            >keyboard_backspace</mat-icon
-          >
+          <mat-icon (click)="regresar()" matTooltip="Regresar"
+            [matTooltipPosition]="'below'">keyboard_backspace</mat-icon>
           <mat-icon>account_circle</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div>
-        <form
-          [formGroup]="formRegistro"
-          class="form"
-          (submit)="registrar()"
-          id="{{ idForm }}"
-          novalidate
-        >
+        <form [formGroup]="formRegistro" class="form" (submit)="registrar()" id="{{ idForm }}" novalidate>
           <div class="row">
             <div class="col">
               <mat-form-field hintLabel="Max 10 caracteres">
                 <mat-label>Nombres</mat-label>
-                <input
-                  matInput
-                  #nombres
-                  required="true"
-                  formControlName="nombres"
-                />
+                <input matInput #nombres required="true" formControlName="nombres" />
               </mat-form-field>
 
               <div *ngIf="formRegistro.controls['nombres'].errors">
-                <mat-error
-                  *ngIf="formRegistro.controls['nombres'].errors?.required"
-                >
+                <mat-error *ngIf="formRegistro.controls['nombres'].errors?.required">
                   <p style="color: F44336">Debe ingresar datos.</p>
                 </mat-error>
               </div>
@@ -50,18 +30,11 @@
             <div class="col">
               <mat-form-field hintLabel="Max 10 caracteres">
                 <mat-label>Apellidos</mat-label>
-                <input
-                  matInput
-                  #apellidos
-                  required="true"
-                  formControlName="apellidos"
-                />
+                <input matInput #apellidos required="true" formControlName="apellidos" />
               </mat-form-field>
 
               <div *ngIf="formRegistro.controls['apellidos'].errors">
-                <mat-error
-                  *ngIf="formRegistro.controls['apellidos'].errors?.required"
-                >
+                <mat-error *ngIf="formRegistro.controls['apellidos'].errors?.required">
                   <p style="color: F44336">Debe ingresar datos.</p>
                 </mat-error>
               </div>
@@ -69,18 +42,10 @@
 
             <div class="col">
               <label id="example-radio-group-label">Sexo</label>
-              <mat-radio-group
-                formControlName="sexo"
-                aria-labelledby="example-radio-group-label"
-                class="example-radio-group"
-                [(ngModel)]="sex"
-              >
-                <mat-radio-button
-                  class="example-radio-button"
-                  *ngFor="let cont of listaSex"
-                  [value]="cont"
-                  (click)="modificaTest(cont)"
-                >
+              <mat-radio-group formControlName="sexo" aria-labelledby="example-radio-group-label"
+                class="example-radio-group" [(ngModel)]="sex">
+                <mat-radio-button class="example-radio-button" *ngFor="let cont of listaSex" [value]="cont"
+                  (click)="modificaTest(cont)">
                   {{ cont }}
                 </mat-radio-button>
               </mat-radio-group>
@@ -91,16 +56,10 @@
               <mat-form-field>
                 <mat-label>País de residencia</mat-label>
                 <mat-select formControlName="pais" placeholder="Paises">
-                  <mat-option
-                    style="z-index: 99999"
-                    *ngFor="let ite of paises"
-                    [value]="ite.codigo"
-                    >{{ ite.nombre }}
+                  <mat-option style="z-index: 99999" *ngFor="let ite of paises" [value]="ite.codigo">{{ ite.nombre }}
                   </mat-option>
                 </mat-select>
-                <mat-error
-                  *ngIf="formRegistro.controls['pais'].errors?.required"
-                >
+                <mat-error *ngIf="formRegistro.controls['pais'].errors?.required">
                   <span> Se debe seleccionar una pa&acuoteis </span>
                 </mat-error>
               </mat-form-field>
@@ -109,20 +68,12 @@
             <div class="col">
               <mat-form-field>
                 <mat-label>Estado Civil</mat-label>
-                <mat-select
-                  formControlName="estadoCivil"
-                  placeholder="Estado Civil"
-                >
-                  <mat-option
-                    style="z-index: 99999"
-                    *ngFor="let estc of estadosCivil"
-                    [value]="estc.codigo"
-                    >{{ estc.nombre }}
+                <mat-select formControlName="estadoCivil" placeholder="Estado Civil">
+                  <mat-option style="z-index: 99999" *ngFor="let estc of estadosCivil" [value]="estc.codigo">{{
+                    estc.nombre }}
                   </mat-option>
                 </mat-select>
-                <mat-error
-                  *ngIf="formRegistro.controls['estadoCivil'].errors?.required"
-                >
+                <mat-error *ngIf="formRegistro.controls['estadoCivil'].errors?.required">
                   <span> Se debe seleccionar una estado civil </span>
                 </mat-error>
               </mat-form-field>
@@ -131,28 +82,13 @@
             <div class="col">
               <mat-form-field color="accent">
                 <mat-label>Fecha Nacimiento</mat-label>
-                <input
-                  readonly="true"
-                  required="true"
-                  matInput
-                  [matDatepicker]="picker1"
-                  formControlName="fechaNacimiento"
-                  [(ngModel)]="age"
-                />
-                <mat-datepicker-toggle
-                  matSuffix
-                  [for]="picker1"
-                ></mat-datepicker-toggle>
-                <mat-datepicker
-                  #picker1
-                  color="primary"
-                  (closed)="calcularEdad()"
-                ></mat-datepicker>
-                <mat-error
-                  *ngIf="
+                <input readonly="true" required="true" matInput [matDatepicker]="picker1"
+                  formControlName="fechaNacimiento" [(ngModel)]="age" />
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1 color="primary" (closed)="calcularEdad()"></mat-datepicker>
+                <mat-error *ngIf="
                     formRegistro.controls['fechaNacimiento'].errors?.required
-                  "
-                >
+                  ">
                   Se debe seleccionar una fecha
                 </mat-error>
               </mat-form-field>
@@ -162,20 +98,13 @@
             <div class="col">
               <mat-form-field class="example-full-width">
                 <mat-label>Correo Electrónico</mat-label>
-                <input
-                  type="email"
-                  matInput
-                  formControlName="email"
-                  placeholder="xxxx@example.com"
-                />
+                <input type="email" matInput formControlName="email" placeholder="xxxx@example.com" />
 
                 <mat-error> Ingrese un email valido! </mat-error>
                 <mat-error> Email es <strong>requerido</strong> </mat-error>
               </mat-form-field>
               <div *ngIf="formRegistro.controls['email'].errors">
-                <mat-error
-                  *ngIf="formRegistro.controls['email'].errors?.required"
-                >
+                <mat-error *ngIf="formRegistro.controls['email'].errors?.required">
                   <p style="color: F44336">Debe ingresar datos.</p>
                 </mat-error>
               </div>
@@ -183,25 +112,14 @@
             <div class="col">
               <mat-form-field>
                 <mat-label>Documento</mat-label>
-                <input
-                  formControlName="documento"
-                  matInput
-                  type="number"
-                  #inputC
-                  placeholder="Documento de identidad"
-                  required="true"
-                  readonly="{{ valido }}"
-                />
-                <mat-error
-                  *ngIf="formRegistro.controls['documento'].errors?.required"
-                >
+                <input formControlName="documento" matInput type="number" #inputC placeholder="Documento de identidad"
+                  required="true" readonly="{{ valido }}" />
+                <mat-error *ngIf="formRegistro.controls['documento'].errors?.required">
                   Se debe ingresar un datos
                 </mat-error>
               </mat-form-field>
               <div *ngIf="formRegistro.controls['documento'].errors">
-                <mat-error
-                  *ngIf="formRegistro.controls['documento'].errors?.required"
-                >
+                <mat-error *ngIf="formRegistro.controls['documento'].errors?.required">
                   <p style="color: F44336">Debe ingresar datos.</p>
                 </mat-error>
               </div>
@@ -213,9 +131,7 @@
               </mat-form-field>
 
               <div *ngIf="formRegistro.controls['ocupacion'].errors">
-                <mat-error
-                  *ngIf="formRegistro.controls['ocupacion'].errors?.required"
-                >
+                <mat-error *ngIf="formRegistro.controls['ocupacion'].errors?.required">
                   <p style="color: F44336">Debe ingresar datos.</p>
                 </mat-error>
               </div>
@@ -225,16 +141,8 @@
               <mat-form-field>
                 <mat-label>Teléfono</mat-label>
                 <mat-icon matSuffix>phone</mat-icon>
-                <input
-                  formControlName="telefono"
-                  matInput
-                  type="number"
-                  #inputC
-                  placeholder="Número de teléfono"
-                />
-                <mat-error
-                  *ngIf="formRegistro.controls['telefono'].errors?.required"
-                >
+                <input formControlName="telefono" matInput type="number" #inputC placeholder="Número de teléfono" />
+                <mat-error *ngIf="formRegistro.controls['telefono'].errors?.required">
                   Se debe ingresar un teléfono de contacto
                 </mat-error>
               </mat-form-field>
@@ -242,38 +150,23 @@
           </div>
         </form>
         <div>
-          <button
-            *ngIf="habilitarBotonCrear"
-            [disabled]="formRegistro.invalid"
-            class="btn btn-primary btn-sm"
-            type="submit"
-            [attr.form]="idForm"
-            (click)="update(false)"
-          >
+          <button *ngIf="habilitarBotonCrear" [disabled]="formRegistro.invalid" class="btn btn-primary btn-sm"
+            type="submit" [attr.form]="idForm" (click)="update(false)">
             Crear
           </button>
-          <button
-            *ngIf="habilitarBotonActualizar"
-            [disabled]="formRegistro.invalid"
-            class="btn btn-secondary btn-sm"
-            type="submit"
-            (click)="update(true)"
-            [attr.form]="idForm"
-          >
+          <button *ngIf="habilitarBotonActualizar" [disabled]="formRegistro.invalid" class="btn btn-secondary btn-sm"
+            type="submit" (click)="update(true)" [attr.form]="idForm">
             Actualizar
           </button>
 
-          <button
-            [disabled]="actualizar"
-            class="btn btn-warning btn-sm"
-            type="submit"
-            (click)="cleanForm()"
-          >
+          <button [disabled]="actualizar" class="btn btn-warning btn-sm" type="submit" (click)="cleanForm()">
             Limpiar
           </button>
         </div>
       </div>
     </mat-expansion-panel>
+
+    <!-- panel informacion paciente registrado-->
     <mat-expansion-panel *ngIf="this.validaSex !=  0">
       <mat-expansion-panel-header>
         <mat-panel-title> Informacion Pacientes </mat-panel-title>
@@ -283,21 +176,15 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <mat-tab-group
-        mat-stretch-tabs
-        [color]="'primary'"
-        [backgroundColor]="'primary'"
-      >
+      <mat-tab-group mat-stretch-tabs [color]="'primary'" [backgroundColor]="'primary'">
         <div *ngFor="let pes of pestanas.subtasks; let i = index">
           <mat-tab *ngIf="pes.mostrar">
             <div *ngIf="pes.nombrePestana == 'indicadoresclinicos'">
-              <app-gestion-indicadores-clinicos
-              [arregloPestanaApetosGine]="sex">
+              <app-gestion-indicadores-clinicos [arregloPestanaApetosGine]="sex">
               </app-gestion-indicadores-clinicos>
             </div>
             <div *ngIf="pes.nombrePestana == 'aspectosginecologicos'">
-              <app-gestion-aspectos-ginecologicos
-              [arregloPestanaApetosGine]="sex">
+              <app-gestion-aspectos-ginecologicos [arregloPestanaApetosGine]="sex">
               </app-gestion-aspectos-ginecologicos>
             </div>
             <div *ngIf="pes.nombrePestana == 'estilosdevida'">
@@ -311,122 +198,87 @@
             </ng-template>
             <br />
             <span class="example-list-section">
-              <form
-                [formGroup]="formularioAnamnesisGeneral"
-                class="form"
-                (submit)="enviarDatos()"
-                id="{{ idFormAnamnesis }}"
-                novalidate
-              >
+              <form [formGroup]="formularioAnamnesisGeneral" class="form" (submit)="enviarDatos()"
+                id="{{ idFormAnamnesis }}" novalidate>
                 <ul>
-                  <li
-                    *ngFor="
+                  <li *ngFor="
                       let listaFormG of datosAnamnesis.valores;
                       let ind = index
-                    "
-                  >
-                    <div
-                      class="row"
-                      *ngIf="
+                    ">
+                    <div class="row" *ngIf="
                         listaFormG.nombrePestana == pes.nombrePestana &&
                         listaFormG.campo != ''
-                      "
-                    >
+                      ">
                       <div class="col-md-12">
-                        <mat-form-field
-                          *ngIf="
+                        <mat-form-field *ngIf="
                             listaFormG.campo != '' &&
                             listaFormG.nombrePestana == pes.nombrePestana &&
                             listaFormG.tipocampoform === 'input'
-                          "
-                          class="example-full-width"
-                          appearance="outline"
-                          hintLabel="{{
+                          " class="example-full-width" appearance="outline" hintLabel="{{
                             listaFormG.campo == 'motivo'
                               ? lbl_max_caracteres + campoMaximo
                               : ''
-                          }}"
-                        >
+                          }}">
                           <mat-label>{{ listaFormG.name }}</mat-label>
-                          <input
-                            matInput
-                            #listaFormG.campo
-                            #max
-                            formControlName="{{ listaFormG.campo }}"
-                            maxlength="{{
+                          <input matInput #listaFormG.campo #max formControlName="{{ listaFormG.campo }}" maxlength="{{
                               listaFormG.longitudCampoDB != 0
                                 ? listaFormG.longitudCampoDB
                                 : campoMaximo
-                            }}"
-                            required="{{ listaFormG.completed }}"
-                            readonly="{{
-                              (listaFormG.campo != 'nu_tele' ? false : true) ||
-                                (listaFormG.campo != 'de_emai'
+                            }}" required="{{ listaFormG.completed }}" readonly="{{
+                              (listaFormG.campo != 'porasignar' ? false : true) ||
+                                (listaFormG.campo != 'porasignar'
                                   ? false
                                   : true) ||
-                                (listaFormG.campo != 'de_dire'
+                                (listaFormG.campo != 'porasignar'
                                   ? false
                                   : true) ||
-                                (listaFormG.campo != 'cd_ciud'
+                                (listaFormG.campo != 'porasignar'
                                   ? false
                                   : true) ||
-                                (listaFormG.campo != 'correopersonasolicito'
+                                (listaFormG.campo != 'porasignar'
                                   ? false
                                   : true) ||
-                                (listaFormG.campo != 'cd_logi_soli'
+                                (listaFormG.campo != 'porasignar'
                                   ? false
                                   : true)
-                            }}"
-                            (keypress)="
+                            }}" (keypress)="
                               validateFormat($event, listaFormG.campo)
-                            "
-                            (paste)="validateFormat($event, listaFormG.campo)"
-                          />
+                            " (paste)="validateFormat($event, listaFormG.campo)" />
 
-                          <mat-hint
-                            *ngIf="
+                          <mat-hint *ngIf="
                               listaFormG.campo &&
                               (listaFormG.longitudCampoDB != 0
                                 ? listaFormG.longitudCampoDB
                                 : campoMaximo)
-                            "
-                            align="end"
-                            >{{ max.value.length || 0 }}/{{
-                              listaFormG.longitudCampoDB != 0
-                                ? listaFormG.longitudCampoDB
-                                : campoMaximo
-                            }}</mat-hint
-                          >
-                          <mat-error
-                            *ngIf="
+                            " align="end">{{ max.value.length || 0 }}/{{
+                            listaFormG.longitudCampoDB != 0
+                            ? listaFormG.longitudCampoDB
+                            : campoMaximo
+                            }}</mat-hint>
+                          <mat-error *ngIf="
                               formularioAnamnesisGeneral.controls[
                                 listaFormG.campo
                               ].errors?.required
-                            "
-                          >
+                            ">
                             <p style="color: F44336">
                               {{ lbl_debe_ingresar }}
                             </p>
                           </mat-error>
-                          <mat-error
-                            *ngIf="
-                              (listaFormG.campo == 'nu_nit_prov' ||
-                                listaFormG.campo == 'nu_nit_clie') &&
+                          <mat-error *ngIf="
+                              (listaFormG.campo == 'porasignar' ||
+                                listaFormG.campo == 'porasignar') &&
                               formularioAnamnesisGeneral.controls[
                                 listaFormG.campo
                               ].errors?.pattern
-                            "
-                          >
+                            ">
                             <span>{{ lbl_solo_numeros }}</span>
                           </mat-error>
-                          <mat-error
-                            *ngIf="
-                              listaFormG.campo == 'correopersonasolicito' &&
+                          <mat-error *ngIf="
+                              listaFormG.campo == 'porasignar' &&
                               formularioAnamnesisGeneral.controls[
                                 listaFormG.campo
                               ].errors?.email
-                            "
-                          >
+                            ">
                             <span>{{ lbl_msn_formato_incorrecto }}</span>
                           </mat-error>
                         </mat-form-field>
@@ -435,12 +287,15 @@
                   </li>
                 </ul>
               </form>
+
+              <button [disabled]="formularioAnamnesisGeneral.invalid" class="btn btn-primary btn-sm" type="submit"
+                [attr.form]="idFormAnamnesis" (click)="registrarInfoPaciente()">Registrar</button>
             </span>
           </mat-tab>
         </div>
       </mat-tab-group>
     </mat-expansion-panel>
-
+    <!--modulo  ver registros en tabla-->
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title> Datos Pacientes </mat-panel-title>
@@ -451,13 +306,8 @@
       </mat-expansion-panel-header>
 
       <div class="">
-        <table
-          datatable
-          [dtOptions]="dtOptions"
-          [dtTrigger]="dtTriggers"
-          id="tabla"
-          class="table table-bordered table-hover"
-        >
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTriggers" id="tabla"
+          class="table table-bordered table-hover">
           <caption></caption>
 
           <thead>
@@ -474,25 +324,13 @@
               <td>{{ p.apellidos }}</td>
               <td>{{ p.documento }}</td>
               <td>
-                <button
-                  type="button"
-                  data-toggle="modal"
-                  class="btn btn-info btn-round btn-fab btn-sm"
-                  matTooltip="Editar"
-                  [matTooltipPosition]="'below'"
-                  (click)="editar(p, ModalEditarPacientes)"
-                >
+                <button type="button" data-toggle="modal" class="btn btn-info btn-round btn-fab btn-sm"
+                  matTooltip="Editar" [matTooltipPosition]="'below'" (click)="editar(p, ModalEditarPacientes)">
                   <mat-icon>edit</mat-icon>
                 </button>
 
-                <button
-                  type="button"
-                  data-toggle="modal"
-                  class="btn btn-debug btn-round btn-fab btn-sm"
-                  matTooltip="Eliminar"
-                  [matTooltipPosition]="'below'"
-                  (click)="delete(p)"
-                >
+                <button type="button" data-toggle="modal" class="btn btn-debug btn-round btn-fab btn-sm"
+                  matTooltip="Eliminar" [matTooltipPosition]="'below'" (click)="delete(p)">
                   <mat-icon>delete</mat-icon>
                 </button>
               </td>
@@ -508,13 +346,8 @@
   <div class="modal-header">
     <h2 class="modal-title">EditaR</h2>
 
-    <button
-      mat-raised-button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="cerrarModal(ModalEditarPacientes)"
-    >
+    <button mat-raised-button type="button" class="close" aria-label="Close"
+      (click)="cerrarModal(ModalEditarPacientes)">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>

@@ -24,6 +24,12 @@ export interface RegistrarPacientes{
         telefono:number;
 }
 
+export interface RegistroInfoPaciente{
+  id: number;
+  motivo: string;
+  varios: string
+}
+
 export class UserDTO {
   username:string | undefined;
   password:string | undefined;

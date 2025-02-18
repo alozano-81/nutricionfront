@@ -265,6 +265,24 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
     }
   }
 
+  registrarInfoPaciente(){
+    if (this.formularioAnamnesisGeneral.pristine) {
+      console.log('sin cambios datos generales info paciente');
+      this.toastr.info('No ha cambiado nada');
+    } else {
+      this.formularioAnamnesisGeneral.get('idPaciente').setValue(this.formRegistro.get('documento').value);
+      this.services.registrarInfoPacientes(this.formularioAnamnesisGeneral.value, localStorage.getItem('token'), this.actualizarR).subscribe(
+        (result: any) => {
+          console.log('correcot', result);
+        },
+        (error) =>{
+          console.log('entra error');
+          console.log(error);
+        }
+      );
+    }
+  }
+
   getListPacientes() {
     this.services.getPacientes().subscribe(
       (result: any) => {
@@ -430,14 +448,14 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
 
   validaSex: number = 0;
   modificaTest(t:any){
-    if(t == 'Femenino'){
+    if(t == 'Femenino' && this.formRegistro.get('documento').value != ''){
       this.validaSex = 1;
      for(let r in this.pestanas.subtasks){
       this.pestanas.subtasks[2].mostrar = true;
      }
     }
 
-    if(t == 'Masculino'){
+    if(t == 'Masculino' && this.formRegistro.get('documento').value != ''){
       this.validaSex = 2;
       for(let r in this.pestanas.subtasks){
        this.pestanas.subtasks[2].mostrar = false;
