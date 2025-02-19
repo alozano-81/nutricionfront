@@ -88,9 +88,10 @@ export class ServiciosService {
    */
   cargarDatosAnamnesisPaciente(): FormGroup{
     return this.formularioHistorialAmnesis.group({
-
+      id: [''],
       idPaciente: [],
-      motivo: [],
+      motivo: [''],
+      varios: [''],
 
     });
   }

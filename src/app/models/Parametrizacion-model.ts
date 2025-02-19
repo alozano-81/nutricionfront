@@ -26,6 +26,7 @@ export interface RegistrarPacientes{
 
 export interface RegistroInfoPaciente{
   id: number;
+  idPaciente: string;
   motivo: string;
   varios: string
 }
