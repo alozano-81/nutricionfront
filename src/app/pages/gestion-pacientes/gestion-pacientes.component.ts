@@ -35,6 +35,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   habilitarBotonActualizar: boolean = false;
   paises: Paises[] = [];
   estadosCivil: EstadosCivil[] = [];
+  parametrosIndicadoresClinicos:any[] = [];
   selected: any;
   public sex: string = '';
   public listaSex: string[] = ['Masculino', 'Femenino'];
@@ -461,6 +462,12 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
        this.pestanas.subtasks[2].mostrar = false;
       }
      }
+  }
+
+  //datos externos de componentes
+  recibirDatosComponenteIndicadoresClinicosArreglo(arreglo:any){
+    this.parametrosIndicadoresClinicos = arreglo;
+    console.log('=====> indi clini: ', this.parametrosIndicadoresClinicos)
   }
 
   //enviar datos
