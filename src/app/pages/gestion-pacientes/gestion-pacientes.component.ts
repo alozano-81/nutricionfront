@@ -48,6 +48,9 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   @ViewChild('panel1')
   firstPanel!: MatExpansionPanel;
 
+  @ViewChild('panel2')
+  secondPanel!: MatExpansionPanel;
+
   actualizar: boolean = false;
   customCollapsedHeight: string = '40px';
   customExpandedHeight: string = '40px';
@@ -315,6 +318,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
     this.formRegistro.reset();
     this.habilitarBotonCrear = true;
     this.habilitarBotonActualizar = false;
+    this.habilitaInfoPacientes = false;
   }
 
   habilitarRegistroNuevo() {
@@ -324,6 +328,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
 
   valido: boolean = false;
   editar(form: any, modal: any) {
+    this.habilitaInfoPacientes = true;
     //this.formRegistro.setValue(form);
     //this.formRegistro.get('documento').disable({ onlySelf: true });
     //this.formRegistro.controls['documento'].disable();
@@ -447,17 +452,17 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
     this.router.navigate(['/', 'gestion-principal']);
   }
 
-  validaSex: number = 0;
+  habilitaInfoPacientes: boolean = false;
   modificaTest(t:any){
     if(t == 'Femenino' && this.formRegistro.get('documento').value != ''){
-      this.validaSex = 1;
+      this.habilitaInfoPacientes = true;
      for(let r in this.pestanas.subtasks){
       this.pestanas.subtasks[2].mostrar = true;
      }
     }
 
     if(t == 'Masculino' && this.formRegistro.get('documento').value != ''){
-      this.validaSex = 2;
+      this.habilitaInfoPacientes = true;
       for(let r in this.pestanas.subtasks){
        this.pestanas.subtasks[2].mostrar = false;
       }

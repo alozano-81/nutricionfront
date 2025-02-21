@@ -94,6 +94,10 @@ export const environment = {
   lbl_problemas_actuales: 'Problemas actuales',
   lbl_antecedentes_familiares: 'Antecedentes familiares',
   lbl_diario_actividades: 'Diario de actividades (24 hrs)',
+  lbl_icon_limpiar: 'Limpiar',
+  lbl_icon_crear:'Crear',
+  lbl_icon_agregar:'Agregar',
+  lbl_icon_guardar: 'Guardar',
 
   //etiquetas antecedentes
   check_diarrea: 'Diarrea',
@@ -161,5 +165,8 @@ export const environment = {
   //formulario anamnesis
   lbl_form_anam_motivo: 'Motivo',
 
+  //iconos
+  icon_limpiar:'clear',
+  icon_crear:'note_add',
 
 }

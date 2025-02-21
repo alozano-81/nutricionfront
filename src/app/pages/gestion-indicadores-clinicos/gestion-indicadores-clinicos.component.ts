@@ -167,6 +167,17 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
     ],
   };
 
+  limpiarArreglo:boolean = false;
+  public icon_limpiar:string = environment.icon_limpiar;
+  public lbl_icon_limpiar:string = environment.lbl_icon_limpiar;
+  public lbl_icon_crear:string =environment.lbl_icon_crear;
+  public icon_crear:string = environment.icon_crear;
+  public lbl_icon_agregar:string =environment.lbl_icon_agregar;
+
+  //emiteres
+  @Output()
+  datosComponenteIndicadoresClinicos : EventEmitter <any[]> = new EventEmitter<any[]>();
+
   constructor(
     public services: ServiciosService,
     private modal: NgbModal,
@@ -196,6 +207,8 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
 
     console.log('==listTomas=> ', this.listTomas.subtasks);
   }
+
+  resetArreglo(){}
 
   validaMed: boolean = false;
   validaCirujia: boolean = false;

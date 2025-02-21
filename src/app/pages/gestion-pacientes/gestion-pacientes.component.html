@@ -167,7 +167,7 @@
     </mat-expansion-panel>
 
     <!-- panel informacion paciente registrado-->
-    <mat-expansion-panel *ngIf="this.validaSex !=  0">
+    <mat-expansion-panel *ngIf="this.habilitaInfoPacientes">
       <mat-expansion-panel-header>
         <mat-panel-title> Informacion Pacientes </mat-panel-title>
         <mat-panel-description>
@@ -180,7 +180,9 @@
         <div *ngFor="let pes of pestanas.subtasks; let i = index">
           <mat-tab *ngIf="pes.mostrar">
             <div *ngIf="pes.nombrePestana == 'indicadoresclinicos'">
-              <app-gestion-indicadores-clinicos [arregloPestanaApetosGine]="sex">
+              <app-gestion-indicadores-clinicos
+              (datosComponenteIndicadoresClinicos) = "recibirDatosComponenteIndicadoresClinicosArreglo($event)"
+              [arregloPestanaApetosGine]="sex">
               </app-gestion-indicadores-clinicos>
             </div>
             <div *ngIf="pes.nombrePestana == 'aspectosginecologicos'">

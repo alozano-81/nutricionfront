@@ -310,6 +310,41 @@
 
 
           </form>
+          <div class="row">
+            <div class="col">
+              <button
+                [attr.form]="idForm"
+                mat-button
+                class="btn btn-sm btn-info"
+                type="submit"
+                [disabled]="formIndicadoresClinicos.invalid"
+              >
+                <mat-icon>{{ icon_crear }}</mat-icon
+                >{{ lbl_icon_crear }}
+              </button>
+
+              <!--button
+                style="margin-left: 10px"
+                (click)="agregar()"
+                mat-button
+                class="btn btn-sm btn-info"
+                [disabled]="!validarMatriz"
+              >
+                <mat-icon>{{ icon_agregar }}</mat-icon
+                >{{ lbl_icon_agregar }}
+              </button-->
+              <button
+                style="margin-left: 10px"
+                (click)="resetArreglo()"
+                mat-button
+                class="btn btn-sm btn-danger"
+                [disabled]="!limpiarArreglo"
+              >
+                <mat-icon>{{ icon_limpiar }}</mat-icon
+                >{{ lbl_icon_limpiar }}
+              </button>
+            </div>
+          </div>
         </span>
       </section>
     </mat-card-content>
