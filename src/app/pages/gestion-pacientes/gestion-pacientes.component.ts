@@ -455,14 +455,14 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
   habilitaInfoPacientes: boolean = false;
   modificaTest(t:any){
     if(t == 'Femenino' && this.formRegistro.get('documento').value != ''){
-      this.habilitaInfoPacientes = true;
+      //this.habilitaInfoPacientes = true;
      for(let r in this.pestanas.subtasks){
       this.pestanas.subtasks[2].mostrar = true;
      }
     }
 
     if(t == 'Masculino' && this.formRegistro.get('documento').value != ''){
-      this.habilitaInfoPacientes = true;
+      //this.habilitaInfoPacientes = true;
       for(let r in this.pestanas.subtasks){
        this.pestanas.subtasks[2].mostrar = false;
       }

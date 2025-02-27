@@ -17,6 +17,7 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
   formIndicadoresClinicos: any;
   idForm: string = 'idform';
   validaDeposicion: boolean = false;
+  arregloMatriz : any[] = [];
 
   @Input() arregloPestanaApetosGine:any;
 
@@ -205,6 +206,14 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.arregloMatriz.push({
+      problemasActuales:this.listProblemasActuales,
+      antecedentesFamiliares:this.listAntecedentesFAmiliares,
+      tomaMedicamentos:this.listTomas
+    })
+
+    this.datosComponenteIndicadoresClinicos.emit(this.arregloMatriz
+    );
     console.log('==listTomas=> ', this.listTomas.subtasks);
   }
 
