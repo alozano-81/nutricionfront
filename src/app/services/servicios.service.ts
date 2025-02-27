@@ -118,6 +118,8 @@ export class ServiciosService {
       cirujia: [''],
       obecidad: [''],
       diabetes: [''],
+      Obesidad: [''],
+      Diabetes: [''],
       ta:[''],
       cancer:[''],
       hipercolesterolemia: [''],

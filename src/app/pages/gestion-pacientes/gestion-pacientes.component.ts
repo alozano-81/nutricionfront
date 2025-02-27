@@ -212,7 +212,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
         )
         .subscribe(
           (result: any) => {
-            console.log('correcot', result);
+            console.log('EStadook', result);
             if (result.status == 'ACCEPTED') {
               this.spinner.hide();
               this.toastr.success(
@@ -278,6 +278,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
       this.services.registrarInfoPacientes(this.formularioAnamnesisGeneral.value, localStorage.getItem('token'), this.actualizarR).subscribe(
         (result: any) => {
           console.log('correcot', result);
+          console.log('=====> indi clini: ', this.parametrosIndicadoresClinicos)
         },
         (error) =>{
           console.log('entra error');

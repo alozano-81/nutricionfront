@@ -200,7 +200,7 @@
             </ng-template>
             <br />
             <span class="example-list-section">
-              <form [formGroup]="formularioAnamnesisGeneral" class="form" (submit)="enviarDatos()"
+              <form [formGroup]="formularioAnamnesisGeneral" class="form" (submit)="registrarInfoPaciente()"
                 id="{{ idFormAnamnesis }}" novalidate>
                 <ul>
                   <li *ngFor="
@@ -291,7 +291,7 @@
               </form>
 
               <button [disabled]="formularioAnamnesisGeneral.invalid" class="btn btn-primary btn-sm" type="submit"
-                [attr.form]="idFormAnamnesis" (click)="registrarInfoPaciente()">Registrar</button>
+                [attr.form]="idFormAnamnesis" >Registrar</button>
             </span>
           </mat-tab>
         </div>

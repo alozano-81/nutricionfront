@@ -8,24 +8,24 @@ import { ServiciosService } from 'src/app/services/servicios.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-    selector: 'app-gestion-indicadores-clinicos',
-    templateUrl: './gestion-indicadores-clinicos.component.html',
-    styleUrl: './gestion-indicadores-clinicos.component.scss',
-    standalone: false
+  selector: 'app-gestion-indicadores-clinicos',
+  templateUrl: './gestion-indicadores-clinicos.component.html',
+  styleUrl: './gestion-indicadores-clinicos.component.scss',
+  standalone: false
 })
 export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
   formIndicadoresClinicos: any;
   idForm: string = 'idform';
   validaDeposicion: boolean = false;
-  arregloMatriz : any[] = [];
+  arregloMatriz: any[] = [];
 
-  @Input() arregloPestanaApetosGine:any;
+  @Input() arregloPestanaApetosGine: any;
 
   /**Enviar datos al componente externo */
-    @Output()
-    datosGestion: EventEmitter<any[]> =
-      new EventEmitter<any[]>();
-    /**Fin enviar datos al componente externo */
+  @Output()
+  datosGestion: EventEmitter<any[]> =
+    new EventEmitter<any[]>();
+  /**Fin enviar datos al componente externo */
   //Listas generales
 
   arregloVecesDeposicion = [
@@ -73,7 +73,7 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
   public lbl_hipertrigeceridemia: string = environment.lbl_hipertrigeceridemia;
   public lbl_hipotiroidismo: string = environment.lbl_hipotiroidismo;
   public lbl_cirujia: string = environment.lbl_cirujia;
-  public lbl_antecedentes_familiares:string = environment.lbl_antecedentes_familiares;
+  public lbl_antecedentes_familiares: string = environment.lbl_antecedentes_familiares;
 
   listProblemasActuales: ProblemasActuales = {
     name: 'Indeterminate',
@@ -129,37 +129,44 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
     completed: false,
     color: 'primary',
     subtasks: [
-      {name: environment.check_obesidad,
+      {
+        name: environment.check_obesidad,
         completed: false,
         color: 'primary',
       },
 
-      {name: environment.check_Diabetes,
+      {
+        name: environment.check_Diabetes,
         completed: false,
         color: 'primary',
       },
 
-      {name: environment.check_TA,
+      {
+        name: environment.check_TA,
         completed: false,
         color: 'primary',
       },
 
-      {name: environment.check_Cancer,
+      {
+        name: environment.check_Cancer,
         completed: false,
         color: 'primary',
       },
 
-      {name: environment.check_hipercolesterolemia,
+      {
+        name: environment.check_hipercolesterolemia,
         completed: false,
         color: 'primary',
       },
 
-      {name: environment.check_hipertrigeceridemia,
+      {
+        name: environment.check_hipertrigeceridemia,
         completed: false,
         color: 'primary',
       },
 
-      {name: environment.check_hipotiroidismo,
+      {
+        name: environment.check_hipotiroidismo,
         completed: false,
         color: 'primary',
       },
@@ -168,16 +175,16 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
     ],
   };
 
-  limpiarArreglo:boolean = false;
-  public icon_limpiar:string = environment.icon_limpiar;
-  public lbl_icon_limpiar:string = environment.lbl_icon_limpiar;
-  public lbl_icon_crear:string =environment.lbl_icon_crear;
-  public icon_crear:string = environment.icon_crear;
-  public lbl_icon_agregar:string =environment.lbl_icon_agregar;
+  limpiarArreglo: boolean = false;
+  public icon_limpiar: string = environment.icon_limpiar;
+  public lbl_icon_limpiar: string = environment.lbl_icon_limpiar;
+  public lbl_icon_crear: string = environment.lbl_icon_crear;
+  public icon_crear: string = environment.icon_crear;
+  public lbl_icon_agregar: string = environment.lbl_icon_agregar;
 
   //emiteres
   @Output()
-  datosComponenteIndicadoresClinicos : EventEmitter <any[]> = new EventEmitter<any[]>();
+  datosComponenteIndicadoresClinicos: EventEmitter<any[]> = new EventEmitter<any[]>();
 
   constructor(
     public services: ServiciosService,
@@ -185,39 +192,43 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
     public router: Router,
     public toastr: ToastrService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.formIndicadoresClinicos =
-      this.services.cargarDatosIndicadoresClinicos();
-      //console.log('ver arre:',this.arregloPestanaApetosGine);
+    this.formIndicadoresClinicos = this.services.cargarDatosIndicadoresClinicos();
+    //console.log('ver arre:',this.arregloPestanaApetosGine);
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void { }
 
   enviarDatos() {
     console.log('===>>', this.formIndicadoresClinicos);
 
-    this.listProblemasActuales.subtasks?.forEach((nombre, ind) => {
+    /*this.listProblemasActuales.subtasks?.forEach((nombre, ind) => {
       console.log(nombre.name);
       console.log(ind);
       if (ind == 2 && nombre.completed) {
         console.log(this.listProblemasActuales.subtasks);
       }
-    });
+    });*/
 
-    this.arregloMatriz.push({
-      problemasActuales:this.listProblemasActuales,
-      antecedentesFamiliares:this.listAntecedentesFAmiliares,
-      tomaMedicamentos:this.listTomas
-    })
+    this.arregloMatriz = [];
+    this.arregloMatriz = [{problemasActuales: this.listProblemasActuales,
+      antecedentesFamiliares: this.listAntecedentesFAmiliares,
+      tomaMedicamentos: this.listTomas}];
 
-    this.datosComponenteIndicadoresClinicos.emit(this.arregloMatriz
-    );
-    console.log('==listTomas=> ', this.listTomas.subtasks);
+    /*this.arregloMatriz.push({
+      problemasActuales: this.listProblemasActuales,
+      antecedentesFamiliares: this.listAntecedentesFAmiliares,
+      tomaMedicamentos: this.listTomas
+    })*/
+
+    this.datosComponenteIndicadoresClinicos.emit(this.arregloMatriz);
+    //console.log('==listTomas=> ', this.listTomas.subtasks);
+    console.log('Array enviado=> ', this.arregloMatriz);
   }
 
-  resetArreglo(){}
+  resetArreglo() { }
 
   validaMed: boolean = false;
   validaCirujia: boolean = false;
@@ -227,11 +238,21 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
 
     if (tipo === 'medicamento') {
       this.validaMed = evento.value;
+      this.validacionSINoCampo(tipo,evento.value);
     }
     if (tipo === 'cirujia') {
       this.validaCirujia = evento.value;
+      this.validacionSINoCampo(tipo,evento.value);
     }
 
-    //console.log(this.formIndicadoresClinicos);
+  }
+
+  validacionSINoCampo(nombreCampo:any, evento:boolean){
+    if(!evento){
+      this.formIndicadoresClinicos.get(nombreCampo).setValue('');
+      this.formIndicadoresClinicos.get(nombreCampo).disable();
+    }else{
+      this.formIndicadoresClinicos.get(nombreCampo).enable();
+    }
   }
 }
