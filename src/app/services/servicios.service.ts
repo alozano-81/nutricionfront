@@ -332,11 +332,12 @@ export class ServiciosService {
       );
   }
 
-  registrarInfoPacientes(form: any, token: any, tipo: boolean) {
+  registrarInfoPacientes(form: any, parametrosIndicadoresClinicos:any, token: any, tipo: boolean) {console.log(tipo)
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
     }).append('Authorization', token);
-    let items = Object.assign(form);
+    let variosParametros = {varios: parametrosIndicadoresClinicos}
+    let items = Object.assign(form, variosParametros);
     let url = tipo
       ? `${environment.urlActualizarPacientes}`
       : `${environment.urlRegistrarInfoPacientes}`;

@@ -9,11 +9,12 @@ export const environment = {
   urlTunelLocal: 'https://4qjxjq2d-8083.use.devtunnels.ms',
 
   urlApi: 'http://localhost:8085/api/tecnica/entrar',
-  urlApivalidacionSesion: 'http://localhost:8083/api/auth/usersesion/validar-sesion',
+
+  //variables para ser usadas en entorno desarrollo
+ /*urlApivalidacionSesion: 'http://localhost:8083/api/auth/usersesion/validar-sesion',
   urlCrearUsuarios: 'http://localhost:8083/api/auth/usersesion/creacion',
   urlListaRoles: 'http://localhost:8083/api/auth/usersesion/get-all-roles',
   urlListaUsuarios: 'http://localhost:8083/api/auth/usersesion/listar',
-
   urlApiListarComercios: 'http://localhost:8085/api/tecnica/listarcomercios',
   urlValidarLogin: 'http://localhost:8083/api/login/validar-credenciales',
   urlListaPaises: 'http://localhost:8083/api/auth/paciente/get-all-paises',
@@ -22,25 +23,32 @@ export const environment = {
   urlActualizarPacientes: 'http://localhost:8083/api/auth/paciente/actualizar',
   urlListaPacientes: 'http://localhost:8083/api/auth/paciente/get-all-datos-personales',
   urlDeletePaciente:'http://localhost:8083/api/auth/paciente/delete',
+  urlRegistrarInfoPacientes: 'http://localhost:8083/api/auth/paciente/registrarInfoPaciente',*/
 
+  //variables para ser usadas en entorno produccion con la validacion de proxi
   /*urlApivalidacionSesion: '/autenticacion-login/api/auth/usersesion/validar-sesion',
   urlCrearUsuarios: '/autenticacion-login/api/auth/usersesion/creacion',
   urlListaRoles: '/autenticacion-login/api/auth/usersesion/get-all-roles',
-
   urlApiListarComercios: '/autenticacion-login/api/tecnica/listarcomercios',
   urlValidarLogin: '/autenticacion-login/api/login/validar-credenciales',
   urlListaPaises: '/autenticacion-login/api/auth/paciente/get-all-paises',
   urlRegistrarPacientes: '/autenticacion-login/api/auth/paciente/registrar',*/
 
 
-  /*urlApivalidacionSesion: 'https://nutricioncc.onrender.com/api/auth/usersesion/validar-sesion',
+  //variables para ser usadas en entorno produccion
+  urlApivalidacionSesion: 'https://nutricioncc.onrender.com/api/auth/usersesion/validar-sesion',
   urlCrearUsuarios: 'https://nutricioncc.onrender.com/api/auth/usersesion/creacion',
   urlListaRoles: 'https://nutricioncc.onrender.com/api/auth/usersesion/get-all-roles',
-
+  urlListaUsuarios: 'https://nutricioncc.onrender.com/api/auth/usersesion/listar',
   urlApiListarComercios: 'https://nutricioncc.onrender.com/api/tecnica/listarcomercios',
   urlValidarLogin: 'https://nutricioncc.onrender.com/api/login/validar-credenciales',
   urlListaPaises: 'https://nutricioncc.onrender.com/api/auth/paciente/get-all-paises',
-  urlRegistrarPacientes: 'https://nutricioncc.onrender.com/api/auth/paciente/registrar',*/
+  urlListaEstadoCivil: 'https://nutricioncc.onrender.com/api/auth/paciente/get-all-estados-civil',
+  urlRegistrarPacientes: 'https://nutricioncc.onrender.com/api/auth/paciente/registrar',
+  urlActualizarPacientes: 'https://nutricioncc.onrender.com/api/auth/paciente/actualizar',
+  urlListaPacientes: 'https://nutricioncc.onrender.com/api/auth/paciente/get-all-datos-personales',
+  urlDeletePaciente:'https://nutricioncc.onrender.com/api/auth/paciente/delete',
+  urlRegistrarInfoPacientes: 'https://nutricioncc.onrender.com/api/auth/paciente/registrarInfoPaciente',
 
 
 
@@ -95,6 +103,11 @@ export const environment = {
   lbl_antecedentes: 'Antecedentes Salu/Enfermedad',
   lbl_problemas_actuales: 'Problemas actuales',
   lbl_antecedentes_familiares: 'Antecedentes familiares',
+  lbl_diario_actividades: 'Diario de actividades (24 hrs)',
+  lbl_icon_limpiar: 'Limpiar',
+  lbl_icon_crear:'Crear',
+  lbl_icon_agregar:'Agregar',
+  lbl_icon_guardar: 'Guardar',
 
   //etiquetas antecedentes
   check_diarrea: 'Diarrea',
@@ -136,6 +149,21 @@ export const environment = {
   check_hipertrigeceridemia: 'Hipertrigliceridemia',
   check_hipotiroidismo: 'Hipotiroidismo',
 
+  //aspectos ginecologicos
+  check_Embarazo_actual: 'Embarazo actual',
+  check_anticoncentivos:'Anticonceptivos',
+  check_climaterio: 'Climaterio',
+  check_terapiaReemplazoHormonal: 'Terapia de reemplazo hormonal',
+  lbl_sdg: 'SDG',
+  lbl_sdg_por: 'Por',
+  lbl_anticoncentivos_cual: 'Cual',
+  lbl_anticoncentivos_dosis: 'Dosis',
+  lbl_climaterioFecha: 'Fecha',
+  lbl_terapiaReemplazoHormonal_cual: 'Cual',
+  lbl_terapiaReemplazoHormonal_dosis: 'Dosis',
+
+
+
 
 
   //mensajes validaciones
@@ -146,5 +174,9 @@ export const environment = {
 
   //formulario anamnesis
   lbl_form_anam_motivo: 'Motivo',
+
+  //iconos
+  icon_limpiar:'clear',
+  icon_crear:'note_add',
 
 }

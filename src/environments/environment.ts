@@ -14,11 +14,12 @@ export const environment = {
   urlTunelLocal: 'https://9cnz3p2c-8083.use2.devtunnels.ms',
 
   urlApi: 'http://localhost:8085/api/tecnica/entrar',
+
+  //variables para ser usadas en entorno desarrollo
   urlApivalidacionSesion: 'http://localhost:8083/api/auth/usersesion/validar-sesion',
   urlCrearUsuarios: 'http://localhost:8083/api/auth/usersesion/creacion',
   urlListaRoles: 'http://localhost:8083/api/auth/usersesion/get-all-roles',
   urlListaUsuarios: 'http://localhost:8083/api/auth/usersesion/listar',
-
   urlApiListarComercios: 'http://localhost:8085/api/tecnica/listarcomercios',
   urlValidarLogin: 'http://localhost:8083/api/login/validar-credenciales',
   urlListaPaises: 'http://localhost:8083/api/auth/paciente/get-all-paises',
@@ -27,15 +28,13 @@ export const environment = {
   urlActualizarPacientes: 'http://localhost:8083/api/auth/paciente/actualizar',
   urlListaPacientes: 'http://localhost:8083/api/auth/paciente/get-all-datos-personales',
   urlDeletePaciente:'http://localhost:8083/api/auth/paciente/delete',
-
   urlRegistrarInfoPacientes: 'http://localhost:8083/api/auth/paciente/registrarInfoPaciente',
 
-//proxy
+//variables para ser usadas en entorno produccion con la validacion de proxi
   /*urlApi: 'http://localhost:8085/api/tecnica/entrar',
   urlApivalidacionSesion: '/autenticacion-login/api/auth/usersesion/validar-sesion',
   urlCrearUsuarios: '/autenticacion-login/api/auth/usersesion/creacion',
   urlListaRoles: '/autenticacion-login/api/auth/usersesion/get-all-roles',
-
   urlApiListarComercios: '/autenticacion-login/api/tecnica/listarcomercios',
   urlValidarLogin: '/autenticacion-login/api/login/validar-credenciales',
   urlListaPaises: '/autenticacion-login/api/auth/paciente/get-all-paises',

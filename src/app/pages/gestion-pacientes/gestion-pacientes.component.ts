@@ -275,7 +275,7 @@ export class GestionPacientesComponent implements OnInit, OnDestroy {
       this.toastr.info('No ha cambiado nada');
     } else {
       this.formularioAnamnesisGeneral.get('idPaciente').setValue(this.formRegistro.get('documento').value);
-      this.services.registrarInfoPacientes(this.formularioAnamnesisGeneral.value, localStorage.getItem('token'), this.actualizarR).subscribe(
+      this.services.registrarInfoPacientes(this.formularioAnamnesisGeneral.value, this.parametrosIndicadoresClinicos, localStorage.getItem('token'), this.actualizarR).subscribe(
         (result: any) => {
           console.log('correcot', result);
           console.log('=====> indi clini: ', this.parametrosIndicadoresClinicos)

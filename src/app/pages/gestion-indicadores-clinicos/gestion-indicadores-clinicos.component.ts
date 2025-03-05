@@ -213,9 +213,12 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
     });*/
 
     this.arregloMatriz = [];
-    this.arregloMatriz = [{problemasActuales: this.listProblemasActuales,
+    this.arregloMatriz = [{
+      problemasActuales: this.listProblemasActuales,
       antecedentesFamiliares: this.listAntecedentesFAmiliares,
-      tomaMedicamentos: this.listTomas}];
+      tomaMedicamentos: this.listTomas,
+      formularioIndicadoresClinicos: this.formIndicadoresClinicos.value
+    }];
 
     /*this.arregloMatriz.push({
       problemasActuales: this.listProblemasActuales,
@@ -233,26 +236,48 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
   validaMed: boolean = false;
   validaCirujia: boolean = false;
   seleccionarFiltros(evento: any, tipo: string) {
-    console.log('llega');
+    console.log('llega', tipo);
     console.log(evento.value);
 
     if (tipo === 'medicamento') {
       this.validaMed = evento.value;
-      this.validacionSINoCampo(tipo,evento.value);
+      this.validacionSINoCampo(tipo, evento.value);
     }
     if (tipo === 'cirujia') {
       this.validaCirujia = evento.value;
-      this.validacionSINoCampo(tipo,evento.value);
+      this.validacionSINoCampo(tipo, evento.value);
     }
 
   }
 
-  validacionSINoCampo(nombreCampo:any, evento:boolean){
-    if(!evento){
-      this.formIndicadoresClinicos.get(nombreCampo).setValue('');
-      this.formIndicadoresClinicos.get(nombreCampo).disable();
-    }else{
-      this.formIndicadoresClinicos.get(nombreCampo).enable();
+  /**
+   * Metodo para el boton si/no, se activa el requerido dependiendo de la necesidad
+   * @param nombreCampo
+   * @param evento
+   */
+  validacionSINoCampo(nombreCampo: any, evento: boolean) {
+    if (!evento) {
+      if (nombreCampo == 'medicamento') {
+        this.formIndicadoresClinicos.get(nombreCampo).setValue('');
+        this.formIndicadoresClinicos.get('dosis').setValue('');
+        this.formIndicadoresClinicos.get('desdecuandodosis').setValue('');
+
+        this.formIndicadoresClinicos.get(nombreCampo).disable();
+        this.formIndicadoresClinicos.get('dosis').disable();
+        this.formIndicadoresClinicos.get('desdecuandodosis').disable();
+      } else {
+        this.formIndicadoresClinicos.get(nombreCampo).setValue('');
+        this.formIndicadoresClinicos.get(nombreCampo).disable();
+      }
+    } else {
+      if (nombreCampo == 'medicamento') {
+        this.formIndicadoresClinicos.get(nombreCampo).enable();
+        this.formIndicadoresClinicos.get('dosis').enable();
+        this.formIndicadoresClinicos.get('desdecuandodosis').enable();
+      } else {
+        this.formIndicadoresClinicos.get(nombreCampo).enable();
+      }
+
     }
   }
 }
