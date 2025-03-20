@@ -170,6 +170,18 @@ export class ServiciosService {
   }
 
   //******************************servicios
+  //metodo para devolver un arreglo sin algun campo especifico
+  retornarArregloSinCampoEspecifico(arregloX:any, nombreCampo:string){
+    let arreglo:any[]=[];
+    arregloX?.forEach((nombre:any, ind:any) => {
+      const { color, ...campoRest } = nombre;
+      arreglo.push(campoRest);
+    });
+    return arreglo;
+  }
+
+  //
+
   getUsuariosTodos() {
     let url = `${environment.urlListaUsuarios}`;
     return this.http.get(url).pipe(

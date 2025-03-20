@@ -11,7 +11,7 @@ export const environment = {
   urlProxy2: 'http://localhost:4200/autenticacion-login',
   urlProxy: '/autenticacion-login',
   //urlTunelLocal: 'https://4qjxjq2d-8083.use.devtunnels.ms',
-  urlTunelLocal: 'https://9cnz3p2c-8083.use2.devtunnels.ms',
+  urlTunelLocal: 'https://fm2qmwd4-9091.use2.devtunnels.ms',
 
   urlApi: 'http://localhost:8085/api/tecnica/entrar',
 

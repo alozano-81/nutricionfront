@@ -212,11 +212,13 @@ export class GestionIndicadoresClinicosComponent implements OnInit, OnDestroy {
       }
     });*/
 
+    console.log('====> ',this.listProblemasActuales);
+
     this.arregloMatriz = [];
     this.arregloMatriz = [{
-      problemasActuales: this.listProblemasActuales,
-      antecedentesFamiliares: this.listAntecedentesFAmiliares,
-      tomaMedicamentos: this.listTomas,
+      problemasActuales:  this.services.retornarArregloSinCampoEspecifico(this.listProblemasActuales.subtasks,'color'),
+      antecedentesFamiliares: this.services.retornarArregloSinCampoEspecifico(this.listAntecedentesFAmiliares.subtasks, 'color'),
+      tomaMedicamentos: this.services.retornarArregloSinCampoEspecifico(this.listTomas.subtasks,'color'),
       formularioIndicadoresClinicos: this.formIndicadoresClinicos.value
     }];
 
